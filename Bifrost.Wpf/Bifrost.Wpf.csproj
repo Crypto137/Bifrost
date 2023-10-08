@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>disable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Background.png" />
+    <None Remove="Resources\BebasNeue-Regular.License.txt" />
+    <None Remove="Resources\BebasNeue-Regular.ttf" />
+    <None Remove="Resources\Button.png" />
+    <None Remove="Resources\ButtonHover.png" />
+    <None Remove="Resources\ButtonSmall.png" />
+    <None Remove="Resources\ButtonSmallHover.png" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Caliburn.Micro" Version="4.0.212" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Bifrost.Launcher\Bifrost.Launcher.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Background.png" />
+    <Resource Include="Resources\BebasNeue-Regular.ttf" />
+    <Resource Include="Resources\Button.png" />
+    <Resource Include="Resources\ButtonHover.png" />
+    <Resource Include="Resources\ButtonSmall.png" />
+    <Resource Include="Resources\ButtonSmallHover.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="BebasNeue-Regular.License.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
