@@ -30,6 +30,8 @@ Bifrost is a custom launcher for Marvel Heroes. It consists of three main parts:
 
 3. Run Bifrost.Wpf.exe.
 
+Downloading a precompiled release may trigger false positives from some antivirus software due to how Bifrost functions (file scanning and launching other executables). If this makes you anxious, feel free to build the source code yourself.
+
 ## Requirements
 
 Bifrost.Launcher and Bifrost.Console are cross-platform and should be buildable on any .NET supported platforms. Bifrost.Wpf relies on WPF and requires Windows or compatible environment.
