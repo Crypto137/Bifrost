@@ -59,8 +59,11 @@ namespace Bifrost.Launcher
                 return "Not Initialized";
 
             var versionInfo = FileVersionInfo.GetVersionInfo(ExecutablePath32);
-            string hash = Convert.ToHexString(SHA1.HashData(File.ReadAllBytes(ExecutablePath32)));
-            return $"{_executableName}\n{hash}\n{versionInfo.FileVersion}";
+            byte[] executable = File.ReadAllBytes(ExecutablePath32);
+            bool isShipping = CheckExecutableSignature(executable, ShippingSignature);
+            string hash = Convert.ToHexString(SHA1.HashData(executable));
+
+            return $"{_executableName}\n{hash}\n{versionInfo.FileVersion}\nIsShipping: {isShipping}";
         }
 
         private string DetectExecutableName()
@@ -89,6 +92,20 @@ namespace Bifrost.Launcher
                 return "Unknown";
 
             return version;
+        }
+
+        private bool CheckExecutableSignature(byte[] executable, byte[] signature)
+        {
+            bool result = false;
+
+            // hack: speed this up by starting in the middle of the executable
+            for (int i = executable.Length / 2; i < executable.Length; i++)
+            {
+                if (signature.SequenceEqual(executable.Skip(i).Take(signature.Length)))
+                    result = true;
+            }
+
+            return result;
         }
     }
 }
