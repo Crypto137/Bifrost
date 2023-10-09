@@ -26,9 +26,11 @@ Bifrost is a custom launcher for Marvel Heroes. It consists of three main parts:
 
 1. Make sure you have [.NET Runtime 6.0](https://dotnet.microsoft.com/en-us/download/dotnet/6.0) installed.
 
-2. Extract Bifrost.Wpf.exe and other files to your Marvel Heroes installation directory (the one that has Data and UnrealEngine3 folders).
+2. Download the latest release [here](https://github.com/Crypto137/Bifrost/releases).
 
-3. Run Bifrost.Wpf.exe.
+3. Extract Bifrost.Wpf.exe and other files to your Marvel Heroes installation directory (the one that has Data and UnrealEngine3 folders).
+
+4. Run Bifrost.Wpf.exe.
 
 Downloading a precompiled release may trigger false positives from some antivirus software due to how Bifrost functions (file scanning and launching other executables). If this makes you anxious, feel free to build the source code yourself.
 
