@@ -98,8 +98,9 @@ namespace Bifrost.Launcher
         {
             bool result = false;
 
-            // hack: speed this up by starting in the middle of the executable
-            for (int i = executable.Length / 2; i < executable.Length; i++)
+            // Hack: speed this up by starting near the end of the executable where the build config
+            // signatures we are looking for should be.
+            for (int i = executable.Length - executable.Length / 5; i < executable.Length; i++)
             {
                 if (signature.SequenceEqual(executable.Skip(i).Take(signature.Length)))
                     result = true;
