@@ -37,7 +37,7 @@ namespace Bifrost.Wpf.ViewModels
             }
         }
 
-        public int CustomResolutionX
+        public string CustomResolutionX
         {
             get => _customResolutionX;
             set
@@ -47,7 +47,7 @@ namespace Bifrost.Wpf.ViewModels
             }
         }
 
-        public int CustomResolutionY
+        public string CustomResolutionY
         {
             get => _customResolutionY;
             set

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 using Caliburn.Micro;
 using Bifrost.Launcher;
 using Bifrost.Wpf.Models;
@@ -15,8 +16,8 @@ namespace Bifrost.Wpf.ViewModels
         private bool _overrideLoggingLevel;
         private LoggingLevelModel _selectedLoggingLevel;
         private bool _forceCustomResolution;
-        private int _customResolutionX;
-        private int _customResolutionY;
+        private string _customResolutionX;
+        private string _customResolutionY;
         private bool _force32Bit;
         private DownloaderModel _selectedDownloader;
         private bool _noAccount;
@@ -47,8 +48,8 @@ namespace Bifrost.Wpf.ViewModels
 
             // Engine
             ForceCustomResolution = _launchManager.LaunchConfig.ForceCustomResolution;
-            CustomResolutionX = _launchManager.LaunchConfig.CustomResolutionX;
-            CustomResolutionY = _launchManager.LaunchConfig.CustomResolutionY;
+            CustomResolutionX = _launchManager.LaunchConfig.CustomResolutionX.ToString();
+            CustomResolutionY = _launchManager.LaunchConfig.CustomResolutionY.ToString();
 
             // Advanced
             Force32Bit = _launchManager.LaunchConfig.Force32Bit;
@@ -175,6 +176,12 @@ namespace Bifrost.Wpf.ViewModels
 
         public void Apply()
         {
+            if (string.IsNullOrWhiteSpace(_customResolutionX) || string.IsNullOrWhiteSpace(_customResolutionY))   // Validate custom resolution
+            {
+                MessageBox.Show("Please enter a valid custom resolution.", "Error");
+                return;
+            }
+
             UpdateLaunchManager();
             TryCloseAsync();
         }
@@ -189,8 +196,8 @@ namespace Bifrost.Wpf.ViewModels
 
             // Engine
             _launchManager.LaunchConfig.ForceCustomResolution = ForceCustomResolution;
-            _launchManager.LaunchConfig.CustomResolutionX = CustomResolutionX;
-            _launchManager.LaunchConfig.CustomResolutionY = CustomResolutionY;
+            _launchManager.LaunchConfig.CustomResolutionX = int.Parse(CustomResolutionX);
+            _launchManager.LaunchConfig.CustomResolutionY = int.Parse(CustomResolutionY);
 
             // Advanced
             _launchManager.LaunchConfig.Force32Bit = Force32Bit;
