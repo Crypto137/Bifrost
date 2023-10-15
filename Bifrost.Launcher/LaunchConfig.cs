@@ -19,9 +19,10 @@ namespace Bifrost.Launcher
         public bool ForceCustomResolution { get; set; } = false;
         public int CustomResolutionX { get; set; } = 1920;
         public int CustomResolutionY { get; set; } = 1080;
+        public bool NoStartupMovies { get; set; } = false;
+        public bool NoSound { get; set; } = false;
 
         // Features
-        public bool NoStartupMovies { get; set; } = false;
         public bool NoAccount { get; set; } = false;
         public bool NoOptions { get; set; } = false;
         public bool NoStore { get; set; } = false;
@@ -77,8 +78,10 @@ namespace Bifrost.Launcher
                 argumentList.Add($"-ResY={CustomResolutionY}");
             }
 
-            // Features
             if (NoStartupMovies) argumentList.Add("-nostartupmovies");
+            if (NoSound) argumentList.Add("-nosound");
+
+            // Features
             if (NoAccount) argumentList.Add("-noaccount");
             if (NoOptions) argumentList.Add("-nooptions");
             if (NoStore) argumentList.Add("-nostore");

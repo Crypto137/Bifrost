@@ -57,6 +57,16 @@ namespace Bifrost.Wpf.ViewModels
             }
         }
 
+        public bool NoSound
+        {
+            get => _noSound;
+            set
+            {
+                _noSound = value;
+                NotifyOfPropertyChange(() => NoSound);
+            }
+        }
+
         public bool Force32Bit
         {
             get => _force32Bit;

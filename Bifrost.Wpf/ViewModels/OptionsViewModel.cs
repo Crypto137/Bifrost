@@ -18,6 +18,7 @@ namespace Bifrost.Wpf.ViewModels
         private bool _forceCustomResolution;
         private string _customResolutionX;
         private string _customResolutionY;
+        private bool _noSound;
         private bool _force32Bit;
         private DownloaderModel _selectedDownloader;
         private bool _noAccount;
@@ -50,6 +51,7 @@ namespace Bifrost.Wpf.ViewModels
             ForceCustomResolution = _launchManager.LaunchConfig.ForceCustomResolution;
             CustomResolutionX = _launchManager.LaunchConfig.CustomResolutionX.ToString();
             CustomResolutionY = _launchManager.LaunchConfig.CustomResolutionY.ToString();
+            NoSound = _launchManager.LaunchConfig.NoSound;
 
             // Advanced
             Force32Bit = _launchManager.LaunchConfig.Force32Bit;
@@ -198,6 +200,7 @@ namespace Bifrost.Wpf.ViewModels
             _launchManager.LaunchConfig.ForceCustomResolution = ForceCustomResolution;
             _launchManager.LaunchConfig.CustomResolutionX = int.Parse(CustomResolutionX);
             _launchManager.LaunchConfig.CustomResolutionY = int.Parse(CustomResolutionY);
+            _launchManager.LaunchConfig.NoSound = NoSound;
 
             // Advanced
             _launchManager.LaunchConfig.Force32Bit = Force32Bit;
