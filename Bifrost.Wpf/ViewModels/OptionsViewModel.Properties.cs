@@ -27,6 +27,36 @@ namespace Bifrost.Wpf.ViewModels
             }
         }
 
+        public bool ForceCustomResolution
+        {
+            get => _forceCustomResolution;
+            set
+            {
+                _forceCustomResolution = value;
+                NotifyOfPropertyChange(() => ForceCustomResolution);
+            }
+        }
+
+        public int CustomResolutionX
+        {
+            get => _customResolutionX;
+            set
+            {
+                _customResolutionX = value;
+                NotifyOfPropertyChange(() => CustomResolutionX);
+            }
+        }
+
+        public int CustomResolutionY
+        {
+            get => _customResolutionY;
+            set
+            {
+                _customResolutionY = value;
+                NotifyOfPropertyChange(() => CustomResolutionY);
+            }
+        }
+
         public bool Force32Bit
         {
             get => _force32Bit;

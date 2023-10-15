@@ -14,6 +14,9 @@ namespace Bifrost.Wpf.ViewModels
 
         private bool _overrideLoggingLevel;
         private LoggingLevelModel _selectedLoggingLevel;
+        private bool _forceCustomResolution;
+        private int _customResolutionX;
+        private int _customResolutionY;
         private bool _force32Bit;
         private DownloaderModel _selectedDownloader;
         private bool _noAccount;
@@ -41,6 +44,11 @@ namespace Bifrost.Wpf.ViewModels
             SelectedLoggingLevel = LoggingLevels[(int)_launchManager.LaunchConfig.LoggingLevel];
             foreach (var kvp in _launchManager.LaunchConfig.LoggingChannelStateDict)
                 _loggingChannelStateDict.Add(kvp.Key, kvp.Value);
+
+            // Engine
+            ForceCustomResolution = _launchManager.LaunchConfig.ForceCustomResolution;
+            CustomResolutionX = _launchManager.LaunchConfig.CustomResolutionX;
+            CustomResolutionY = _launchManager.LaunchConfig.CustomResolutionY;
 
             // Advanced
             Force32Bit = _launchManager.LaunchConfig.Force32Bit;
@@ -178,6 +186,11 @@ namespace Bifrost.Wpf.ViewModels
             _launchManager.LaunchConfig.LoggingLevel = (LoggingLevel)LoggingLevels.IndexOf(SelectedLoggingLevel);
             foreach (var kvp in _loggingChannelStateDict)
                 _launchManager.LaunchConfig.LoggingChannelStateDict[kvp.Key] = kvp.Value;
+
+            // Engine
+            _launchManager.LaunchConfig.ForceCustomResolution = ForceCustomResolution;
+            _launchManager.LaunchConfig.CustomResolutionX = CustomResolutionX;
+            _launchManager.LaunchConfig.CustomResolutionY = CustomResolutionY;
 
             // Advanced
             _launchManager.LaunchConfig.Force32Bit = Force32Bit;

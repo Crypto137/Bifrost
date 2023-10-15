@@ -235,10 +235,6 @@
                     </Grid>
                 </ScrollViewer>
             </GroupBox>
-
-            
-
-
         </Grid>
 
         <!-- Advanced -->
@@ -250,10 +246,30 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <GroupBox Grid.Row="0" Header="Modes">
+            <GroupBox Grid.Row="0" Header="Engine">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+
+                    <CheckBox Grid.Column="0" Grid.Row="0" Margin="4" x:Name="ForceCustomResolution" Content="Force Custom Resolution" />
+                    <TextBox Grid.Column="1" Grid.Row="0" Width="48" Margin="4,4,0,4" x:Name="CustomResolutionX" IsEnabled="{Binding Path=ForceCustomResolution}" MaxLength="5" PreviewTextInput="NumberValidationTextBox" />
+                    <Label Grid.Column="2" Grid.Row="0" Content="x" />
+                    <TextBox Grid.Column="3" Grid.Row="0" Width="48" Margin="0,4,4,4" x:Name="CustomResolutionY" IsEnabled="{Binding Path=ForceCustomResolution}" MaxLength="5" PreviewTextInput="NumberValidationTextBox" />
+                </Grid>
+            </GroupBox>
+
+            <GroupBox Grid.Row="1" Header="Modes">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto" />
@@ -272,7 +288,7 @@
                 </Grid>
             </GroupBox>
 
-            <GroupBox Grid.Row="1" Header="Features">
+            <GroupBox Grid.Row="2" Header="Features">
                 <GroupBox.Resources>
                     <Style TargetType="CheckBox">
                         <Setter Property="Margin" Value="4" />

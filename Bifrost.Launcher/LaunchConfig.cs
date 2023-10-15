@@ -15,6 +15,11 @@ namespace Bifrost.Launcher
         public LoggingLevel LoggingLevel { get; set; } = LoggingLevel.NONE;
         public Dictionary<LoggingChannel, LoggingChannelState> LoggingChannelStateDict { get; set; } = new();
 
+        // Engine
+        public bool ForceCustomResolution { get; set; } = false;
+        public int CustomResolutionX { get; set; } = 1920;
+        public int CustomResolutionY { get; set; } = 1080;
+
         // Features
         public bool NoStartupMovies { get; set; } = false;
         public bool NoAccount { get; set; } = false;
@@ -63,6 +68,13 @@ namespace Bifrost.Launcher
                 if (OverrideLoggingLevel) argumentList.Add($"-LoggingLevel={LoggingLevel}");
                 string loggingChannelFilter = BuildLoggingChannelFilter();
                 if (loggingChannelFilter.Length > 0) argumentList.Add($"-LoggingChannels={loggingChannelFilter}");
+            }
+
+            // Engine
+            if (ForceCustomResolution)
+            {
+                argumentList.Add($"-ResX={CustomResolutionX}");
+                argumentList.Add($"-ResY={CustomResolutionY}");
             }
 
             // Features
