@@ -12,10 +12,17 @@
         // SHA1 hashes of Win32 executables for detecting version
         private static readonly Dictionary<string, string> VersionDict = new()
         {
-            // Old Versions
+            // 1.9
+            { "942464121E433F5FFF0389B6015B296F8411D341", "1.9.0.614" },
             { "82F8D87C2E780A3491B4EC49575B2542DE2F0375", "1.9.0.645" },
+            // 1.10
+            { "3E70AE41398D44836BFFE1971B728DF67E35568C", "1.0.2447.0" },
+            { "0961DE7BA206421D087D45D0521E291F4B885389", "1.0.2470.0" },
+            { "6467E9AF671796C9ECBBB568A9CB8B707D0B8DFD", "1.10.1.1" },
+            { "4D394193827D09B1A2F0CC93143998FBFC835FD5", "1.10.0.45" },
             { "F1C99B3DF9B57B5490F7E124D9183B6F90BA491D", "1.10.0.83" },
             { "B93109BC35A326C842009892FC6084E3DEC35F28", "1.10.0.643" },
+            // Unsorted
             { "DF59D785BEFC368FD8A40BD135261E82C62AECCF", "1.0.3753.0" },
             { "CB5F1E1688CBA0DD2688D4EFD61615D0D890B411", "1.41.0.533" },
             // 1.46
