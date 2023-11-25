@@ -12,7 +12,7 @@ namespace Bifrost.Launcher
 
         internal string ExecutablePath32 { get => IsInitialized ? Path.Combine(_executableDirectory32, _executableName) : string.Empty; }
         internal string ExecutablePath64 { get => IsInitialized && Supports64 ? Path.Combine(_executableDirectory64, _executableName) : string.Empty; }
-        internal bool Supports64 { get; private set; }
+        internal bool Supports64 { get; private set; }  // Only versions 1.26.0.119 (2014-09-12) and up have Win64 executables
 
         public bool IsInitialized { get; private set; } = false;
         public string Version { get; private set; } = "Unknown Version";
