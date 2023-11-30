@@ -100,6 +100,8 @@ namespace Bifrost.Launcher
             // signatures we are looking for should be.
             for (int i = executable.Length - executable.Length / 5; i < executable.Length; i++)
             {
+                if (executable[i] != signature[0]) continue;  // Check the entire signature only if the first character matches
+
                 if (signature.SequenceEqual(executable.Skip(i).Take(signature.Length)))
                     return true;
             }
