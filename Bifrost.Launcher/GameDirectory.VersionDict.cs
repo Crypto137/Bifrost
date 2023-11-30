@@ -7,7 +7,7 @@
         private const string ExecutableName2016 = "MarvelHeroes2016.exe";
         private const string ExecutableNameOmega = "MarvelHeroesOmega.exe";     // From 1.52.0.1168 (2017-07-05)
 
-        private static readonly byte[] ShippingSignature = Convert.FromHexString("5368697070696E675C57696E33325C"); // Shipping\Win32\
+        private static readonly byte[] ShippingSignature = Convert.FromHexString("5368697070696E675C"); // Shipping\
 
         // SHA1 hashes of Win32 executables for detecting version
         private static readonly Dictionary<string, string> VersionDict = new()
