@@ -5,6 +5,13 @@ namespace Bifrost.Launcher
 {
     public partial class GameDirectory
     {
+        private const string ExecutableNameVanilla = "MarvelGame.exe";          // Original name
+        private const string ExecutableName2015 = "MarvelHeroes2015.exe";       // From 1.23.0.23   (2014-06-04)
+        private const string ExecutableName2016 = "MarvelHeroes2016.exe";       // From 1.42.0.59   (2016-01-22)
+        private const string ExecutableNameOmega = "MarvelHeroesOmega.exe";     // From 1.52.0.1168 (2017-07-05)
+
+        private static readonly byte[] ShippingSignature = Convert.FromHexString("5368697070696E675C"); // Shipping\
+
         private string _directoryPath = string.Empty;
         private string _executableDirectory32 = string.Empty;
         private string _executableDirectory64 = string.Empty;
@@ -88,16 +95,18 @@ namespace Bifrost.Launcher
             byte[] executable = File.ReadAllBytes(Path.Combine(_executableDirectory32, _executableName));
             string hash = Convert.ToHexString(SHA1.HashData(executable));
 
-            if (VersionDict.TryGetValue(hash, out string version) == false)
-                return "Unknown";
+            // Quick check for the most likely version
+            if (hash == "AABFC231A0BA96229BCAC1C931EAEA777B7470EC")
+                return "1.52.0.1700";
 
-            return version;
+            // Slow check for all possible versions
+            return ClientMetadataManager.Instance.GetVersionNumberFromExecutableHash(hash);
         }
 
         private bool CheckExecutableSignature(byte[] executable, byte[] signature)
         {
-            // Hack: speed this up by starting near the end of the executable where the build config
-            // signatures we are looking for should be.
+            // HACK: speed this up by starting near the end of the executable
+            // where the build config signatures we are looking for should be.
             for (int i = executable.Length - executable.Length / 5; i < executable.Length; i++)
             {
                 if (executable[i] != signature[0]) continue;  // Check the entire signature only if the first character matches
