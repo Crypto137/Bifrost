@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Windows;
 using Caliburn.Micro;
 using Bifrost.Wpf.Models;
 
@@ -52,6 +53,9 @@ namespace Bifrost.Wpf.ViewModels
 
         public void Apply()
         {
+            if (ValidateServerList() == false)
+                return;
+
             UpdateShellServerCollection();
             TryCloseAsync();
         }
@@ -60,6 +64,26 @@ namespace Bifrost.Wpf.ViewModels
         {
             _shellServerCollection.Clear();
             _shellServerCollection.AddRange(_managedServerCollection);
+        }
+
+        private bool ValidateServerList()
+        {
+            foreach (ServerModel server in ServerCollection)
+            {
+                if (string.IsNullOrWhiteSpace(server.Name))
+                {
+                    MessageBox.Show("Invalid server name.", "Error");
+                    return false;
+                }
+
+                if (string.IsNullOrWhiteSpace(server.SiteConfigUrl))
+                {
+                    MessageBox.Show($"Invalid site config URL for server {server.Name}.", "Error");
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }

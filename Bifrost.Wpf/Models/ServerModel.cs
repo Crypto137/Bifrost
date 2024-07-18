@@ -31,7 +31,7 @@ namespace Bifrost.Wpf.Models
             }
         }
 
-        public string ComboBoxLabel { get => $"{Name} ({SiteConfigUrl})"; }
+        public string ComboBoxLabel { get => $"{Name} ({SiteConfigUrl.Split('/')[0]})"; }
 
         public ServerModel(Server server)
         {
