@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Bifrost.Wpf.Views
 {
     /// <summary>
-    /// Interaction logic for OptionsView.xaml
+    /// Interaction logic for OptionsAdvancedView.xaml
     /// </summary>
-    public partial class OptionsView : Window
+    public partial class OptionsAdvancedView : UserControl
     {
-        public OptionsView()
+        public OptionsAdvancedView()
         {
             InitializeComponent();
         }

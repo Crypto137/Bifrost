@@ -5,103 +5,41 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Bifrost.Wpf.Views"
         mc:Ignorable="d"
-        Title="Options" Width="800" Height="450"
+        Title="Options" Width="450" Height="450"
         WindowStartupLocation="CenterOwner"
         ResizeMode="NoResize">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20" />
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
             <ColumnDefinition Width="20" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
+            <RowDefinition Height="10" />
             <RowDefinition Height="*" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="10" />
         </Grid.RowDefinitions>
 
-        <!-- Logging -->
-        <Label Grid.Column="1" Grid.Row="0" Content="Logging" FontSize="24" />
-        <ContentControl x:Name="OptionsLogging" Grid.Column="1" Grid.Row="1" />
+        <TabControl Grid.Column="1" Grid.Row="1">
+            <TabItem Header="General">
+                <ContentControl x:Name="OptionsGeneral" />
+            </TabItem>
 
-        <!-- Advanced -->
-        <Label Grid.Column="2" Grid.Row="0" Content="Advanced" FontSize="24" />
-        <Grid Grid.Column="2" Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
+            <TabItem Header="Logging">
+                <ContentControl x:Name="OptionsLogging" />
+            </TabItem>
 
-            <GroupBox Grid.Row="0" Header="Engine">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto" />
-                        <ColumnDefinition Width="auto" />
-                        <ColumnDefinition Width="auto" />
-                        <ColumnDefinition Width="auto" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                    </Grid.RowDefinitions>
+            <TabItem Header="Advanced">
+                <ContentControl x:Name="OptionsAdvanced" />
+            </TabItem>
+        </TabControl>
+        
+        
 
-                    <CheckBox Grid.Column="0" Grid.Row="0" Margin="4" x:Name="SkipStartupMovies" Content="Skip Startup Movies" />
-
-                    <CheckBox Grid.Column="0" Grid.Row="1" Margin="4" x:Name="ForceCustomResolution" Content="Force Custom Resolution" />
-                    <TextBox Grid.Column="1" Grid.Row="1" Width="48" Margin="4,4,0,4" x:Name="CustomResolutionX" IsEnabled="{Binding Path=ForceCustomResolution}" MaxLength="5" PreviewTextInput="NumberValidationTextBox" />
-                    <Label Grid.Column="2" Grid.Row="1" Content="x" />
-                    <TextBox Grid.Column="3" Grid.Row="1" Width="48" Margin="0,4,4,4" x:Name="CustomResolutionY" IsEnabled="{Binding Path=ForceCustomResolution}" MaxLength="5" PreviewTextInput="NumberValidationTextBox" />
-
-                    <CheckBox Grid.Column="0" Grid.Row="2" Margin="4" x:Name="NoSound" Content="Disable Sound" />
-                </Grid>
-            </GroupBox>
-
-            <GroupBox Grid.Row="1" Header="Modes">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-
-                    <CheckBox Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="4" Content="Force 32-bit" x:Name="Force32Bit" />
-
-                    <Label Grid.Column="0" Grid.Row="1" Margin="4" Content="Downloader" />
-                    <ComboBox Grid.Column="1" Grid.Row="1"  Margin="4" x:Name="Downloaders" DisplayMemberPath="Name" SelectedItem="{Binding Path=SelectedDownloader}" />
-                </Grid>
-            </GroupBox>
-
-            <GroupBox Grid.Row="2" Header="Features">
-                <GroupBox.Resources>
-                    <Style TargetType="CheckBox">
-                        <Setter Property="Margin" Value="4" />
-                    </Style>
-                </GroupBox.Resources>
-                <StackPanel>
-                    <CheckBox Content="Disable Login Screen Account" x:Name="NoAccount" />
-                    <CheckBox Content="Disable Options" x:Name="NoOptions" />
-                    <CheckBox Content="Disable Store" x:Name="NoStore" />
-                    <CheckBox Content="Disable Store Catalog" x:Name="NoCatalog" />
-                    <CheckBox Content="Disable News" x:Name="NoNews" />
-                    <CheckBox Content="Disable Logout" x:Name="NoLogout" />
-                </StackPanel>
-            </GroupBox>
-        </Grid>
         
         <!-- Accept -->
-        <Button Grid.Column="1" Grid.Row="2" Content="Apply" Grid.ColumnSpan="2" Margin="4" x:Name="Apply" />
+        <Button Grid.Column="1" Grid.Row="2" Content="Apply" Margin="4" x:Name="Apply" />
 
     </Grid>
 </Window>
