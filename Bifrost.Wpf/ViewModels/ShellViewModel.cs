@@ -25,15 +25,11 @@ namespace Bifrost.Wpf.ViewModels
         public ServerModel SelectedServer
         {
             get => _selectedServer;
-            set
-            {
-                _selectedServer = value;
-                NotifyOfPropertyChange(() => SelectedServer);
-            }
+            set { _selectedServer = value; NotifyOfPropertyChange(() => SelectedServer); }
         }
 
-        public bool NoStartupMovies { get; set; }
-        public bool EnableLogging { get; set; }
+        //public bool NoStartupMovies { get; set; }
+        //public bool EnableLogging { get; set; }
 
         public string GameVersion { get => $"Game Version: {_launchManager.GameDirectory.Version}"; }
 
@@ -44,7 +40,7 @@ namespace Bifrost.Wpf.ViewModels
             // Initialize launch manager
             _launchManager = new();
 
-            if (_launchManager.GameDirectory.Initialize(Directory.GetCurrentDirectory(), out string message) == false)
+            if (_launchManager.GameDirectory.Initialize("E:\\Games\\Marvel Heroes Omega", out string message) == false)
             {
                 MessageBox.Show(message, "Error");
                 Environment.Exit(0);
@@ -56,8 +52,8 @@ namespace Bifrost.Wpf.ViewModels
             // Load data
             ServerCollection = new(_launchManager.ServerList.Select(server => new ServerModel(server)));
             SelectedServer = ServerCollection.ElementAtOrDefault(_launchManager.LaunchConfig.ServerIndex);
-            EnableLogging = _launchManager.LaunchConfig.EnableLogging;
-            NoStartupMovies = _launchManager.LaunchConfig.NoStartupMovies;
+            //EnableLogging = _launchManager.LaunchConfig.EnableLogging;
+            //NoStartupMovies = _launchManager.LaunchConfig.NoStartupMovies;
         }
 
         public void Play()
@@ -99,8 +95,8 @@ namespace Bifrost.Wpf.ViewModels
 
             // Update launch config
             _launchManager.LaunchConfig.ServerIndex = ServerCollection.IndexOf(SelectedServer);
-            _launchManager.LaunchConfig.EnableLogging = EnableLogging;
-            _launchManager.LaunchConfig.NoStartupMovies = NoStartupMovies;
+            //_launchManager.LaunchConfig.EnableLogging = EnableLogging;
+            //_launchManager.LaunchConfig.NoStartupMovies = NoStartupMovies;
 
             // Save updated data
             _launchManager.SaveData();
