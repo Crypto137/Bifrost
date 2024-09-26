@@ -17,6 +17,8 @@ namespace Bifrost.Launcher
         public string AutoLoginEmailAddress { get; set; } = "test1@test.com";
         public string AutoLoginPassword { get; set; } = "123";
 
+        public string CustomArguments { get; set; } = string.Empty;
+
         // Logging
         public bool EnableLogging { get; set; } = false;
         public bool OverrideLoggingLevel { get; set; } = false;
@@ -82,6 +84,9 @@ namespace Bifrost.Launcher
                 argumentList.Add($"-emailaddress={AutoLoginEmailAddress}");
                 argumentList.Add($"-password={AutoLoginPassword}");
             }
+
+            if (string.IsNullOrWhiteSpace(CustomArguments) == false)
+                argumentList.AddRange(CustomArguments.Split(' '));
 
             // Logging
             if (EnableLogging)

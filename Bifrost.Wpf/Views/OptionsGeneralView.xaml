@@ -13,6 +13,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -61,6 +62,23 @@
 
                 <Label Grid.Column="0" Grid.Row="2" Content="Password" />
                 <TextBox Grid.Column="1" Grid.Row="2" Margin="4" IsEnabled="{Binding Path=EnableAutoLogin}" x:Name="AutoLoginPassword" />
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Grid.Row="2" Header="Custom Command Line Arguments">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+
+                <Label Grid.Column="0" Grid.Row="1" Content="Arguments" />
+                <TextBox Grid.Column="1" Grid.Row="1" Margin="4" x:Name="CustomArguments" />
             </Grid>
         </GroupBox>
     </Grid>

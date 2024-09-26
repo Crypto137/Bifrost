@@ -15,6 +15,8 @@ namespace Bifrost.Wpf.ViewModels
         private string _autoLoginEmailAddress;
         private string _autoLoginPassword;
 
+        private string _customArguments;
+
         public OptionsGeneralViewModel(LaunchManager launchManager) : base(launchManager)
         {
             _skipStartupMovies = _launchManager.LaunchConfig.NoStartupMovies;
@@ -26,6 +28,8 @@ namespace Bifrost.Wpf.ViewModels
             _enableAutoLogin = _launchManager.LaunchConfig.EnableAutoLogin;
             _autoLoginEmailAddress = _launchManager.LaunchConfig.AutoLoginEmailAddress;
             _autoLoginPassword = _launchManager.LaunchConfig.AutoLoginPassword;
+
+            _customArguments = _launchManager.LaunchConfig.CustomArguments;
         }
 
         public override void UpdateLaunchManager()
@@ -39,6 +43,8 @@ namespace Bifrost.Wpf.ViewModels
             _launchManager.LaunchConfig.EnableAutoLogin = _enableAutoLogin;
             _launchManager.LaunchConfig.AutoLoginEmailAddress = _autoLoginEmailAddress;
             _launchManager.LaunchConfig.AutoLoginPassword = _autoLoginPassword;
+
+            _launchManager.LaunchConfig.CustomArguments = _customArguments;
         }
 
         public override bool ValidateInput()
@@ -119,6 +125,12 @@ namespace Bifrost.Wpf.ViewModels
         {
             get { return _autoLoginPassword; }
             set { _autoLoginPassword = value; NotifyOfPropertyChange(() => AutoLoginPassword); }
+        }
+
+        public string CustomArguments
+        {
+            get { return _customArguments; }
+            set { _customArguments = value; NotifyOfPropertyChange(() => CustomArguments); }
         }
     }
 }
