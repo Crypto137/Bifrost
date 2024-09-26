@@ -11,30 +11,47 @@ namespace Bifrost.Wpf.ViewModels
         private string _customResolutionX;
         private string _customResolutionY;
 
+        private bool _enableAutoLogin;
+        private string _autoLoginEmailAddress;
+        private string _autoLoginPassword;
+
         public OptionsGeneralViewModel(LaunchManager launchManager) : base(launchManager)
         {
-            SkipStartupMovies = _launchManager.LaunchConfig.NoStartupMovies;
-            NoSplash = _launchManager.LaunchConfig.NoSplash;
-            ForceCustomResolution = _launchManager.LaunchConfig.ForceCustomResolution;
-            CustomResolutionX = _launchManager.LaunchConfig.CustomResolutionX.ToString();
-            CustomResolutionY = _launchManager.LaunchConfig.CustomResolutionY.ToString();
+            _skipStartupMovies = _launchManager.LaunchConfig.NoStartupMovies;
+            _noSplash = _launchManager.LaunchConfig.NoSplash;
+            _forceCustomResolution = _launchManager.LaunchConfig.ForceCustomResolution;
+            _customResolutionX = _launchManager.LaunchConfig.CustomResolutionX.ToString();
+            _customResolutionY = _launchManager.LaunchConfig.CustomResolutionY.ToString();
+
+            _enableAutoLogin = _launchManager.LaunchConfig.EnableAutoLogin;
+            _autoLoginEmailAddress = _launchManager.LaunchConfig.AutoLoginEmailAddress;
+            _autoLoginPassword = _launchManager.LaunchConfig.AutoLoginPassword;
         }
 
         public override void UpdateLaunchManager()
         {
-            _launchManager.LaunchConfig.NoStartupMovies = SkipStartupMovies;
-            _launchManager.LaunchConfig.NoSplash = NoSplash;
-            _launchManager.LaunchConfig.ForceCustomResolution = ForceCustomResolution;
-            _launchManager.LaunchConfig.CustomResolutionX = int.Parse(CustomResolutionX);
-            _launchManager.LaunchConfig.CustomResolutionY = int.Parse(CustomResolutionY);
+            _launchManager.LaunchConfig.NoStartupMovies = _skipStartupMovies;
+            _launchManager.LaunchConfig.NoSplash = _noSplash;
+            _launchManager.LaunchConfig.ForceCustomResolution = _forceCustomResolution;
+            _launchManager.LaunchConfig.CustomResolutionX = int.Parse(_customResolutionX);
+            _launchManager.LaunchConfig.CustomResolutionY = int.Parse(_customResolutionY);
+
+            _launchManager.LaunchConfig.EnableAutoLogin = _enableAutoLogin;
+            _launchManager.LaunchConfig.AutoLoginEmailAddress = _autoLoginEmailAddress;
+            _launchManager.LaunchConfig.AutoLoginPassword = _autoLoginPassword;
         }
 
         public override bool ValidateInput()
         {
-            // Custom resolution
             if (string.IsNullOrWhiteSpace(_customResolutionX) || string.IsNullOrWhiteSpace(_customResolutionY))
             {
                 MessageBox.Show("Please enter a valid custom resolution.", "Error");
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(_autoLoginEmailAddress) || string.IsNullOrWhiteSpace(_autoLoginPassword))
+            {
+                MessageBox.Show("Please enter valid auto-login credentials.", "Error");
                 return false;
             }
 
@@ -69,6 +86,39 @@ namespace Bifrost.Wpf.ViewModels
         {
             get { return _customResolutionY; }
             set { _customResolutionY = value; NotifyOfPropertyChange(() => CustomResolutionY); }
+        }
+
+        public bool EnableAutoLogin
+        {
+            get { return _enableAutoLogin; }
+            set
+            {
+                if (value)
+                {
+                    MessageBoxResult result = MessageBox.Show("Auto-login does not store your credentials in a secure way. " +
+                        "You should use this option only with throwaway credentials on local servers. " +
+                        "Are you sure you want to enable auto-login?",
+                        "Confirm Enable Auto-Login", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+
+                    if (result != MessageBoxResult.Yes)
+                        return;
+                }
+
+                _enableAutoLogin = value;
+                NotifyOfPropertyChange(() => EnableAutoLogin);
+            }
+        }
+
+        public string AutoLoginEmailAddress
+        {
+            get { return _autoLoginEmailAddress; }
+            set { _autoLoginEmailAddress = value; NotifyOfPropertyChange(() => AutoLoginEmailAddress); }
+        }
+
+        public string AutoLoginPassword
+        {
+            get { return _autoLoginPassword; }
+            set { _autoLoginPassword = value; NotifyOfPropertyChange(() => AutoLoginPassword); }
         }
     }
 }

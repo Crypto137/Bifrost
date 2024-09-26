@@ -23,9 +23,9 @@ namespace Bifrost.Wpf.ViewModels
             LoggingLevels = Enum.GetNames(typeof(LoggingLevel)).Select(name => new LoggingLevelModel(name)).ToList();
             InitLoggingChannelCheckboxes();
 
-            EnableLogging = _launchManager.LaunchConfig.EnableLogging;
-            OverrideLoggingLevel = _launchManager.LaunchConfig.OverrideLoggingLevel;
-            SelectedLoggingLevel = LoggingLevels[(int)_launchManager.LaunchConfig.LoggingLevel];
+            _enableLogging = _launchManager.LaunchConfig.EnableLogging;
+            _overrideLoggingLevel = _launchManager.LaunchConfig.OverrideLoggingLevel;
+            _selectedLoggingLevel = LoggingLevels[(int)_launchManager.LaunchConfig.LoggingLevel];
 
             foreach (var kvp in _launchManager.LaunchConfig.LoggingChannelStateDict)
                 _loggingChannelStateDict.Add(kvp.Key, kvp.Value);

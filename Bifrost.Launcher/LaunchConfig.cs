@@ -12,6 +12,10 @@ namespace Bifrost.Launcher
         public bool ForceCustomResolution { get; set; } = false;
         public int CustomResolutionX { get; set; } = 1920;
         public int CustomResolutionY { get; set; } = 1080;
+        
+        public bool EnableAutoLogin { get; set; } = false;
+        public string AutoLoginEmailAddress { get; set; } = "test1@test.com";
+        public string AutoLoginPassword { get; set; } = "123";
 
         // Logging
         public bool EnableLogging { get; set; } = false;
@@ -71,6 +75,12 @@ namespace Bifrost.Launcher
             {
                 argumentList.Add($"-ResX={CustomResolutionX}");
                 argumentList.Add($"-ResY={CustomResolutionY}");
+            }
+
+            if (EnableAutoLogin)
+            {
+                argumentList.Add($"-emailaddress={AutoLoginEmailAddress}");
+                argumentList.Add($"-password={AutoLoginPassword}");
             }
 
             // Logging

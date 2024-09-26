@@ -24,28 +24,28 @@ namespace Bifrost.Wpf.ViewModels
         {
             Downloaders = Enum.GetNames(typeof(Downloader)).Select(name => new DownloaderModel(name)).ToList();
 
-            Force32Bit = _launchManager.LaunchConfig.Force32Bit;
-            SelectedDownloader = Downloaders[(int)_launchManager.LaunchConfig.Downloader];
-            NoSound = _launchManager.LaunchConfig.NoSound;
-            NoAccount = _launchManager.LaunchConfig.NoAccount;
-            NoOptions = _launchManager.LaunchConfig.NoOptions;
-            NoStore = _launchManager.LaunchConfig.NoStore;
-            NoCatalog = _launchManager.LaunchConfig.NoCatalog;
-            NoNews = _launchManager.LaunchConfig.NoNews;
-            NoLogout = _launchManager.LaunchConfig.NoLogout;
+            _force32Bit = _launchManager.LaunchConfig.Force32Bit;
+            _selectedDownloader = Downloaders[(int)_launchManager.LaunchConfig.Downloader];
+            _noSound = _launchManager.LaunchConfig.NoSound;
+            _noAccount = _launchManager.LaunchConfig.NoAccount;
+            _noOptions = _launchManager.LaunchConfig.NoOptions;
+            _noStore = _launchManager.LaunchConfig.NoStore;
+            _noCatalog = _launchManager.LaunchConfig.NoCatalog;
+            _noNews = _launchManager.LaunchConfig.NoNews;
+            _noLogout = _launchManager.LaunchConfig.NoLogout;
         }
 
         public override void UpdateLaunchManager()
         {
-            _launchManager.LaunchConfig.Force32Bit = Force32Bit;
+            _launchManager.LaunchConfig.Force32Bit = _force32Bit;
             _launchManager.LaunchConfig.Downloader = (Downloader)Downloaders.IndexOf(SelectedDownloader);
-            _launchManager.LaunchConfig.NoSound = NoSound;
-            _launchManager.LaunchConfig.NoAccount = NoAccount;
-            _launchManager.LaunchConfig.NoOptions = NoOptions;
-            _launchManager.LaunchConfig.NoStore = NoStore;
-            _launchManager.LaunchConfig.NoCatalog = NoCatalog;
-            _launchManager.LaunchConfig.NoNews = NoNews;
-            _launchManager.LaunchConfig.NoLogout = NoLogout;
+            _launchManager.LaunchConfig.NoSound = _noSound;
+            _launchManager.LaunchConfig.NoAccount = _noAccount;
+            _launchManager.LaunchConfig.NoOptions = _noOptions;
+            _launchManager.LaunchConfig.NoStore = _noStore;
+            _launchManager.LaunchConfig.NoCatalog = _noCatalog;
+            _launchManager.LaunchConfig.NoNews = _noNews;
+            _launchManager.LaunchConfig.NoLogout = _noLogout;
         }
 
         #region Properties

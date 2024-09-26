@@ -12,14 +12,13 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <GroupBox Grid.Row="0" Header="Engine">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto" />
-                    <ColumnDefinition Width="auto" />
                     <ColumnDefinition Width="auto" />
                     <ColumnDefinition Width="auto" />
                 </Grid.ColumnDefinitions>
@@ -34,9 +33,34 @@
                 <CheckBox Grid.Column="0" Grid.Row="1" Margin="4" x:Name="NoSplash" Content="Hide Splash Screen" />
 
                 <CheckBox Grid.Column="0" Grid.Row="2" Margin="4" x:Name="ForceCustomResolution" Content="Force Custom Resolution" />
-                <TextBox Grid.Column="1" Grid.Row="2" Width="48" Margin="4,4,0,4" x:Name="CustomResolutionX" IsEnabled="{Binding Path=ForceCustomResolution}" MaxLength="5" PreviewTextInput="NumberValidationTextBox" />
-                <Label Grid.Column="2" Grid.Row="2" Content="x" />
-                <TextBox Grid.Column="3" Grid.Row="2" Width="48" Margin="0,4,4,4" x:Name="CustomResolutionY" IsEnabled="{Binding Path=ForceCustomResolution}" MaxLength="5" PreviewTextInput="NumberValidationTextBox" />
+                <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal">
+                    <TextBox Width="48" Margin="4,4,0,4" x:Name="CustomResolutionX" IsEnabled="{Binding Path=ForceCustomResolution}" MaxLength="5" PreviewTextInput="NumberValidationTextBox" />
+                    <Label Content="x" />
+                    <TextBox  Width="48" Margin="0,4,4,4" x:Name="CustomResolutionY" IsEnabled="{Binding Path=ForceCustomResolution}" MaxLength="5" PreviewTextInput="NumberValidationTextBox" />
+                </StackPanel>
+
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Grid.Row="1" Header="Auto-Login">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+
+                <CheckBox Grid.Column="0" Grid.Row="0" Margin="4" x:Name="EnableAutoLogin" Content="Enable Auto-Login" />
+
+                <Label Grid.Column="0" Grid.Row="1" Content="Email Address" />
+                <TextBox Grid.Column="1" Grid.Row="1" Margin="4" IsEnabled="{Binding Path=EnableAutoLogin}" x:Name="AutoLoginEmailAddress" />
+
+                <Label Grid.Column="0" Grid.Row="2" Content="Password" />
+                <TextBox Grid.Column="1" Grid.Row="2" Margin="4" IsEnabled="{Binding Path=EnableAutoLogin}" x:Name="AutoLoginPassword" />
             </Grid>
         </GroupBox>
     </Grid>
