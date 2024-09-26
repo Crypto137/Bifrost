@@ -6,8 +6,12 @@ namespace Bifrost.Launcher
     {
         public int ServerIndex { get; set; }
 
-        public Downloader Downloader { get; set; } = Downloader.Robocopy;
-        public bool Force32Bit { get; set; } = false;
+        // General
+        public bool NoStartupMovies { get; set; } = false;
+        public bool NoSplash { get; set; } = false;
+        public bool ForceCustomResolution { get; set; } = false;
+        public int CustomResolutionX { get; set; } = 1920;
+        public int CustomResolutionY { get; set; } = 1080;
 
         // Logging
         public bool EnableLogging { get; set; } = false;
@@ -15,14 +19,11 @@ namespace Bifrost.Launcher
         public LoggingLevel LoggingLevel { get; set; } = LoggingLevel.NONE;
         public Dictionary<LoggingChannel, LoggingChannelState> LoggingChannelStateDict { get; set; } = new();
 
-        // Engine
-        public bool ForceCustomResolution { get; set; } = false;
-        public int CustomResolutionX { get; set; } = 1920;
-        public int CustomResolutionY { get; set; } = 1080;
-        public bool NoStartupMovies { get; set; } = false;
-        public bool NoSound { get; set; } = false;
+        // Advanced
+        public Downloader Downloader { get; set; } = Downloader.Robocopy;
+        public bool Force32Bit { get; set; } = false;
 
-        // Features
+        public bool NoSound { get; set; } = false;
         public bool NoAccount { get; set; } = false;
         public bool NoOptions { get; set; } = false;
         public bool NoStore { get; set; } = false;
@@ -62,26 +63,31 @@ namespace Bifrost.Launcher
 
             if (server != null) argumentList.Add($"-siteconfigurl={server.SiteConfigUrl}");
 
-            // Logging
-            if (EnableLogging)
-            {
-                argumentList.Add("-log");
-                if (OverrideLoggingLevel) argumentList.Add($"-LoggingLevel={LoggingLevel}");
-                string loggingChannelFilter = BuildLoggingChannelFilter();
-                if (loggingChannelFilter.Length > 0) argumentList.Add($"-LoggingChannels={loggingChannelFilter}");
-            }
+            // General
+            if (NoStartupMovies) argumentList.Add("-nostartupmovies");
+            if (NoSplash) argumentList.Add("-nosplash");
 
-            // Engine
             if (ForceCustomResolution)
             {
                 argumentList.Add($"-ResX={CustomResolutionX}");
                 argumentList.Add($"-ResY={CustomResolutionY}");
             }
 
-            if (NoStartupMovies) argumentList.Add("-nostartupmovies");
-            if (NoSound) argumentList.Add("-nosound");
+            // Logging
+            if (EnableLogging)
+            {
+                argumentList.Add("-log");
 
-            // Features
+                if (OverrideLoggingLevel)
+                    argumentList.Add($"-LoggingLevel={LoggingLevel}");
+
+                string loggingChannelFilter = BuildLoggingChannelFilter();
+                if (loggingChannelFilter.Length > 0)
+                    argumentList.Add($"-LoggingChannels={loggingChannelFilter}");
+            }
+
+            // Advanced
+            if (NoSound) argumentList.Add("-nosound");
             if (NoAccount) argumentList.Add("-noaccount");
             if (NoOptions) argumentList.Add("-nooptions");
             if (NoStore) argumentList.Add("-nostore");

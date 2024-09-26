@@ -6,6 +6,7 @@ namespace Bifrost.Wpf.ViewModels
     public class OptionsGeneralViewModel : OptionsCategoryBaseViewModel
     {
         private bool _skipStartupMovies;
+        private bool _noSplash;
         private bool _forceCustomResolution;
         private string _customResolutionX;
         private string _customResolutionY;
@@ -13,6 +14,7 @@ namespace Bifrost.Wpf.ViewModels
         public OptionsGeneralViewModel(LaunchManager launchManager) : base(launchManager)
         {
             SkipStartupMovies = _launchManager.LaunchConfig.NoStartupMovies;
+            NoSplash = _launchManager.LaunchConfig.NoSplash;
             ForceCustomResolution = _launchManager.LaunchConfig.ForceCustomResolution;
             CustomResolutionX = _launchManager.LaunchConfig.CustomResolutionX.ToString();
             CustomResolutionY = _launchManager.LaunchConfig.CustomResolutionY.ToString();
@@ -21,6 +23,7 @@ namespace Bifrost.Wpf.ViewModels
         public override void UpdateLaunchManager()
         {
             _launchManager.LaunchConfig.NoStartupMovies = SkipStartupMovies;
+            _launchManager.LaunchConfig.NoSplash = NoSplash;
             _launchManager.LaunchConfig.ForceCustomResolution = ForceCustomResolution;
             _launchManager.LaunchConfig.CustomResolutionX = int.Parse(CustomResolutionX);
             _launchManager.LaunchConfig.CustomResolutionY = int.Parse(CustomResolutionY);
@@ -42,6 +45,12 @@ namespace Bifrost.Wpf.ViewModels
         {
             get { return _skipStartupMovies; }
             set { _skipStartupMovies = value; NotifyOfPropertyChange(() => SkipStartupMovies); }
+        }
+
+        public bool NoSplash
+        {
+            get { return _noSplash; }
+            set { _noSplash = value; NotifyOfPropertyChange(() => NoSplash); }
         }
 
         public bool ForceCustomResolution
