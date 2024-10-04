@@ -13,6 +13,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -51,5 +52,7 @@
                 <CheckBox Content="Disable Logout" x:Name="NoLogout" />
             </StackPanel>
         </GroupBox>
+
+        <Button Grid.Row="2" x:Name="OpenThirdPartyLicenses" Content="Third Party Licenses" Margin="5" Width="150" HorizontalAlignment="Left" />
     </Grid>
 </UserControl>

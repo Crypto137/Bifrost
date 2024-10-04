@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Caliburn.Micro;
 using Bifrost.Launcher;
 using Bifrost.Wpf.Models;
 
@@ -18,6 +19,8 @@ namespace Bifrost.Wpf.ViewModels
         private bool _noNews;
         private bool _noLogout;
 
+        private IWindowManager _windowManager;
+
         public List<DownloaderModel> Downloaders { get; }
 
         public OptionsAdvancedViewModel(LaunchManager launchManager) : base(launchManager)
@@ -33,6 +36,8 @@ namespace Bifrost.Wpf.ViewModels
             _noCatalog = _launchManager.LaunchConfig.NoCatalog;
             _noNews = _launchManager.LaunchConfig.NoNews;
             _noLogout = _launchManager.LaunchConfig.NoLogout;
+
+            _windowManager = new WindowManager();
         }
 
         public override void UpdateLaunchManager()
@@ -46,6 +51,11 @@ namespace Bifrost.Wpf.ViewModels
             _launchManager.LaunchConfig.NoCatalog = _noCatalog;
             _launchManager.LaunchConfig.NoNews = _noNews;
             _launchManager.LaunchConfig.NoLogout = _noLogout;
+        }
+
+        public void OpenThirdPartyLicenses()
+        {
+            _windowManager.ShowDialogAsync(new ThirdPartyLicensesViewModel());
         }
 
         #region Properties

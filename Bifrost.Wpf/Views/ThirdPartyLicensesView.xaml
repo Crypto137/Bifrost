@@ -1,0 +1,28 @@
+﻿<Window x:Class="Bifrost.Wpf.Views.ThirdPartyLicensesView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Bifrost.Wpf.Views"
+        mc:Ignorable="d"
+        Title="Third Party Licenses" Width="600" Height="450"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="10" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="10" />
+        </Grid.RowDefinitions>
+
+        <ScrollViewer Grid.Column="1" Grid.Row="1">
+            <TextBox IsReadOnly="true" x:Name="LicenseText" />
+        </ScrollViewer>
+        
+    </Grid>
+</Window>
