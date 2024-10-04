@@ -3,12 +3,22 @@ using System.Security.Cryptography;
 
 namespace Bifrost.Launcher
 {
-    public partial class GameDirectory
+    public enum GameDirectoryInitializationResult
     {
-        private const string ExecutableNameVanilla = "MarvelGame.exe";          // Original name
-        private const string ExecutableName2015 = "MarvelHeroes2015.exe";       // From 1.23.0.23   (2014-06-04)
-        private const string ExecutableName2016 = "MarvelHeroes2016.exe";       // From 1.42.0.59   (2016-01-22)
-        private const string ExecutableNameOmega = "MarvelHeroesOmega.exe";     // From 1.52.0.1168 (2017-07-05)
+        Success,
+        ClientNotFound,
+        ExecutableNotFound
+    }
+
+    public class GameDirectory
+    {
+        private static readonly string[] ExecutableNames = new string[]
+        {
+            "MarvelGame.exe",           // Original name
+            "MarvelHeroes2015.exe",     // From 1.23.0.23   (2014-06-04)
+            "MarvelHeroes2016.exe",     // From 1.42.0.59   (2016-01-22)
+            "MarvelHeroesOmega.exe"     // From 1.52.0.1168 (2017-07-05)
+        };
 
         private static readonly byte[] ShippingSignature = Convert.FromHexString("5368697070696E675C"); // Shipping\
 
@@ -24,30 +34,28 @@ namespace Bifrost.Launcher
         public bool IsInitialized { get; private set; } = false;
         public string Version { get; private set; } = "Unknown Version";
 
-        public bool Initialize(string path, out string message)
+        public GameDirectoryInitializationResult Initialize(string path)
         {
             // Determine executable directories
-            _directoryPath = path;
+            _directoryPath = FindClientDirectory(path);
             _executableDirectory32 = Path.Combine(_directoryPath, "UnrealEngine3", "Binaries", "Win32");
             _executableDirectory64 = Path.Combine(_directoryPath, "UnrealEngine3", "Binaries", "Win64");
 
             // Fail initialization if Win32 executable directory does not exist
             if (Directory.Exists(_executableDirectory32) == false)
             {
-                message = "Marvel Heroes not found.";
                 IsInitialized = false;
-                return IsInitialized;
+                return GameDirectoryInitializationResult.ClientNotFound;
             }
 
             // Detect executable name
-            _executableName = DetectExecutableName();
+            _executableName = DetectExecutableName(_executableDirectory32);
 
             // Fail initialization if could not detect executable name
             if (_executableName == string.Empty)
             {
-                message = "Marvel Heroes executable not found.";
                 IsInitialized = false;
-                return IsInitialized;
+                return GameDirectoryInitializationResult.ExecutableNotFound;
             }
 
             // Detect version and Win64 support
@@ -55,9 +63,8 @@ namespace Bifrost.Launcher
             Supports64 = Directory.Exists(_executableDirectory64) && File.Exists(Path.Combine(_executableDirectory64, _executableName));
 
             // Finish initialization
-            message = "Game directory initialized successfully.";
             IsInitialized = true;
-            return IsInitialized;
+            return GameDirectoryInitializationResult.Success;
         }
 
         public string GetVersionDebugInfo()
@@ -73,19 +80,39 @@ namespace Bifrost.Launcher
             return $"{_executableName}\n{hash}\n{versionInfo.FileVersion.Replace(',', '.')}\nIsShipping: {isShipping}";
         }
 
-        private string DetectExecutableName()
+        public static string GetInitializationResultText(GameDirectoryInitializationResult result)
         {
-            if (File.Exists(Path.Combine(_executableDirectory32, ExecutableNameOmega)))
-                return ExecutableNameOmega;
+            return result switch
+            {
+                GameDirectoryInitializationResult.Success               => "Game directory initialized successfully.",
+                GameDirectoryInitializationResult.ClientNotFound        => "Marvel Heroes not found.",
+                GameDirectoryInitializationResult.ExecutableNotFound    => "Marvel Heroes executable not found.",
+                _                                                       => "Unknown error.",
+            };
+        }
+        
+        private string FindClientDirectory(string rootDirectory)
+        {
+            // We are in the right directory - no adjustments needed
+            if (Directory.Exists(Path.Combine(rootDirectory, "UnrealEngine3")))
+                return rootDirectory;
 
-            if (File.Exists(Path.Combine(_executableDirectory32, ExecutableName2016)))
-                return ExecutableName2016;
+            // We are in the binaries directory - go up three levels
+            if (DetectExecutableName(rootDirectory) != string.Empty)
+                return Path.GetFullPath(Path.Combine(rootDirectory, "..", "..", ".."));
 
-            if (File.Exists(Path.Combine(_executableDirectory32, ExecutableName2015)))
-                return ExecutableName2015;
+            // As a last resort try going up level (if the launcher is in a subdirectory with the client folder)
+            return Path.GetFullPath(Path.Combine(rootDirectory, ".."));
+        }
 
-            if (File.Exists(Path.Combine(_executableDirectory32, ExecutableNameVanilla)))
-                return ExecutableNameVanilla;
+        private string DetectExecutableName(string binariesDirectory)
+        {
+            // Check executable names in reverse order (because users are more likely to use later versions)
+            for (int i = ExecutableNames.Length - 1; i >= 0; i--)
+            {
+                if (File.Exists(Path.Combine(binariesDirectory, ExecutableNames[i])))
+                    return ExecutableNames[i];
+            }
 
             return string.Empty;
         }

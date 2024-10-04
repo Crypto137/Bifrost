@@ -13,14 +13,14 @@ namespace Bifrost.ConsoleApp
             string dir = args.Length > 0 ? args[0] : Directory.GetCurrentDirectory();
             Console.WriteLine($"Directory: {dir}");
 
-            if (launchManager.GameDirectory.Initialize(dir, out string message) == false)
+            GameDirectoryInitializationResult result = launchManager.GameDirectory.Initialize(dir);
+            Console.WriteLine(GameDirectory.GetInitializationResultText(result));
+            if (result != GameDirectoryInitializationResult.Success)
             {
-                Console.WriteLine(message);
                 Console.ReadLine();
                 return;
             };
 
-            Console.WriteLine(message);
             Console.WriteLine($"Version: {launchManager.GameDirectory.Version}");
 
             foreach (string arg in launchManager.LaunchConfig.ToLaunchArguments(new()))

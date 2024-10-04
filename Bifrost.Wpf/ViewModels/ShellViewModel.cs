@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Linq;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using Caliburn.Micro;
 using Bifrost.Launcher;
@@ -37,9 +37,10 @@ namespace Bifrost.Wpf.ViewModels
             // Initialize launch manager
             _launchManager = new();
 
-            if (_launchManager.GameDirectory.Initialize(Directory.GetCurrentDirectory(), out string message) == false)
+            GameDirectoryInitializationResult result = _launchManager.GameDirectory.Initialize(Directory.GetCurrentDirectory());
+            if (result != GameDirectoryInitializationResult.Success)
             {
-                MessageBox.Show(message, "Error");
+                MessageBox.Show(GameDirectory.GetInitializationResultText(result), "Error");
                 Environment.Exit(0);
             }
 
