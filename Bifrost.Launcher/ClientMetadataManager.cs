@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-
-namespace Bifrost.Launcher
+﻿namespace Bifrost.Launcher
 {
     public sealed class ClientMetadataManager
     {
@@ -27,13 +25,7 @@ namespace Bifrost.Launcher
         {
             _versionMetadataDict.Clear();
 
-            string launcherDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            string metadataFilePath = Path.Combine(launcherDirectory, "Bifrost.ClientMetadata.tsv");
-            
-            if (File.Exists(metadataFilePath) == false)
-                return;
-
-            string[] rows = File.ReadAllLines(metadataFilePath);
+            string[] rows = Resources.ClientMetadataTable.Split('\n');
             foreach (string row in rows)
             {
                 string[] columns = row.Split('\t');
