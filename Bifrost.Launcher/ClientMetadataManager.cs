@@ -25,8 +25,9 @@
         {
             _versionMetadataDict.Clear();
 
-            string[] rows = Resources.ClientMetadataTable.Split('\n');
-            foreach (string row in rows)
+            using StringReader reader = new(Resources.ClientMetadataTable);
+            string row;
+            while ((row = reader.ReadLine()) != null)
             {
                 string[] columns = row.Split('\t');
 
