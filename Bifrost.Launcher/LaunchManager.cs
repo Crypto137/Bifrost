@@ -1,10 +1,13 @@
 ﻿using System.Diagnostics;
-using System.Text.Json;
+using Bifrost.Launcher.Serialization;
 
 namespace Bifrost.Launcher
 {
     public class LaunchManager
     {
+        private const string ServerListFileName = "Bifrost.ServerList.json";
+        private const string LaunchConfigFileName = "Bifrost.LaunchConfig.json";
+
         public GameDirectory GameDirectory { get; }
         public List<Server> ServerList { get; }
         public LaunchConfig LaunchConfig { get; }
@@ -12,18 +15,17 @@ namespace Bifrost.Launcher
         public LaunchManager()
         {
             GameDirectory = new();
+            ServerList = JsonHelper.LoadOrCreate(ServerListFileName, JsonContext.Default.ListServer);
+            LaunchConfig = JsonHelper.LoadOrCreate(LaunchConfigFileName, JsonContext.Default.LaunchConfig);
 
-            string dir = Directory.GetCurrentDirectory();
-            string serverListPath = Path.Combine(dir, "Bifrost.ServerList.json");
-            string launchConfigPath = Path.Combine(dir, "Bifrost.LaunchConfig.json");
+            if (ServerList.Count == 0)
+                ServerList.Add(new());
+        }
 
-            ServerList = File.Exists(serverListPath)
-                ? JsonSerializer.Deserialize<List<Server>>(File.ReadAllText(serverListPath)) ?? throw new("Invalid server list json.")
-                : new() { new() };
-
-            LaunchConfig = File.Exists(launchConfigPath)
-                ? JsonSerializer.Deserialize<LaunchConfig>(File.ReadAllText(launchConfigPath)) ?? throw new("Invalid launch config json.")
-                : new();
+        public void SaveData()
+        {
+            JsonHelper.Save(ServerList, ServerListFileName, JsonContext.Default.ListServer);
+            JsonHelper.Save(LaunchConfig, LaunchConfigFileName, JsonContext.Default.LaunchConfig);
         }
 
         public bool Launch()
@@ -43,15 +45,6 @@ namespace Bifrost.Launcher
 
             Process.Start(executablePath, LaunchConfig.ToLaunchArguments(server));
             return true;
-        }
-
-        public void SaveData()
-        {
-            string dir = Directory.GetCurrentDirectory();
-            JsonSerializerOptions jsonOptions = new() { WriteIndented = true };
-
-            File.WriteAllText(Path.Combine(dir, "Bifrost.ServerList.json"), JsonSerializer.Serialize(ServerList, jsonOptions));
-            File.WriteAllText(Path.Combine(dir, "Bifrost.LaunchConfig.json"), JsonSerializer.Serialize(LaunchConfig, jsonOptions));
         }
     }
 }
