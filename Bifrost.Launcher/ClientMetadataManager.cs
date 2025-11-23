@@ -1,7 +1,11 @@
-﻿namespace Bifrost.Launcher
+﻿using System.Reflection;
+
+namespace Bifrost.Launcher
 {
     public sealed class ClientMetadataManager
     {
+        private const string MetadataEmbeddedResourceName = "Bifrost.Launcher.Data.ClientVersions.tsv";
+
         // Contains SHA1 hashes of Win32 executables for detecting version.
         // Potentially can be expanded to include other metadata.
         private readonly Dictionary<string, string> _versionMetadataDict = new();
@@ -25,7 +29,9 @@
         {
             _versionMetadataDict.Clear();
 
-            using StringReader reader = new(Resources.ClientMetadataTable);
+            using Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(MetadataEmbeddedResourceName);
+            using StreamReader reader = new(stream);
+
             string row;
             while ((row = reader.ReadLine()) != null)
             {
