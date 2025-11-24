@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34024.191
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bifrost.Launcher", "Bifrost.Launcher\Bifrost.Launcher.csproj", "{B4F6A307-AE5D-4896-B9AB-46A200D89968}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bifrost.Core", "Bifrost.Core\Bifrost.Core.csproj", "{B4F6A307-AE5D-4896-B9AB-46A200D89968}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bifrost.Wpf", "Bifrost.Wpf\Bifrost.Wpf.csproj", "{C7AABBF6-231D-427E-B2EB-45651A85B592}"
 EndProject

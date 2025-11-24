@@ -1,4 +1,4 @@
-﻿using Bifrost.Launcher;
+﻿using Bifrost.Core;
 
 namespace Bifrost.ConsoleApp
 {

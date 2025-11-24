@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace Bifrost.Launcher
+namespace Bifrost.Core
 {
     public class LaunchConfig
     {

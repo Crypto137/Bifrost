@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Caliburn.Micro;
-using Bifrost.Launcher;
+using Bifrost.Core;
 using Bifrost.Wpf.Models;
 
 namespace Bifrost.Wpf.ViewModels

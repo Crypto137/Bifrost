@@ -1,4 +1,4 @@
-﻿using Bifrost.Launcher;
+﻿using Bifrost.Core;
 using System.Windows;
 
 namespace Bifrost.Wpf.ViewModels

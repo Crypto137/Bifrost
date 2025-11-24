@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
-using Bifrost.Launcher.Serialization;
+using Bifrost.Core.Serialization;
 
-namespace Bifrost.Launcher
+namespace Bifrost.Core
 {
     public class LaunchManager
     {

@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization.Metadata;
 
-namespace Bifrost.Launcher.Serialization
+namespace Bifrost.Core.Serialization
 {
     public static class JsonHelper
     {

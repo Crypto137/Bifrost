@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Security.Cryptography;
 
-namespace Bifrost.Launcher
+namespace Bifrost.Core
 {
     public enum GameDirectoryInitializationResult
     {

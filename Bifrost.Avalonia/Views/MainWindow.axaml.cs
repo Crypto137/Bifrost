@@ -1,6 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
-using Bifrost.Launcher;
+using Bifrost.Core;
 using System;
 using System.IO;
 

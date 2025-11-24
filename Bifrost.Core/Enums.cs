@@ -1,4 +1,4 @@
-﻿namespace Bifrost.Launcher
+﻿namespace Bifrost.Core
 {
     public enum Downloader
     {

@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Bifrost.Launcher
+namespace Bifrost.Core.Serialization
 {
     /// <summary>
     /// <see cref="JsonSerializerContext"/> implementation for AOT publish compatibility.

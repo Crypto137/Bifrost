@@ -32,12 +32,14 @@ Bifrost is a custom launcher for Marvel Heroes.
 
 ## Additional Details
 
-Bifrost consists of three main parts:
+Bifrost consists of the following projects:
 
-- `Bifrost.Launcher` - a backend library.
+- `Bifrost.Core` - a backend library.
 
-- `Bifrost.ConsoleApp` - a very simple example program that demonstrates how to use Bifrost.Launcher.
+- `Bifrost.ConsoleApp` - a very simple example program that demonstrates how to use Bifrost.Core.
 
-- `Bifrost.Wpf` - a WPF-based graphical interface that uses Bifrost.Launcher.
+- `Bifrost.Wpf` - a WPF-based graphical interface that uses Bifrost.Core.
 
-Bifrost.Launcher and Bifrost.ConsoleApp are cross-platform and should be able to target any .NET supported platform. Bifrost.Wpf relies on WPF and requires Windows or compatible environment.
+- `Bifrost.Avalonia` - an experimental Avalonia-based GUI implementation.
+
+Bifrost.Core and Bifrost.ConsoleApp are cross-platform and should be able to target any .NET supported platform. Bifrost.Wpf relies on WPF and requires Windows or compatible environment.
