@@ -1,0 +1,85 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="820" d:DesignHeight="660"
+        x:Class="Bifrost.Avalonia.Views.MainWindow"
+        Title="Bifrost.Avalonia"
+        Width="820" Height="660" CanResize="false"
+        WindowStartupLocation="CenterScreen"
+        Opened="Window_Opened">
+
+    <Window.Styles>
+        <Style Selector="Border.news-item-container">
+            <Setter Property="Width" Value="270" />
+            <Setter Property="Height" Value="90" />
+            <Setter Property="Background" Value="#80000000" />
+        </Style>
+
+        <Style Selector="TextBlock.news-item">
+            <Setter Property="Margin" Value="10" />
+            <!-- <Setter Property="TextAlignment" Value="Right" /> doesn't work correctly with wrapping -->
+            <Setter Property="VerticalAlignment" Value="Bottom" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Foreground" Value="#519BFF" />
+        </Style>
+
+        <Style Selector="TextBlock.news-item:pointerover">
+            <Setter Property="Foreground" Value="#FFFFFF" />
+        </Style>
+
+        <Style Selector="Button">
+            <Setter Property="FontSize" Value="34" />
+        </Style>
+    </Window.Styles>
+    
+    <Grid RowDefinitions="30 * 95">
+
+        <Grid.Background>
+            <ImageBrush Source="/Assets/background.png" />
+        </Grid.Background>
+
+        <!-- Server Status Bar -->
+        <Grid Grid.Row="0" ColumnDefinitions="* 270 30">
+            <Border Grid.Column="1" Grid.Row="0" Background="#80000000">
+                <TextBlock HorizontalAlignment="Center" FontSize="18" VerticalAlignment="Center" >Server Status: Online</TextBlock>
+            </Border>
+        </Grid>
+
+        <!-- Main Content -->
+        <Grid Grid.Row="1" ColumnDefinitions="* 320" RowDefinitions="84 *" Margin="10">
+            <!-- News -->
+            <TextBlock Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="10 10 40 10" FontSize="36">News</TextBlock>
+            <StackPanel Grid.Column="1" Grid.Row="1" Spacing="12">
+                <Border Classes="news-item-container">
+                    <TextBlock Classes="news-item">Midtown Madness, Vibranium Mines One-Shot, and More</TextBlock>
+                </Border>
+                <Border Classes="news-item-container">
+                    <TextBlock Classes="news-item">Psylocke Presale Now Available!</TextBlock>
+                </Border>
+                <Border Classes="news-item-container">
+                    <TextBlock Classes="news-item">Deadpool Battle of the Atom, Moon Knight Marvel Now! Costumes Now Available!</TextBlock>
+                </Border>
+                <Border Classes="news-item-container">
+                    <TextBlock Classes="news-item">Bounty Hunter Week, Fortune Mark 6 and More!</TextBlock>
+                </Border>
+            </StackPanel>
+        </Grid>
+        
+        <!-- Bottom Controls -->
+        <Grid Grid.Row="2" Background="#80000000">
+            <Grid ColumnDefinitions="* 280 180" RowDefinitions="* *" Margin="10" ColumnSpacing="10">
+                <!--<TextBlock Grid.Row="0" VerticalAlignment="Center">Bottom Row 1</TextBlock>-->
+                <!--<TextBlock Grid.Row="1" VerticalAlignment="Center">Bottom Row 2</TextBlock>-->
+                
+                <ComboBox Grid.Column="1" Grid.Row="2" SelectedIndex="0" x:Name="ServerComboBox">
+                    <ComboBoxItem Content="Local Server" />
+                </ComboBox>
+                <Button Grid.Column="2" Grid.RowSpan="2" x:Name="PlayButton" Click="PlayButton_Click">Play</Button>
+            </Grid>
+        </Grid>
+
+    </Grid>
+
+</Window>

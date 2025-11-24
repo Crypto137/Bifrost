@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bifrost.Wpf", "Bifrost.Wpf\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bifrost.ConsoleApp", "Bifrost.ConsoleApp\Bifrost.ConsoleApp.csproj", "{BA84B447-D010-4D5F-8A17-5700067C082D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bifrost.Avalonia", "Bifrost.Avalonia\Bifrost.Avalonia.csproj", "{DA69D8C8-7400-472F-BEFD-8EE10FDF56B7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{BA84B447-D010-4D5F-8A17-5700067C082D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA84B447-D010-4D5F-8A17-5700067C082D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA84B447-D010-4D5F-8A17-5700067C082D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA69D8C8-7400-472F-BEFD-8EE10FDF56B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA69D8C8-7400-472F-BEFD-8EE10FDF56B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA69D8C8-7400-472F-BEFD-8EE10FDF56B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA69D8C8-7400-472F-BEFD-8EE10FDF56B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
