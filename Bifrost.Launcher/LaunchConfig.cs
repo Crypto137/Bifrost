@@ -40,7 +40,7 @@ namespace Bifrost.Launcher
         public LaunchConfig()
         {
             // Initialize logging channels
-            foreach (LoggingChannel channel in Enum.GetValues(typeof(LoggingChannel)))
+            foreach (LoggingChannel channel in Enum.GetValues<LoggingChannel>())
                 LoggingChannelStateDict.Add(channel, LoggingChannelState.Default);
         }
 
