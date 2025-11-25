@@ -7,4 +7,9 @@
     <Application.Styles>
         <SimpleTheme />
     </Application.Styles>
+
+    <Application.Resources>
+        <FontFamily x:Key="BebasNeue">/Assets/Fonts/BebasNeue-Regular.ttf#Bebas Neue</FontFamily>
+    </Application.Resources>
+
 </Application>
