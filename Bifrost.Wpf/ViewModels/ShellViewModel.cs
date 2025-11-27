@@ -28,7 +28,7 @@ namespace Bifrost.Wpf.ViewModels
             set { _selectedServer = value; NotifyOfPropertyChange(() => SelectedServer); }
         }
 
-        public string GameVersion { get => $"Game Version: {_launchManager.GameDirectory.Version}"; }
+        public string GameVersion { get => $"Game Version: {_launchManager.GameDirectory.ClientMetadata.Version}"; }
 
         public ShellViewModel()
         {
@@ -44,7 +44,7 @@ namespace Bifrost.Wpf.ViewModels
                 Environment.Exit(0);
             }
 
-            if (_launchManager.GameDirectory.Version == "Unknown")
+            if (_launchManager.GameDirectory.ClientMetadata == ClientMetadata.Unknown)
                 MessageBox.Show($"Unknown game version detected. Please report this information:\n{_launchManager.GameDirectory.GetVersionDebugInfo()}", "Warning");
 
             // Load data
