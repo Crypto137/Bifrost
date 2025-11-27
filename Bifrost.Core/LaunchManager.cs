@@ -43,7 +43,8 @@ namespace Bifrost.Core
             if (string.IsNullOrWhiteSpace(executablePath))
                 return false;
 
-            Process.Start(executablePath, LaunchConfig.ToLaunchArguments(server));
+            string[] args = LaunchConfig.ToLaunchArguments(server, GameDirectory.ClientMetadata.Flags);
+            Process.Start(executablePath, args);
             return true;
         }
     }

@@ -44,27 +44,44 @@ namespace Bifrost.Core
                 LoggingChannelStateDict.Add(channel, LoggingChannelState.Default);
         }
 
-        public string[] ToLaunchArguments(Server server)
+        public string[] ToLaunchArguments(Server server, ClientFlags flags)
         {
             List<string> argumentList = new();
 
-            switch (Downloader)
+            if (flags.HasFlag(ClientFlags.BitRaider))
             {
-                case Downloader.Robocopy:
-                    argumentList.Add("-robocopy");
-                    argumentList.Add("-nosolidstate");
-                    argumentList.Add("-nosteam");
-                    break;
+                // Treat Solid State as BitRaider for older versions of the game. Also do not use -robocopy, since it didn't exist back then.
+                switch (Downloader)
+                {
+                    case Downloader.Robocopy:
+                        argumentList.AddRange(["-nobitraider", "-nosteam"]);
+                        break;
 
-                case Downloader.SolidState:
-                    argumentList.Add("-solidstate");
-                    argumentList.Add("-nosteam");
-                    break;
+                    case Downloader.BitRaiderOrSolidState:
+                        argumentList.AddRange(["-bitraider", "-nosteam"]);
+                        break;
 
-                case Downloader.Steam:
-                    argumentList.Add("-steam");
-                    argumentList.Add("-nosolidstate");
-                    break;
+                    case Downloader.Steam:
+                        argumentList.AddRange(["-steam", "-nobitraider"]);
+                        break;
+                }
+            }
+            else
+            {
+                switch (Downloader)
+                {
+                    case Downloader.Robocopy:
+                        argumentList.AddRange(["-robocopy", "-nosolidstate", "-nosteam"]);
+                        break;
+
+                    case Downloader.BitRaiderOrSolidState:
+                        argumentList.AddRange(["-solidstate", "-nosteam"]);
+                        break;
+
+                    case Downloader.Steam:
+                        argumentList.AddRange(["-steam", "-nosolidstate"]);
+                        break;
+                }
             }
 
             if (server != null) argumentList.Add($"-siteconfigurl={server.SiteConfigUrl}");

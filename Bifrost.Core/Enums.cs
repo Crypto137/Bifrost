@@ -3,7 +3,7 @@
     public enum Downloader
     {
         Robocopy,
-        SolidState,     // BitRaider for pre-1.11
+        BitRaiderOrSolidState,     // SolidState replaced BitRaider in 1.11.0.281
         Steam
     }
 

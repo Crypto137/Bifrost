@@ -33,6 +33,8 @@ namespace Bifrost.Core
 
         private void InitializeMetadata()
         {
+            const int NumColumns = 3;
+
             _metadataDict.Clear();
 
             using Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(MetadataEmbeddedResourceName);
@@ -43,15 +45,16 @@ namespace Bifrost.Core
             {
                 string[] columns = row.Split('\t');
 
-                if (columns.Length < 2)
+                if (columns.Length < NumColumns)
                     continue;
 
                 try
                 {
                     string hash = columns[0];
                     string version = columns[1];
+                    ClientFlags flags = string.IsNullOrWhiteSpace(columns[2]) ? ClientFlags.None : Enum.Parse<ClientFlags>(columns[2]);
 
-                    ClientMetadata clientMetadata = new(version);
+                    ClientMetadata clientMetadata = new(version, flags);
                     _metadataDict.Add(hash, clientMetadata);
                 }
                 catch
