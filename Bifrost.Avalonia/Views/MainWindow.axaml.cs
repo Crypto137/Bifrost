@@ -62,6 +62,8 @@ namespace Bifrost.Avalonia.Views
             }
 
             ServerComboBox.SelectedIndex = _launchManager.LaunchConfig.ServerIndex;
+
+            VersionTextBlock.Text = $"Game Version: {_launchManager.GameDirectory.ClientMetadata.Version}";
         }
 
         private void PlayButton_Click(object sender, RoutedEventArgs e)
