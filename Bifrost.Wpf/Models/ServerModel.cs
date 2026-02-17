@@ -1,6 +1,6 @@
 ﻿using System;
 using Caliburn.Micro;
-using Bifrost.Core;
+using Bifrost.Core.Models;
 
 namespace Bifrost.Wpf.Models
 {

@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Security.Cryptography;
 
-namespace Bifrost.Core
+namespace Bifrost.Core.ClientManagement
 {
     public enum GameDirectoryInitializationResult
     {
@@ -79,7 +79,7 @@ namespace Bifrost.Core
 
             // Look for the shipping build signature.
             // HACK: speed this up by searching near the end of the executable where the build config signatures we are looking for should be.
-            int signatureStart = executable.Length - (executable.Length / 5);
+            int signatureStart = executable.Length - executable.Length / 5;
             bool isShipping = executable.AsSpan(signatureStart).IndexOf(ShippingSignature) != -1;
             
             string hash = Convert.ToHexString(SHA1.HashData(executable));

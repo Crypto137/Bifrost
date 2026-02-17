@@ -1,7 +1,8 @@
 ﻿using System.Diagnostics;
+using Bifrost.Core.Models;
 using Bifrost.Core.Serialization;
 
-namespace Bifrost.Core
+namespace Bifrost.Core.ClientManagement
 {
     public class LaunchManager
     {
@@ -31,7 +32,7 @@ namespace Bifrost.Core
         public bool Launch()
         {
             // Use the specified server if index is within range
-            Server server = (LaunchConfig.ServerIndex >= 0 && LaunchConfig.ServerIndex < ServerList.Count)
+            Server server = LaunchConfig.ServerIndex >= 0 && LaunchConfig.ServerIndex < ServerList.Count
                 ? ServerList[LaunchConfig.ServerIndex]
                 : null;
 

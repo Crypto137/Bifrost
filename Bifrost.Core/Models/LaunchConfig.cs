@@ -1,6 +1,7 @@
-﻿using System.Text;
+﻿using Bifrost.Core.ClientManagement;
+using System.Text;
 
-namespace Bifrost.Core
+namespace Bifrost.Core.Models
 {
     public class LaunchConfig
     {

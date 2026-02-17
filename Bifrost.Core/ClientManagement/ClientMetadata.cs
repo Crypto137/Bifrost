@@ -1,4 +1,4 @@
-﻿namespace Bifrost.Core
+﻿namespace Bifrost.Core.ClientManagement
 {
     [Flags]
     public enum ClientFlags

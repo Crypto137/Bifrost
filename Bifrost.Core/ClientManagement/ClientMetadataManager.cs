@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Bifrost.Core
+namespace Bifrost.Core.ClientManagement
 {
     public sealed class ClientMetadataManager
     {

@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Caliburn.Micro;
-using Bifrost.Core;
 using Bifrost.Wpf.Models;
+using Bifrost.Core.Models;
+using Bifrost.Core.ClientManagement;
 
 namespace Bifrost.Wpf.ViewModels
 {

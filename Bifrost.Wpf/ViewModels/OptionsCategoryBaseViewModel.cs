@@ -1,5 +1,5 @@
 ﻿using Caliburn.Micro;
-using Bifrost.Core;
+using Bifrost.Core.ClientManagement;
 
 namespace Bifrost.Wpf.ViewModels
 {

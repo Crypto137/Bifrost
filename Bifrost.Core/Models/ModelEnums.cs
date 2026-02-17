@@ -1,4 +1,4 @@
-﻿namespace Bifrost.Core
+﻿namespace Bifrost.Core.Models
 {
     public enum Downloader
     {

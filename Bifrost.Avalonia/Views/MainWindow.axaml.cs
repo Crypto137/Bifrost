@@ -2,7 +2,8 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
-using Bifrost.Core;
+using Bifrost.Core.ClientManagement;
+using Bifrost.Core.Models;
 using System;
 using System.IO;
 

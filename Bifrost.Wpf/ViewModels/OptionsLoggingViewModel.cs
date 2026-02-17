@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Bifrost.Core;
+using Bifrost.Core.ClientManagement;
+using Bifrost.Core.Models;
 using Bifrost.Wpf.Models;
 
 namespace Bifrost.Wpf.ViewModels

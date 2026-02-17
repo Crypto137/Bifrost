@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using Caliburn.Micro;
-using Bifrost.Core;
+using Bifrost.Core.ClientManagement;
 using Bifrost.Wpf.Models;
 
 namespace Bifrost.Wpf.ViewModels
