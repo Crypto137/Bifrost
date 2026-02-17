@@ -19,26 +19,26 @@ namespace Bifrost.Wpf.ViewModels
 
         public List<LoggingLevelModel> LoggingLevels { get; }
 
-        public OptionsLoggingViewModel(LaunchManager launchManager) : base(launchManager)
+        public OptionsLoggingViewModel(ClientLauncher clientLauncher) : base(clientLauncher)
         {
             LoggingLevels = Enum.GetNames(typeof(LoggingLevel)).Select(name => new LoggingLevelModel(name)).ToList();
             InitLoggingChannelCheckboxes();
 
-            _enableLogging = _launchManager.LaunchConfig.EnableLogging;
-            _overrideLoggingLevel = _launchManager.LaunchConfig.OverrideLoggingLevel;
-            _selectedLoggingLevel = LoggingLevels[(int)_launchManager.LaunchConfig.LoggingLevel];
+            _enableLogging = _clientLauncher.Config.EnableLogging;
+            _overrideLoggingLevel = _clientLauncher.Config.OverrideLoggingLevel;
+            _selectedLoggingLevel = LoggingLevels[(int)_clientLauncher.Config.LoggingLevel];
 
-            foreach (var kvp in _launchManager.LaunchConfig.LoggingChannelStateDict)
+            foreach (var kvp in _clientLauncher.Config.LoggingChannelStateDict)
                 _loggingChannelStateDict.Add(kvp.Key, kvp.Value);
         }
 
-        public override void UpdateLaunchManager()
+        public override void UpdateClientLauncher()
         {
-            _launchManager.LaunchConfig.EnableLogging = _enableLogging;
-            _launchManager.LaunchConfig.OverrideLoggingLevel = _overrideLoggingLevel;
-            _launchManager.LaunchConfig.LoggingLevel = (LoggingLevel)LoggingLevels.IndexOf(SelectedLoggingLevel);
+            _clientLauncher.Config.EnableLogging = _enableLogging;
+            _clientLauncher.Config.OverrideLoggingLevel = _overrideLoggingLevel;
+            _clientLauncher.Config.LoggingLevel = (LoggingLevel)LoggingLevels.IndexOf(SelectedLoggingLevel);
             foreach (var kvp in _loggingChannelStateDict)
-                _launchManager.LaunchConfig.LoggingChannelStateDict[kvp.Key] = kvp.Value;
+                _clientLauncher.Config.LoggingChannelStateDict[kvp.Key] = kvp.Value;
         }
 
         public void ResetLoggingChannels()

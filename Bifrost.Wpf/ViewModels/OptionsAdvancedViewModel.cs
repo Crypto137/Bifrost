@@ -24,34 +24,34 @@ namespace Bifrost.Wpf.ViewModels
 
         public List<DownloaderModel> Downloaders { get; }
 
-        public OptionsAdvancedViewModel(LaunchManager launchManager) : base(launchManager)
+        public OptionsAdvancedViewModel(ClientLauncher clientLauncher) : base(clientLauncher)
         {
             Downloaders = Enum.GetNames(typeof(Downloader)).Select(name => new DownloaderModel(name)).ToList();
 
-            _force32Bit = _launchManager.LaunchConfig.Force32Bit;
-            _selectedDownloader = Downloaders[(int)_launchManager.LaunchConfig.Downloader];
-            _noSound = _launchManager.LaunchConfig.NoSound;
-            _noAccount = _launchManager.LaunchConfig.NoAccount;
-            _noOptions = _launchManager.LaunchConfig.NoOptions;
-            _noStore = _launchManager.LaunchConfig.NoStore;
-            _noCatalog = _launchManager.LaunchConfig.NoCatalog;
-            _noNews = _launchManager.LaunchConfig.NoNews;
-            _noLogout = _launchManager.LaunchConfig.NoLogout;
+            _force32Bit = _clientLauncher.Config.Force32Bit;
+            _selectedDownloader = Downloaders[(int)_clientLauncher.Config.Downloader];
+            _noSound = _clientLauncher.Config.NoSound;
+            _noAccount = _clientLauncher.Config.NoAccount;
+            _noOptions = _clientLauncher.Config.NoOptions;
+            _noStore = _clientLauncher.Config.NoStore;
+            _noCatalog = _clientLauncher.Config.NoCatalog;
+            _noNews = _clientLauncher.Config.NoNews;
+            _noLogout = _clientLauncher.Config.NoLogout;
 
             _windowManager = new WindowManager();
         }
 
-        public override void UpdateLaunchManager()
+        public override void UpdateClientLauncher()
         {
-            _launchManager.LaunchConfig.Force32Bit = _force32Bit;
-            _launchManager.LaunchConfig.Downloader = (Downloader)Downloaders.IndexOf(SelectedDownloader);
-            _launchManager.LaunchConfig.NoSound = _noSound;
-            _launchManager.LaunchConfig.NoAccount = _noAccount;
-            _launchManager.LaunchConfig.NoOptions = _noOptions;
-            _launchManager.LaunchConfig.NoStore = _noStore;
-            _launchManager.LaunchConfig.NoCatalog = _noCatalog;
-            _launchManager.LaunchConfig.NoNews = _noNews;
-            _launchManager.LaunchConfig.NoLogout = _noLogout;
+            _clientLauncher.Config.Force32Bit = _force32Bit;
+            _clientLauncher.Config.Downloader = (Downloader)Downloaders.IndexOf(SelectedDownloader);
+            _clientLauncher.Config.NoSound = _noSound;
+            _clientLauncher.Config.NoAccount = _noAccount;
+            _clientLauncher.Config.NoOptions = _noOptions;
+            _clientLauncher.Config.NoStore = _noStore;
+            _clientLauncher.Config.NoCatalog = _noCatalog;
+            _clientLauncher.Config.NoNews = _noNews;
+            _clientLauncher.Config.NoLogout = _noLogout;
         }
 
         public void OpenThirdPartyLicenses()

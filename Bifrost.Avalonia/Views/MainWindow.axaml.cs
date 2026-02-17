@@ -13,7 +13,7 @@ namespace Bifrost.Avalonia.Views
     {
         private const string BackgroundOverrideFileName = "Bifrost.Background.png";
 
-        private LaunchManager _launchManager;
+        private ClientLauncher _clientLauncher;
 
         public MainWindow()
         {
@@ -46,25 +46,25 @@ namespace Bifrost.Avalonia.Views
             if (Design.IsDesignMode)
                 return;
 
-            _launchManager = new();
+            _clientLauncher = new();
 
-            GameDirectoryInitializationResult result = _launchManager.GameDirectory.Initialize(Directory.GetCurrentDirectory());
-            if (result != GameDirectoryInitializationResult.Success)
+            ClientLauncherInitializationResult result = _clientLauncher.Initialize(Directory.GetCurrentDirectory());
+            if (result != ClientLauncherInitializationResult.Success)
             {
                 Close();
                 Environment.Exit(0);
             }
 
             ServerComboBox.Items.Clear();
-            foreach (Server server in _launchManager.ServerList)
+            foreach (Server server in _clientLauncher.ServerList)
             {
                 ComboBoxItem serverItem = new() { Content = server.Name };
                 ServerComboBox.Items.Add(serverItem);
             }
 
-            ServerComboBox.SelectedIndex = _launchManager.LaunchConfig.ServerIndex;
+            ServerComboBox.SelectedIndex = _clientLauncher.Config.ServerIndex;
 
-            VersionTextBlock.Text = $"Game Version: {_launchManager.GameDirectory.ClientMetadata.Version}";
+            VersionTextBlock.Text = $"Game Version: {_clientLauncher.ClientMetadata.Version}";
         }
 
         private void PlayButton_Click(object sender, RoutedEventArgs e)
@@ -72,9 +72,9 @@ namespace Bifrost.Avalonia.Views
             if (Design.IsDesignMode)
                 return;
 
-            _launchManager.LaunchConfig.ServerIndex = ServerComboBox.SelectedIndex;
-            _launchManager.SaveData();
-            _launchManager.Launch();
+            _clientLauncher.Config.ServerIndex = ServerComboBox.SelectedIndex;
+            _clientLauncher.SaveData();
+            _clientLauncher.Launch();
 
             Environment.Exit(0);
         }

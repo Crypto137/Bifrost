@@ -11,7 +11,7 @@ namespace Bifrost.Wpf.ViewModels
     public class ShellViewModel : Screen
     {
         private readonly IWindowManager _windowManager;
-        private readonly LaunchManager _launchManager;
+        private readonly ClientLauncher _clientLauncher;
 
         private BindableCollection<ServerModel> _serverCollection;
         private ServerModel _selectedServer;
@@ -28,34 +28,34 @@ namespace Bifrost.Wpf.ViewModels
             set { _selectedServer = value; NotifyOfPropertyChange(() => SelectedServer); }
         }
 
-        public string GameVersion { get => $"Game Version: {_launchManager.GameDirectory.ClientMetadata.Version}"; }
+        public string GameVersion { get => $"Game Version: {_clientLauncher.ClientMetadata.Version}"; }
 
         public ShellViewModel()
         {
             _windowManager = new WindowManager();
 
-            // Initialize launch manager
-            _launchManager = new();
+            // Initialize client launcher
+            _clientLauncher = new();
 
-            GameDirectoryInitializationResult result = _launchManager.GameDirectory.Initialize(Directory.GetCurrentDirectory());
-            if (result != GameDirectoryInitializationResult.Success)
+            ClientLauncherInitializationResult result = _clientLauncher.Initialize(Directory.GetCurrentDirectory());
+            if (result != ClientLauncherInitializationResult.Success)
             {
-                MessageBox.Show(GameDirectory.GetInitializationResultText(result), "Error");
+                MessageBox.Show(ClientLauncher.GetInitializationResultText(result), "Error");
                 Environment.Exit(0);
             }
 
-            if (_launchManager.GameDirectory.ClientMetadata == ClientMetadata.Unknown)
-                MessageBox.Show($"Unknown game version detected. Please report this information:\n{_launchManager.GameDirectory.GetVersionDebugInfo()}", "Warning");
+            if (_clientLauncher.ClientMetadata == ClientMetadata.Unknown)
+                MessageBox.Show($"Unknown game version detected. Please report this information:\n{_clientLauncher.GetClientDebugInfo()}", "Warning");
 
             // Load data
-            ServerCollection = new(_launchManager.ServerList.Select(server => new ServerModel(server)));
-            SelectedServer = ServerCollection.ElementAtOrDefault(_launchManager.LaunchConfig.ServerIndex);
+            ServerCollection = new(_clientLauncher.ServerList.Select(server => new ServerModel(server)));
+            SelectedServer = ServerCollection.ElementAtOrDefault(_clientLauncher.Config.ServerIndex);
         }
 
         public void Play()
         {
-            UpdateLaunchManager();
-            _launchManager.Launch();
+            UpdateClientLauncher();
+            _clientLauncher.Launch();
             Environment.Exit(0);
         }
 
@@ -66,34 +66,34 @@ namespace Bifrost.Wpf.ViewModels
             // Update selected server
             if (ServerCollection.Any())
             {
-                SelectedServer = _launchManager.LaunchConfig.ServerIndex >=0 && _launchManager.LaunchConfig.ServerIndex < _serverCollection.Count
-                    ? ServerCollection[_launchManager.LaunchConfig.ServerIndex]
+                SelectedServer = _clientLauncher.Config.ServerIndex >=0 && _clientLauncher.Config.ServerIndex < _serverCollection.Count
+                    ? ServerCollection[_clientLauncher.Config.ServerIndex]
                     : ServerCollection[0];
             }
         }
 
         public void OpenOptions()
         {
-            _windowManager.ShowDialogAsync(new OptionsViewModel(_launchManager));
+            _windowManager.ShowDialogAsync(new OptionsViewModel(_clientLauncher));
         }
 
         public void Exit()
         {
-            UpdateLaunchManager();
+            UpdateClientLauncher();
             Environment.Exit(0);
         }
 
-        private void UpdateLaunchManager()
+        private void UpdateClientLauncher()
         {
             // Update server list
-            _launchManager.ServerList.Clear();
-            _launchManager.ServerList.AddRange(ServerCollection.Select(serverModel => serverModel.ToServer()));
+            _clientLauncher.ServerList.Clear();
+            _clientLauncher.ServerList.AddRange(ServerCollection.Select(serverModel => serverModel.ToServer()));
 
             // Update launch config
-            _launchManager.LaunchConfig.ServerIndex = ServerCollection.IndexOf(SelectedServer);
+            _clientLauncher.Config.ServerIndex = ServerCollection.IndexOf(SelectedServer);
 
             // Save updated data
-            _launchManager.SaveData();
+            _clientLauncher.SaveData();
         }
     }
 }

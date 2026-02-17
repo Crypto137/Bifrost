@@ -8,14 +8,14 @@ namespace Bifrost.Wpf.ViewModels
     /// </summary>
     public abstract class OptionsCategoryBaseViewModel : Screen
     {
-        protected readonly LaunchManager _launchManager;
+        protected readonly ClientLauncher _clientLauncher;
 
-        public OptionsCategoryBaseViewModel(LaunchManager launchManager)
+        public OptionsCategoryBaseViewModel(ClientLauncher clientLauncher)
         {
-            _launchManager = launchManager;
+            _clientLauncher = clientLauncher;
         }
 
-        public virtual void UpdateLaunchManager()
+        public virtual void UpdateClientLauncher()
         {
         }
 

@@ -11,12 +11,12 @@ namespace Bifrost.Wpf.ViewModels
         public OptionsLoggingViewModel OptionsLogging { get; }
         public OptionsAdvancedViewModel OptionsAdvanced { get; }
 
-        public OptionsViewModel(LaunchManager launchManager)
+        public OptionsViewModel(ClientLauncher clientLauncher)
         {
-            // Initialize categories (Tabs) from the launch manager
-            OptionsGeneral = new(launchManager);
-            OptionsLogging = new(launchManager);
-            OptionsAdvanced = new(launchManager);
+            // Initialize categories (Tabs) from the client launcher
+            OptionsGeneral = new(clientLauncher);
+            OptionsLogging = new(clientLauncher);
+            OptionsAdvanced = new(clientLauncher);
 
             _categories = new OptionsCategoryBaseViewModel[] { OptionsGeneral, OptionsLogging, OptionsAdvanced };
         }
@@ -30,7 +30,7 @@ namespace Bifrost.Wpf.ViewModels
             }
 
             foreach (OptionsCategoryBaseViewModel category in _categories)
-                category.UpdateLaunchManager();
+                category.UpdateClientLauncher();
 
             TryCloseAsync();
         }

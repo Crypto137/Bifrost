@@ -3,14 +3,7 @@ using System.Security.Cryptography;
 
 namespace Bifrost.Core.ClientManagement
 {
-    public enum GameDirectoryInitializationResult
-    {
-        Success,
-        ClientNotFound,
-        ExecutableNotFound
-    }
-
-    public class GameDirectory
+    public class ClientDirectory
     {
         // Executables are listed in reverse order because users are more likely to use more recent versions.
         private static readonly string[] ExecutableNames =
@@ -35,11 +28,11 @@ namespace Bifrost.Core.ClientManagement
         public bool IsInitialized { get; private set; } = false;
         public ClientMetadata ClientMetadata { get; private set; } = ClientMetadata.Unknown;
 
-        public GameDirectory()
+        public ClientDirectory()
         {
         }
 
-        public GameDirectoryInitializationResult Initialize(string path)
+        public ClientLauncherInitializationResult Initialize(string path)
         {
             // Detect executable directories
             _directoryPath = FindClientDirectory(path);
@@ -49,7 +42,7 @@ namespace Bifrost.Core.ClientManagement
             if (Directory.Exists(_executableDirectory32) == false)
             {
                 IsInitialized = false;
-                return GameDirectoryInitializationResult.ClientNotFound;
+                return ClientLauncherInitializationResult.ClientNotFound;
             }
 
             // Detect executable name
@@ -57,7 +50,7 @@ namespace Bifrost.Core.ClientManagement
             if (_executableName == string.Empty)
             {
                 IsInitialized = false;
-                return GameDirectoryInitializationResult.ExecutableNotFound;
+                return ClientLauncherInitializationResult.ExecutableNotFound;
             }
 
             // Find client metadata and detect Win64 support
@@ -66,7 +59,7 @@ namespace Bifrost.Core.ClientManagement
 
             // Finish initialization
             IsInitialized = true;
-            return GameDirectoryInitializationResult.Success;
+            return ClientLauncherInitializationResult.Success;
         }
 
         public string GetVersionDebugInfo()
@@ -85,17 +78,6 @@ namespace Bifrost.Core.ClientManagement
             string hash = Convert.ToHexString(SHA1.HashData(executable));
 
             return $"{_executableName}\n{hash}\n{versionInfo.FileVersion.Replace(',', '.')}\nIsShipping: {isShipping}";
-        }
-
-        public static string GetInitializationResultText(GameDirectoryInitializationResult result)
-        {
-            return result switch
-            {
-                GameDirectoryInitializationResult.Success               => "Game directory initialized successfully.",
-                GameDirectoryInitializationResult.ClientNotFound        => "Marvel Heroes not found.",
-                GameDirectoryInitializationResult.ExecutableNotFound    => "Marvel Heroes executable not found.",
-                _                                                       => "Unknown error.",
-            };
         }
 
         private static string DetectExecutableName(string directory)

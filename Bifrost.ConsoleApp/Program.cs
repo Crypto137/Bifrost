@@ -8,27 +8,27 @@ namespace Bifrost.ConsoleApp
         {
             Console.WriteLine("Starting...");
 
-            LaunchManager launchManager = new();
+            ClientLauncher clientLauncher = new();
 
             string dir = args.Length > 0 ? args[0] : Directory.GetCurrentDirectory();
             Console.WriteLine($"Directory: {dir}");
 
-            GameDirectoryInitializationResult result = launchManager.GameDirectory.Initialize(dir);
-            Console.WriteLine(GameDirectory.GetInitializationResultText(result));
-            if (result != GameDirectoryInitializationResult.Success)
+            ClientLauncherInitializationResult result = clientLauncher.Initialize(dir);
+            Console.WriteLine(ClientLauncher.GetInitializationResultText(result));
+            if (result != ClientLauncherInitializationResult.Success)
             {
                 Console.ReadLine();
                 return;
             };
 
-            Console.WriteLine($"Version: {launchManager.GameDirectory.Version}");
+            Console.WriteLine($"Version: {clientLauncher.ClientMetadata.Version}");
 
-            foreach (string arg in launchManager.LaunchConfig.ToLaunchArguments(new()))
+            foreach (string arg in clientLauncher.Config.ToLaunchArguments(new(), ClientFlags.None))
                 Console.WriteLine(arg);
 
             Console.WriteLine("Launching...");
 
-            if (launchManager.Launch())
+            if (clientLauncher.Launch())
                 Console.WriteLine("Launched successfully");
             else
                 Console.WriteLine("Launch failed. Make sure you initialized game directory!");
