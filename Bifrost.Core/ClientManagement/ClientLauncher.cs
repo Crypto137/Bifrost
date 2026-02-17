@@ -34,8 +34,6 @@ namespace Bifrost.Core.ClientManagement
 
         public ClientLauncherInitializationResult Initialize(string clientPath)
         {
-            clientPath = "I:\\Games\\Marvel Heroes\\1.52.0.1700";
-
             ClientLauncherInitializationResult directoryResult = _clientDirectory.Initialize(clientPath);
             if (directoryResult != ClientLauncherInitializationResult.Success)
                 return directoryResult;
@@ -78,9 +76,9 @@ namespace Bifrost.Core.ClientManagement
         {
             return result switch
             {
-                ClientLauncherInitializationResult.Success               => "Game directory initialized successfully.",
-                ClientLauncherInitializationResult.ClientNotFound        => "Marvel Heroes not found.",
-                ClientLauncherInitializationResult.ExecutableNotFound    => "Marvel Heroes executable not found.",
+                ClientLauncherInitializationResult.Success              => "Game directory initialized successfully.",
+                ClientLauncherInitializationResult.ClientNotFound       => "Marvel Heroes not found.",
+                ClientLauncherInitializationResult.ExecutableNotFound   => "Marvel Heroes executable not found.",
                 _                                                       => "Unknown error.",
             };
         }

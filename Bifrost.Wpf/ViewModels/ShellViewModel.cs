@@ -37,7 +37,8 @@ namespace Bifrost.Wpf.ViewModels
             // Initialize client launcher
             _clientLauncher = new();
 
-            ClientLauncherInitializationResult result = _clientLauncher.Initialize(Directory.GetCurrentDirectory());
+            string clientPath = ClientHelper.GetClientPath();
+            ClientLauncherInitializationResult result = _clientLauncher.Initialize(clientPath);
             if (result != ClientLauncherInitializationResult.Success)
             {
                 MessageBox.Show(ClientLauncher.GetInitializationResultText(result), "Error");
