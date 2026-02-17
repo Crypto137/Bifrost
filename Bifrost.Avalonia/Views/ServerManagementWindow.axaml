@@ -1,0 +1,19 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="450" d:DesignHeight="400"
+        x:Class="Bifrost.Avalonia.ServerManagementWindow"
+        Title="Server Management" Width="450" Height="400"
+        WindowStartupLocation="CenterOwner"
+        CanResize="False">
+    <Grid RowDefinitions="* auto" Margin="20" RowSpacing="4">
+        <ListBox Grid.Row="0" x:Name="ServerListBox" />
+
+        <Grid Grid.Row="1" ColumnDefinitions="* * *" ColumnSpacing="4">
+            <Button Grid.Column="0" Content="Add" x:Name="AddButton" Click="AddButton_Click" />
+            <Button Grid.Column="1" Content="Edit" x:Name="EditButton" Click="EditButton_Click" />
+            <Button Grid.Column="2" Content="Remove" x:Name="RemoveButton" Click="RemoveButton_Click" />
+        </Grid>
+    </Grid>
+</Window>

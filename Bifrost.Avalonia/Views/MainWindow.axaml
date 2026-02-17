@@ -124,7 +124,7 @@
                     <ComboBoxItem Content="Local Server" />
                 </ComboBox>
 
-                <Button Grid.Column="3" Grid.Row="1">Manage</Button>
+                <Button Grid.Column="3" Grid.Row="1" x:Name="ManageServersButton" Click="ManageServersButton_Click">Manage</Button>
                 <Button Grid.Column="4" Grid.RowSpan="2" Classes="play-button" x:Name="PlayButton" Click="PlayButton_Click">Play</Button>
             </Grid>
         </Grid>

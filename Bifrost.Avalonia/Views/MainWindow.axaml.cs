@@ -80,6 +80,12 @@ namespace Bifrost.Avalonia.Views
             Environment.Exit(0);
         }
 
+        private void ManageServersButton_Click(object? sender, RoutedEventArgs e)
+        {
+            ServerManagementWindow serverManagementWindow = new(_clientLauncher);
+            serverManagementWindow.ShowDialog(this);
+        }
+
         #endregion
     }
 }
