@@ -1,9 +1,10 @@
 ﻿using System;
-using System.IO;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using Caliburn.Micro;
 using Bifrost.Core.ClientManagement;
+using Bifrost.Core.Models;
 using Bifrost.Wpf.Models;
 
 namespace Bifrost.Wpf.ViewModels
@@ -49,7 +50,11 @@ namespace Bifrost.Wpf.ViewModels
                 MessageBox.Show($"Unknown game version detected. Please report this information:\n{_clientLauncher.GetClientDebugInfo()}", "Warning");
 
             // Load data
-            ServerCollection = new(_clientLauncher.ServerList.Select(server => new ServerModel(server)));
+            List<ServerModel> serverModels = new();
+            foreach (ServerInfo serverInfo in _clientLauncher.ServerManager)
+                serverModels.Add(new ServerModel(serverInfo));
+            ServerCollection = new(serverModels);
+
             SelectedServer = ServerCollection.ElementAtOrDefault(_clientLauncher.Config.ServerIndex);
         }
 
@@ -87,8 +92,7 @@ namespace Bifrost.Wpf.ViewModels
         private void UpdateClientLauncher()
         {
             // Update server list
-            _clientLauncher.ServerList.Clear();
-            _clientLauncher.ServerList.AddRange(ServerCollection.Select(serverModel => serverModel.ToServer()));
+            _clientLauncher.ServerManager.SetServerList(ServerCollection.Select(serverModel => serverModel.ToServerInfo()));
 
             // Update launch config
             _clientLauncher.Config.ServerIndex = ServerCollection.IndexOf(SelectedServer);

@@ -45,7 +45,7 @@ namespace Bifrost.Core.Models
                 LoggingChannelStateDict.Add(channel, LoggingChannelState.Default);
         }
 
-        public string[] ToLaunchArguments(Server server, ClientFlags flags)
+        public string[] ToLaunchArguments(ServerInfo serverInfo, ClientFlags flags)
         {
             List<string> argumentList = new();
 
@@ -85,7 +85,7 @@ namespace Bifrost.Core.Models
                 }
             }
 
-            if (server != null) argumentList.Add($"-siteconfigurl={server.SiteConfigUrl}");
+            if (serverInfo != null) argumentList.Add($"-siteconfigurl={serverInfo.SiteConfigUrl}");
 
             // General
             if (NoStartupMovies) argumentList.Add("-nostartupmovies");

@@ -31,9 +31,9 @@ public partial class ServerManagementWindow : Window
 
         ServerListBox.Items.Clear();
 
-        foreach (Server server in _clientLauncher.ServerList)
+        foreach (ServerInfo serverInfo in _clientLauncher.ServerManager)
         {
-            ListBoxItem item = new() { Content = $"{server.Name} ({server.SiteConfigUrl.Split('/').FirstOrDefault()})", Tag = server };
+            ListBoxItem item = new() { Content = $"{serverInfo.Name} ({serverInfo.SiteConfigUrl.Split('/').FirstOrDefault()})", Tag = serverInfo };
             ServerListBox.Items.Add(item);
         }
 

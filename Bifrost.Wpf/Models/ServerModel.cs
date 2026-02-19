@@ -33,10 +33,10 @@ namespace Bifrost.Wpf.Models
 
         public string ComboBoxLabel { get => $"{Name} ({SiteConfigUrl.Split('/')[0]})"; }
 
-        public ServerModel(Server server)
+        public ServerModel(ServerInfo serverInfo)
         {
-            Name = server.Name;
-            SiteConfigUrl = server.SiteConfigUrl;
+            Name = serverInfo.Name;
+            SiteConfigUrl = serverInfo.SiteConfigUrl;
         }
 
         public ServerModel(string name, string siteConfigUrl)
@@ -45,7 +45,10 @@ namespace Bifrost.Wpf.Models
             SiteConfigUrl = siteConfigUrl;
         }
 
-        public Server ToServer() => new(Name, SiteConfigUrl);
+        public ServerInfo ToServerInfo()
+        {
+            return new(Name, SiteConfigUrl);
+        }
 
         public object Clone()
         {

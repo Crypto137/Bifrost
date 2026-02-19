@@ -64,9 +64,9 @@ namespace Bifrost.Avalonia.Views
         private void RefreshServerComboBox()
         {
             ServerComboBox.Items.Clear();
-            foreach (Server server in _clientLauncher.ServerList)
+            foreach (ServerInfo serverInfo in _clientLauncher.ServerManager)
             {
-                ComboBoxItem serverItem = new() { Content = server.Name };
+                ComboBoxItem serverItem = new() { Content = serverInfo.Name };
                 ServerComboBox.Items.Add(serverItem);
             }
 
