@@ -22,6 +22,22 @@ namespace Bifrost.Avalonia.Views
             ApplyBackgroundOverride();
         }
 
+        private void Initialize()
+        {
+            _clientLauncher = new();
+
+            string clientPath = ClientHelper.GetClientPath();
+            ClientLauncherInitializationResult result = _clientLauncher.Initialize(clientPath);
+            if (result != ClientLauncherInitializationResult.Success)
+            {
+                Close();
+                Environment.Exit(0);
+            }
+
+            RefreshClientData();
+            RefreshServerComboBox();
+        }
+
         private void ApplyBackgroundOverride()
         {
             if (File.Exists(BackgroundOverrideFileName) == false)
@@ -39,23 +55,13 @@ namespace Bifrost.Avalonia.Views
             }
         }
 
-        #region Event Handlers
-
-        private void Window_Opened(object sender, EventArgs e)
+        private void RefreshClientData()
         {
-            if (Design.IsDesignMode)
-                return;
+            VersionTextBlock.Text = $"Game Version: {_clientLauncher.ClientMetadata.Version}";
+        }
 
-            _clientLauncher = new();
-
-            string clientPath = ClientHelper.GetClientPath();
-            ClientLauncherInitializationResult result = _clientLauncher.Initialize(clientPath);
-            if (result != ClientLauncherInitializationResult.Success)
-            {
-                Close();
-                Environment.Exit(0);
-            }
-
+        private void RefreshServerComboBox()
+        {
             ServerComboBox.Items.Clear();
             foreach (Server server in _clientLauncher.ServerList)
             {
@@ -64,8 +70,40 @@ namespace Bifrost.Avalonia.Views
             }
 
             ServerComboBox.SelectedIndex = _clientLauncher.Config.ServerIndex;
+        }
 
-            VersionTextBlock.Text = $"Game Version: {_clientLauncher.ClientMetadata.Version}";
+        #region Event Handlers
+
+        private void Window_Opened(object sender, EventArgs e)
+        {
+            if (Design.IsDesignMode == false)
+                Initialize();
+        }
+
+        private void Window_Closed(object? sender, EventArgs e)
+        {
+            _clientLauncher?.SaveData();
+        }
+
+        private void ServerComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (_clientLauncher == null)
+                return;
+
+            int selectedIndex = ServerComboBox.SelectedIndex;
+            if (selectedIndex == -1)
+                return;
+
+            _clientLauncher.Config.ServerIndex = selectedIndex;
+        }
+
+        private async void ManageServersButton_Click(object sender, RoutedEventArgs e)
+        {
+            ServerManagementWindow serverManagementWindow = new(_clientLauncher);
+            await serverManagementWindow.ShowDialog(this);
+
+            if (serverManagementWindow.IsChanged)
+                RefreshServerComboBox();
         }
 
         private void PlayButton_Click(object sender, RoutedEventArgs e)
@@ -73,17 +111,10 @@ namespace Bifrost.Avalonia.Views
             if (Design.IsDesignMode)
                 return;
 
-            _clientLauncher.Config.ServerIndex = ServerComboBox.SelectedIndex;
-            _clientLauncher.SaveData();
-            _clientLauncher.Launch();
+            if (_clientLauncher.Launch())
+                Environment.Exit(0);
 
-            Environment.Exit(0);
-        }
-
-        private void ManageServersButton_Click(object? sender, RoutedEventArgs e)
-        {
-            ServerManagementWindow serverManagementWindow = new(_clientLauncher);
-            serverManagementWindow.ShowDialog(this);
+            // TODO: show an error message box when Launch() fails.
         }
 
         #endregion

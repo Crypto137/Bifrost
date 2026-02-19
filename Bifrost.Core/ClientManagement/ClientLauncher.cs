@@ -54,6 +54,9 @@ namespace Bifrost.Core.ClientManagement
                 ? ServerList[Config.ServerIndex]
                 : null;
 
+            if (server == null)
+                return false;
+
             // Prefer Win64 if supported and Win32 is not forced. Otherwise launch Win32.
             string executablePath = _clientDirectory.Supports64
                 ? Config.Force32Bit ? _clientDirectory.ExecutablePath32 : _clientDirectory.ExecutablePath64

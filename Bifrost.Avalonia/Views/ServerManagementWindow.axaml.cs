@@ -10,6 +10,8 @@ public partial class ServerManagementWindow : Window
 {
     private readonly ClientLauncher _clientLauncher;
 
+    public bool IsChanged { get; private set; }
+
     public ServerManagementWindow()
     {
         InitializeComponent();

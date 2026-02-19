@@ -7,7 +7,8 @@
         Title="Bifrost.Avalonia"
         Width="820" Height="660" CanResize="false"
         WindowStartupLocation="CenterScreen"
-        Opened="Window_Opened">
+        Opened="Window_Opened"
+        Closed="Window_Closed">
 
     <Window.Styles>
         <Style Selector="TextBlock.server-status">
@@ -120,7 +121,7 @@
 
                 <Button Grid.Column="0" Grid.Row="1">Options</Button>
 
-                <ComboBox Grid.Column="2" Grid.Row="1" SelectedIndex="0" x:Name="ServerComboBox">
+                <ComboBox Grid.Column="2" Grid.Row="1" SelectedIndex="0" x:Name="ServerComboBox" SelectionChanged="ServerComboBox_SelectionChanged">
                     <ComboBoxItem Content="Local Server" />
                 </ComboBox>
 
