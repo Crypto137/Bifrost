@@ -1,0 +1,26 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="150"
+        x:Class="Bifrost.Avalonia.EditServerWindow"
+        Title="Edit Server"
+        Width="400" Height="150" CanMinimize="False" CanResize="False"
+        WindowStartupLocation="CenterOwner">
+  
+    <Grid RowDefinitions="auto * auto" Margin="20" RowSpacing="4">
+        <Grid ColumnDefinitions="auto *" Grid.RowDefinitions="auto auto" Grid.Row="0" ColumnSpacing="4" RowSpacing="4">
+            <Label Grid.Column="0" Grid.Row="0" Content="Server Name" />
+            <TextBox Grid.Column="1" Grid.Row="0" x:Name="NameTextBox" />
+
+            <Label Grid.Column="0" Grid.Row="1" Content="Site Config URL" />
+            <TextBox Grid.Column="1" Grid.Row="1" x:Name="SiteConfigUrlTextBox" />
+        </Grid>
+
+        <Grid ColumnDefinitions="* *" Grid.Row="2" ColumnSpacing="4">
+            <Button x:Name="OKButton" Click="OKButton_Click" IsDefault="True" Grid.Column="0">OK</Button>
+            <Button x:Name="CancelButton" Click="CancelButton_Click" IsCancel="True" Grid.Column="1">Cancel</Button>
+        </Grid>
+    </Grid>
+
+</Window>

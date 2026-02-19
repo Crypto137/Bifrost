@@ -103,7 +103,7 @@ namespace Bifrost.Avalonia.Views
             ServerManagementWindow serverManagementWindow = new(_clientLauncher);
             await serverManagementWindow.ShowDialog(this);
 
-            if (serverManagementWindow.IsChanged)
+            if (serverManagementWindow.ServerListChanged)
                 RefreshServerComboBox();
         }
 

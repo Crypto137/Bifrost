@@ -8,7 +8,7 @@
         WindowStartupLocation="CenterOwner"
         CanResize="False">
     <Grid RowDefinitions="* auto" Margin="20" RowSpacing="4">
-        <ListBox Grid.Row="0" x:Name="ServerListBox" />
+        <ListBox Grid.Row="0" x:Name="ServerListBox" DoubleTapped="ServerListBox_DoubleTapped" />
 
         <Grid Grid.Row="1" ColumnDefinitions="* * *" ColumnSpacing="4">
             <Button Grid.Column="0" Content="Add" x:Name="AddButton" Click="AddButton_Click" />

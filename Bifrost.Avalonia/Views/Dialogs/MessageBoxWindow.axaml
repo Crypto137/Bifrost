@@ -15,7 +15,7 @@
       </Style>
   </Window.Styles>
 
-  <Grid RowDefinitions="* 24" ColumnDefinitions="* *" Margin="20" ColumnSpacing="8" RowSpacing="8">
+  <Grid RowDefinitions="* 24" ColumnDefinitions="* *" Margin="20" ColumnSpacing="4">
 	  <TextBlock x:Name="MessageTextBlock" Grid.Row="0" Grid.ColumnSpan="2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</TextBlock>
       <Button x:Name="OKButton" Click="OKButton_Click" IsDefault="True" Grid.Row="1" Grid.Column="0">OK</Button>
       <Button x:Name="CancelButton" Click="CancelButton_Click" IsCancel="True" Grid.Row="1" Grid.Column="1">Cancel</Button>

@@ -51,5 +51,11 @@ namespace Bifrost.Core.ClientManagement
             _servers.RemoveAt(index);
             return true;
         }
+
+        public bool RemoveServer(ServerInfo serverInfo)
+        {
+            int index = _servers.IndexOf(serverInfo);
+            return RemoveServer(index);
+        }
     }
 }
