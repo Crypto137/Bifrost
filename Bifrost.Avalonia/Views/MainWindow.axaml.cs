@@ -2,6 +2,7 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
+using Bifrost.Avalonia.Views.Dialogs;
 using Bifrost.Core.ClientManagement;
 using Bifrost.Core.Models;
 using System;
@@ -106,15 +107,15 @@ namespace Bifrost.Avalonia.Views
                 RefreshServerComboBox();
         }
 
-        private void PlayButton_Click(object sender, RoutedEventArgs e)
+        private async void PlayButton_Click(object sender, RoutedEventArgs e)
         {
             if (Design.IsDesignMode)
                 return;
 
             if (_clientLauncher.Launch())
                 Environment.Exit(0);
-
-            // TODO: show an error message box when Launch() fails.
+            else
+                await MessageBoxWindow.Show(this, "Failed to launch game client.", "Error");
         }
 
         #endregion

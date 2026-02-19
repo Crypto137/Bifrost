@@ -1,5 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using Bifrost.Avalonia.Views.Dialogs;
 using Bifrost.Core.ClientManagement;
 using Bifrost.Core.Models;
 using System.Linq;
@@ -41,16 +42,19 @@ public partial class ServerManagementWindow : Window
 
     #region Event Handlers
 
-    private void AddButton_Click(object sender, RoutedEventArgs e)
+    private async void AddButton_Click(object sender, RoutedEventArgs e)
     {
+        await MessageBoxWindow.Show(this, "Add - not yet implemented", "Error");
     }
 
-    private void EditButton_Click(object sender, RoutedEventArgs e)
+    private async void EditButton_Click(object sender, RoutedEventArgs e)
     {
+        await MessageBoxWindow.Show(this, "Edit - not yet implemented", "Error");
     }
 
-    private void RemoveButton_Click(object sender, RoutedEventArgs e)
+    private async void RemoveButton_Click(object sender, RoutedEventArgs e)
     {
+        await MessageBoxWindow.Show(this, "Remove - not yet implemented", "Error");
     }
 
     #endregion
