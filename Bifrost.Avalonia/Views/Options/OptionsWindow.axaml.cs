@@ -46,7 +46,7 @@ public partial class OptionsWindow : Window
     private void InitializeCategoryControls()
     {
         foreach (OptionsUserControl categoryControl in _categoryControls)
-            categoryControl?.Initialize(_clientLauncher);
+            categoryControl?.Initialize(this, _clientLauncher);
     }
 
     private bool UpdateClientLauncher(out string message)

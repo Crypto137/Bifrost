@@ -12,7 +12,7 @@
                 
                 <CheckBox Grid.Column="0" Grid.Row="1" x:Name="NoSplashCheckBox" Content="Hide Splash Screen" />
 
-                <CheckBox Grid.Column="0" Grid.Row="2" x:Name="ForceCustomResolutionCheckBox" Content="Force Custom Resolution" />
+                <CheckBox Grid.Column="0" Grid.Row="2" x:Name="ForceCustomResolutionCheckBox" IsCheckedChanged="ForceCustomResolutionCheckBox_IsCheckedChanged" Content="Force Custom Resolution" />
                 <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal">
                     <TextBox Width="48" x:Name="CustomResolutionXTextBox" MaxLength="5" />
                     <Label VerticalAlignment="Center" Content="x" />
@@ -23,7 +23,7 @@
 
         <HeaderedContentControl Header="Auto-Login">
             <Grid ColumnDefinitions="auto *" RowDefinitions="auto auto auto" RowSpacing="4">
-                <CheckBox Grid.Column="0" Grid.Row="0" x:Name="EnableAutoLoginCheckBox" Content="Enable Auto-Login" />
+                <CheckBox Grid.Column="0" Grid.Row="0" x:Name="EnableAutoLoginCheckBox" IsCheckedChanged="EnableAutoLoginCheckBox_IsCheckedChanged" Content="Enable Auto-Login" />
 
                 <Label Grid.Column="0" Grid.Row="1" Content="Email Address" />
                 <TextBox Grid.Column="1" Grid.Row="1" x:Name="AutoLoginEmailAddressTextBox" />
