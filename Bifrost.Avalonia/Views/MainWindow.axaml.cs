@@ -3,6 +3,7 @@ using Avalonia.Interactivity;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Bifrost.Avalonia.Views.Dialogs;
+using Bifrost.Avalonia.Views.Options;
 using Bifrost.Core.ClientManagement;
 using Bifrost.Core.Models;
 using System;
@@ -81,9 +82,17 @@ namespace Bifrost.Avalonia.Views
                 Initialize();
         }
 
-        private void Window_Closed(object? sender, EventArgs e)
+        private void Window_Closed(object sender, EventArgs e)
         {
             _clientLauncher?.SaveData();
+        }
+
+        private async void OptionsButton_Click(object sender, RoutedEventArgs e)
+        {
+            OptionsWindow optionsWindow = new(_clientLauncher);
+            await optionsWindow.ShowDialog(this);
+
+            // TODO: react to options changes
         }
 
         private void ServerComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

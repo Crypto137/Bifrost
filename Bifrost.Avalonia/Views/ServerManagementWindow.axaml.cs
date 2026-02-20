@@ -7,7 +7,7 @@ using Bifrost.Core.Models;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Bifrost.Avalonia;
+namespace Bifrost.Avalonia.Views;
 
 public partial class ServerManagementWindow : Window
 {

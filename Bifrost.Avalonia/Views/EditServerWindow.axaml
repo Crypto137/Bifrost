@@ -3,7 +3,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="150"
-        x:Class="Bifrost.Avalonia.EditServerWindow"
+        x:Class="Bifrost.Avalonia.Views.EditServerWindow"
         Title="Edit Server"
         Width="400" Height="150" CanMinimize="False" CanResize="False"
         WindowStartupLocation="CenterOwner">

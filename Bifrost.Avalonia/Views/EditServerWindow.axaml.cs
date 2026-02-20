@@ -3,7 +3,7 @@ using Avalonia.Interactivity;
 using Bifrost.Avalonia.Views.Dialogs;
 using Bifrost.Core.Models;
 
-namespace Bifrost.Avalonia;
+namespace Bifrost.Avalonia.Views;
 
 public partial class EditServerWindow : Window
 {

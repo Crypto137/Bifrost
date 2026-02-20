@@ -1,0 +1,56 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="using:Bifrost.Avalonia.Views.Options"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="640" d:DesignHeight="400"
+        x:Class="Bifrost.Avalonia.Views.Options.OptionsWindow"
+        Title="Options" Width="640" Height="400"
+        WindowStartupLocation="CenterOwner"
+        CanResize="False">
+
+    <Grid ColumnDefinitions="180 *">
+        <ListBox x:Name="CategoryListBox" SelectionChanged="CategoryListBox_SelectionChanged" SelectionMode="Single, AlwaysSelected">
+            <ListBoxItem>
+                <StackPanel Orientation="Horizontal" Spacing="4">
+                    <Image Width="24" Height="24" Source="/Assets/Icons/general.png"/>
+                    <Label FontSize="16" Content="General"/>
+                </StackPanel>
+            </ListBoxItem>
+            <ListBoxItem>
+                <StackPanel Orientation="Horizontal" Spacing="4">
+                    <Image Width="24" Height="24" Source="/Assets/Icons/bifrost.png"/>
+                    <Label FontSize="16" Content="Bifrost"/>
+                </StackPanel>
+            </ListBoxItem>
+            <ListBoxItem>
+                <StackPanel Orientation="Horizontal" Spacing="4">
+                    <Image Width="24" Height="24" Source="/Assets/Icons/logging.png"/>
+                    <Label FontSize="16" Content="Logging"/>
+                </StackPanel>
+            </ListBoxItem>
+            <ListBoxItem>
+                <StackPanel Orientation="Horizontal" Spacing="4">
+                    <Image Width="24" Height="24" Source="/Assets/Icons/advanced.png"/>
+                    <Label FontSize="16" Content="Advanced"/>
+                </StackPanel>
+            </ListBoxItem>
+            <ListBoxItem>
+                <StackPanel Orientation="Horizontal" Spacing="4">
+                    <Image Width="24" Height="24" Source="/Assets/Icons/about.png"/>
+                    <Label FontSize="16" Content="About"/>
+                </StackPanel>
+            </ListBoxItem>
+        </ListBox>
+
+        <Panel Grid.Column="1" Margin="8">
+			<local:OptionsGeneralUserControl x:Name="GeneralUserControl" IsVisible="False" />
+            <local:OptionsBifrostUserControl x:Name="BifrostUserControl" IsVisible="False" />
+            <local:OptionsLoggingUserControl x:Name="LoggingUserControl" IsVisible="False" />
+            <local:OptionsAdvancedUserControl x:Name="AdvancedUserControl" IsVisible="False" />
+            <local:OptionsAboutUserControl x:Name="AboutUserControl" IsVisible="False" />
+        </Panel>
+
+    </Grid>
+
+</Window>

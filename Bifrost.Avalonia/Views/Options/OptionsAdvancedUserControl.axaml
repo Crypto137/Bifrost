@@ -1,0 +1,51 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="450" d:DesignHeight="400"
+             x:Class="Bifrost.Avalonia.Views.Options.OptionsAdvancedUserControl">
+<Grid Grid.Column="2" Grid.Row="1">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <HeaderedContentControl Grid.Row="0" Header="Modes">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <CheckBox Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="4" Content="Force 32-bit" x:Name="Force32Bit" />
+
+                <Label Grid.Column="0" Grid.Row="1" Margin="4" Content="Downloader" />
+                <ComboBox Grid.Column="1" Grid.Row="1"  Margin="4" x:Name="Downloaders" />
+            </Grid>
+        </HeaderedContentControl>
+
+        <HeaderedContentControl Grid.Row="1" Header="Features">
+            <StackPanel>
+                <CheckBox Content="Disable Sound" x:Name="NoSound" />
+                <CheckBox Content="Disable Login Screen Account" x:Name="NoAccount" />
+                <CheckBox Content="Disable Options" x:Name="NoOptions" />
+                <CheckBox Content="Disable Store" x:Name="NoStore" />
+                <CheckBox Content="Disable Store Catalog" x:Name="NoCatalog" />
+                <CheckBox Content="Disable News" x:Name="NoNews" />
+                <CheckBox Content="Disable Logout" x:Name="NoLogout" />
+            </StackPanel>
+        </HeaderedContentControl>
+
+        <Button Grid.Row="2" x:Name="OpenThirdPartyLicenses" Content="Third Party Licenses" Margin="5" Width="150" HorizontalAlignment="Left" />
+    </Grid>
+</UserControl>
