@@ -1,4 +1,5 @@
 using Avalonia.Controls;
+using Avalonia.Interactivity;
 using Bifrost.Core.ClientManagement;
 
 namespace Bifrost.Avalonia.Views.Options;
@@ -45,6 +46,16 @@ public partial class OptionsWindow : Window
     {
         if (sender is ListBox listBox)
             ShowCategory(listBox.SelectedIndex);
+    }
+
+    private void ApplyButton_Click(object sender, RoutedEventArgs e)
+    {
+        Close();
+    }
+
+    private void CancelButton_Click(object sender, RoutedEventArgs e)
+    {
+        Close();
     }
 
     #endregion
