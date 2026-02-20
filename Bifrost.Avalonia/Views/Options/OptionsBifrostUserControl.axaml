@@ -4,5 +4,5 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="450" d:DesignHeight="400"
              x:Class="Bifrost.Avalonia.Views.Options.OptionsBifrostUserControl">
-  Bifrost
+
 </UserControl>

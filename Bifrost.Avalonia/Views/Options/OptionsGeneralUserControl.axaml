@@ -4,82 +4,41 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              x:Class="Bifrost.Avalonia.Views.Options.OptionsGeneralUserControl"
              mc:Ignorable="d" d:DesignWidth="450" d:DesignHeight="400">
-  
-    <Grid Grid.Column="2" Grid.Row="1">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
 
-        <HeaderedContentControl Grid.Row="0" Header="Engine">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto" />
-                    <ColumnDefinition Width="auto" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
-                </Grid.RowDefinitions>
-
-                <CheckBox Grid.Column="0" Grid.Row="0" Margin="4" x:Name="SkipStartupMovies" Content="Skip Startup Movies" />
+    <StackPanel>
+        <HeaderedContentControl Header="Engine">
+            <Grid ColumnDefinitions="auto auto" RowDefinitions="auto auto auto" RowSpacing="4" ColumnSpacing="8">
+                <CheckBox Grid.Column="0" Grid.Row="0" x:Name="SkipStartupMoviesCheckBox" Content="Skip Startup Movies" />
                 
-                <CheckBox Grid.Column="0" Grid.Row="1" Margin="4" x:Name="NoSplash" Content="Hide Splash Screen" />
+                <CheckBox Grid.Column="0" Grid.Row="1" x:Name="NoSplashCheckBox" Content="Hide Splash Screen" />
 
-                <CheckBox Grid.Column="0" Grid.Row="2" Margin="4" x:Name="ForceCustomResolution" Content="Force Custom Resolution" />
+                <CheckBox Grid.Column="0" Grid.Row="2" x:Name="ForceCustomResolutionCheckBox" Content="Force Custom Resolution" />
                 <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal">
-                    <TextBox Width="48" Margin="4,4,0,4" x:Name="CustomResolutionX" MaxLength="5" />
-                    <Label Content="x" />
-                    <TextBox  Width="48" Margin="0,4,4,4" x:Name="CustomResolutionY" MaxLength="5" />
+                    <TextBox Width="48" x:Name="CustomResolutionXTextBox" MaxLength="5" />
+                    <Label VerticalAlignment="Center" Content="x" />
+                    <TextBox Width="48" x:Name="CustomResolutionYTextBox" MaxLength="5" />
                 </StackPanel>
-
             </Grid>
         </HeaderedContentControl>
 
-        <HeaderedContentControl Grid.Row="1" Header="Auto-Login">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
-                </Grid.RowDefinitions>
-
-                <CheckBox Grid.Column="0" Grid.Row="0" Margin="4" x:Name="EnableAutoLogin" Content="Enable Auto-Login" />
+        <HeaderedContentControl Header="Auto-Login">
+            <Grid ColumnDefinitions="auto *" RowDefinitions="auto auto auto" RowSpacing="4">
+                <CheckBox Grid.Column="0" Grid.Row="0" x:Name="EnableAutoLoginCheckBox" Content="Enable Auto-Login" />
 
                 <Label Grid.Column="0" Grid.Row="1" Content="Email Address" />
-                <TextBox Grid.Column="1" Grid.Row="1" Margin="4" x:Name="AutoLoginEmailAddress" />
+                <TextBox Grid.Column="1" Grid.Row="1" x:Name="AutoLoginEmailAddressTextBox" />
 
                 <Label Grid.Column="0" Grid.Row="2" Content="Password" />
-                <TextBox Grid.Column="1" Grid.Row="2" Margin="4" x:Name="AutoLoginPassword" />
+                <TextBox Grid.Column="1" Grid.Row="2" x:Name="AutoLoginPasswordTextBox" />
             </Grid>
         </HeaderedContentControl>
 
-        <HeaderedContentControl Grid.Row="2" Header="Custom Command Line Arguments">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
-                </Grid.RowDefinitions>
-
-                <Label Grid.Column="0" Grid.Row="1" Content="Arguments" />
-                <TextBox Grid.Column="1" Grid.Row="1" Margin="4" x:Name="CustomArguments" />
+        <HeaderedContentControl Header="Custom Command Line Arguments">
+            <Grid ColumnDefinitions="auto *">
+                <Label Grid.Column="0" Grid.Row="0" Content="Arguments" />
+                <TextBox Grid.Column="1" Grid.Row="0" x:Name="CustomArgumentsTextBox" />
             </Grid>
         </HeaderedContentControl>
-    </Grid>
+    </StackPanel>
 
 </UserControl>

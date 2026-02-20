@@ -4,48 +4,29 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="450" d:DesignHeight="400"
              x:Class="Bifrost.Avalonia.Views.Options.OptionsAdvancedUserControl">
-<Grid Grid.Column="2" Grid.Row="1">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
 
-        <HeaderedContentControl Grid.Row="0" Header="Modes">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-
-                <CheckBox Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="4" Content="Force 32-bit" x:Name="Force32Bit" />
+    <StackPanel>
+        <HeaderedContentControl Header="Modes">
+            <Grid ColumnDefinitions="auto *" RowDefinitions="auto auto *">
+                <CheckBox Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="4" Content="Force 32-bit" x:Name="Force32BitCheckBox" />
 
                 <Label Grid.Column="0" Grid.Row="1" Margin="4" Content="Downloader" />
-                <ComboBox Grid.Column="1" Grid.Row="1"  Margin="4" x:Name="Downloaders" />
+                <ComboBox Grid.Column="1" Grid.Row="1"  Margin="4" x:Name="DownloadersComboBox" />
             </Grid>
         </HeaderedContentControl>
 
-        <HeaderedContentControl Grid.Row="1" Header="Features">
+        <HeaderedContentControl Header="Features">
             <StackPanel>
-                <CheckBox Content="Disable Sound" x:Name="NoSound" />
-                <CheckBox Content="Disable Login Screen Account" x:Name="NoAccount" />
-                <CheckBox Content="Disable Options" x:Name="NoOptions" />
-                <CheckBox Content="Disable Store" x:Name="NoStore" />
-                <CheckBox Content="Disable Store Catalog" x:Name="NoCatalog" />
-                <CheckBox Content="Disable News" x:Name="NoNews" />
-                <CheckBox Content="Disable Logout" x:Name="NoLogout" />
+                <CheckBox Content="Disable Sound" x:Name="NoSoundCheckBox" />
+                <CheckBox Content="Disable Login Screen Account" x:Name="NoAccountCheckBox" />
+                <CheckBox Content="Disable Options" x:Name="NoOptionsCheckBox" />
+                <CheckBox Content="Disable Store" x:Name="NoStoreCheckBox" />
+                <CheckBox Content="Disable Store Catalog" x:Name="NoCatalogCheckBox" />
+                <CheckBox Content="Disable News" x:Name="NoNewsCheckBox" />
+                <CheckBox Content="Disable Logout" x:Name="NoLogoutCheckBox" />
             </StackPanel>
         </HeaderedContentControl>
 
-        <Button Grid.Row="2" x:Name="OpenThirdPartyLicenses" Content="Third Party Licenses" Margin="5" Width="150" HorizontalAlignment="Left" />
-    </Grid>
+        <Button x:Name="OpenThirdPartyLicensesButton" Content="Third Party Licenses" Margin="5" Width="150" HorizontalAlignment="Left" />
+    </StackPanel>
 </UserControl>

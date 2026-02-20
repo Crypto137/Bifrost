@@ -4,27 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="450" d:DesignHeight="400"
              x:Class="Bifrost.Avalonia.Views.Options.OptionsLoggingUserControl">
-  
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
 
+    <Grid RowDefinitions="auto *">
         <HeaderedContentControl Grid.Column="0" Grid.Row="0" Header="Logging Settings">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
-                </Grid.RowDefinitions>
-
+            <Grid ColumnDefinitions="auto *" RowDefinitions="auto auto">
                 <CheckBox Grid.Column="0" Grid.Row="0" Margin="4" Content="Enable Logging" x:Name="EnableLogging" />
                 
                 <CheckBox Grid.Column="0" Grid.Row="1" Margin="4" Content="Override Logging Level" x:Name="OverrideLoggingLevel" />
@@ -33,50 +16,15 @@
         </HeaderedContentControl>
 
         <HeaderedContentControl Grid.Column="0" Grid.Row="1" Header="Logging Channels">
+            <HeaderedContentControl.Styles>
+                <Style Selector="CheckBox">
+                    <Setter Property="HorizontalAlignment" Value="Center" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                </Style>
+            </HeaderedContentControl.Styles>
+            
             <ScrollViewer>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="auto" />
-                    </Grid.RowDefinitions>
-
+                <Grid ColumnDefinitions="auto * * *" RowDefinitions="auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto">
                     <Button Grid.Column="0" Grid.Row="0" Content="Channel" FontWeight="Bold" HorizontalAlignment="Stretch" />
                     <Label Grid.Column="0" Grid.Row="1" Content="ALL" />
                     <Label Grid.Column="0" Grid.Row="2" Content="ERROR" />
@@ -212,7 +160,6 @@
                     <CheckBox Grid.Column="3" Grid.Row="30" x:Name="CheckBoxChannelMobileOn" />
                     <CheckBox Grid.Column="3" Grid.Row="31" x:Name="CheckBoxChannelUIOn" />
                     <CheckBox Grid.Column="3" Grid.Row="32" x:Name="CheckBoxChannelLeaderboardOn" />
-
                 </Grid>
             </ScrollViewer>
         </HeaderedContentControl>

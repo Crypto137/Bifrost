@@ -6,6 +6,19 @@
 
     <Application.Styles>
         <SimpleTheme />
+
+        <Style Selector="HeaderedContentControl">
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Grid RowDefinitions="auto *" Margin="4">
+                        <Label Grid.Row="0" FontSize="16" Content="{TemplateBinding Header}" />
+                        <Border Grid.Row="1" BorderBrush="{DynamicResource ThemeBorderLowColor}" BorderThickness="1" Padding="4">
+                            <ContentPresenter Content="{TemplateBinding Content}" />
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter>
+        </Style>
     </Application.Styles>
 
     <Application.Resources>
