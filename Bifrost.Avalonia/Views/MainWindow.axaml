@@ -27,24 +27,28 @@
             <Setter Property="Foreground" Value="#ffaa00" />
         </Style>
 
-        <Style Selector="Border.news-item-container">
+        <Style Selector="HyperlinkButton.news-item">
             <Setter Property="Width" Value="270" />
             <Setter Property="Height" Value="90" />
             <Setter Property="Background" Value="#80000000" />
+            <Setter Property="Padding" Value="0" />
+
+            <Style Selector="^ TextBlock">
+                <Setter Property="Margin" Value="10" />
+                <!-- <Setter Property="TextAlignment" Value="Right" /> doesn't work correctly with wrapping -->
+                <Setter Property="VerticalAlignment" Value="Bottom" />
+                <Setter Property="TextWrapping" Value="Wrap" />
+                <Setter Property="FontFamily" Value="{DynamicResource ResourceKey=BebasNeue}" />
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="Foreground" Value="#00aaff" />
+                <Setter Property="TextDecorations" Value="{x:Null}" />
+            </Style>
         </Style>
 
-        <Style Selector="TextBlock.news-item">
-            <Setter Property="Margin" Value="10" />
-            <!-- <Setter Property="TextAlignment" Value="Right" /> doesn't work correctly with wrapping -->
-            <Setter Property="VerticalAlignment" Value="Bottom" />
-            <Setter Property="TextWrapping" Value="Wrap" />
-            <Setter Property="FontFamily" Value="{DynamicResource ResourceKey=BebasNeue}" />
-            <Setter Property="FontSize" Value="18" />
-            <Setter Property="Foreground" Value="#00aaff" />
-        </Style>
-
-        <Style Selector="TextBlock.news-item:pointerover">
-            <Setter Property="Foreground" Value="#FFFFFF" />
+        <Style Selector="HyperlinkButton.news-item:pointerover">
+            <Style Selector="^ TextBlock">
+                <Setter Property="Foreground" Value="#FFFFFF" />
+            </Style>
         </Style>
 
         <Style Selector="Button">
@@ -83,14 +87,14 @@
             <ImageBrush Source="/Assets/Images/background.png" />
         </Grid.Background>
 
-        <!-- Server Status Bar -->
+        <!-- Server Status -->
         <Grid Grid.Row="0" ColumnDefinitions="* 270 30">
             <Border Grid.Column="1" Grid.Row="0" Background="#80000000">
                 <TextBlock Classes="server-status" >Server Status: <Span Foreground="#00cc00">Online</Span></TextBlock>
             </Border>
         </Grid>
 
-        <!-- Main Content -->
+        <!-- News -->
         <Grid Grid.Row="1" ColumnDefinitions="* 320" RowDefinitions="84 *" Margin="10">
             <!-- News -->
             <TextBlock Grid.Column="1" Grid.Row="0" Classes="news-header" Text="News">
@@ -98,19 +102,19 @@
                     <DropShadowDirectionEffect Color="#80FFAA00" Direction="0" />
                 </TextBlock.Effect>
             </TextBlock>
-            <StackPanel Grid.Column="1" Grid.Row="1" Spacing="12">
-                <Border Classes="news-item-container">
-                    <TextBlock Classes="news-item">Midtown Madness, Vibranium Mines One-Shot, and More</TextBlock>
-                </Border>
-                <Border Classes="news-item-container">
-                    <TextBlock Classes="news-item">Psylocke Presale Now Available!</TextBlock>
-                </Border>
-                <Border Classes="news-item-container">
-                    <TextBlock Classes="news-item">Deadpool Battle of the Atom, Moon Knight Marvel Now! Costumes Now Available!</TextBlock>
-                </Border>
-                <Border Classes="news-item-container">
-                    <TextBlock Classes="news-item">Bounty Hunter Week, Fortune Mark 6 and More!</TextBlock>
-                </Border>
+            <StackPanel Grid.Column="1" Grid.Row="1" Spacing="12" Margin="24 0 0 0">
+                <HyperlinkButton Classes="news-item">
+                    <TextBlock>Midtown Madness, Vibranium Mines One-Shot, and More</TextBlock>
+                </HyperlinkButton>
+                <HyperlinkButton Classes="news-item">
+                    <TextBlock>Psylocke Presale Now Available!</TextBlock>
+                </HyperlinkButton>
+                <HyperlinkButton Classes="news-item">
+                    <TextBlock>Deadpool Battle of the Atom, Moon Knight Marvel Now! Costumes Now Available!</TextBlock>
+                </HyperlinkButton>
+                <HyperlinkButton Classes="news-item">
+                    <TextBlock>Bounty Hunter Week, Fortune Mark 6 and More!</TextBlock>
+                </HyperlinkButton>
             </StackPanel>
         </Grid>
         
