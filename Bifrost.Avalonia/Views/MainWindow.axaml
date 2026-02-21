@@ -51,6 +51,15 @@
             </Style>
         </Style>
 
+        <Style Selector="ScrollBar:vertical">
+            <Style Selector="^ /template/ RepeatButton">
+                <Setter Property="Background" Value="{x:Null}" />
+            </Style>
+            <Style Selector="^ /template/ Border">
+                <Setter Property="Background" Value="{x:Null}" />
+            </Style>
+        </Style>
+
         <Style Selector="Button">
             <Setter Property="Background" Value="#0088cc" />
             <Setter Property="BorderThickness" Value="0" />
@@ -102,20 +111,22 @@
                     <DropShadowDirectionEffect Color="#80FFAA00" Direction="0" />
                 </TextBlock.Effect>
             </TextBlock>
-            <StackPanel Grid.Column="1" Grid.Row="1" Spacing="12" Margin="24 0 0 0">
-                <HyperlinkButton Classes="news-item">
-                    <TextBlock>Midtown Madness, Vibranium Mines One-Shot, and More</TextBlock>
-                </HyperlinkButton>
-                <HyperlinkButton Classes="news-item">
-                    <TextBlock>Psylocke Presale Now Available!</TextBlock>
-                </HyperlinkButton>
-                <HyperlinkButton Classes="news-item">
-                    <TextBlock>Deadpool Battle of the Atom, Moon Knight Marvel Now! Costumes Now Available!</TextBlock>
-                </HyperlinkButton>
-                <HyperlinkButton Classes="news-item">
-                    <TextBlock>Bounty Hunter Week, Fortune Mark 6 and More!</TextBlock>
-                </HyperlinkButton>
-            </StackPanel>
+            <ScrollViewer Grid.Column="1" Grid.Row="1">
+                <StackPanel Spacing="12" Margin="24 0 0 0">
+                    <HyperlinkButton Classes="news-item">
+                        <TextBlock>Midtown Madness, Vibranium Mines One-Shot, and More</TextBlock>
+                    </HyperlinkButton>
+                    <HyperlinkButton Classes="news-item">
+                        <TextBlock>Psylocke Presale Now Available!</TextBlock>
+                    </HyperlinkButton>
+                    <HyperlinkButton Classes="news-item">
+                        <TextBlock>Deadpool Battle of the Atom, Moon Knight Marvel Now! Costumes Now Available!</TextBlock>
+                    </HyperlinkButton>
+                    <HyperlinkButton Classes="news-item">
+                        <TextBlock>Bounty Hunter Week, Fortune Mark 6 and More!</TextBlock>
+                    </HyperlinkButton>
+                </StackPanel>
+            </ScrollViewer>
         </Grid>
         
         <!-- Bottom Controls -->
