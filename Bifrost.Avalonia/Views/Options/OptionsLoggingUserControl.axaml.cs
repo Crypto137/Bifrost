@@ -130,7 +130,7 @@ public partial class OptionsLoggingUserControl : OptionsUserControl
 
     #region Event Handlers
 
-    private void OverrideLoggingLevelCheckBox_IsCheckedChanged(object? sender, RoutedEventArgs e)
+    private void OverrideLoggingLevelCheckBox_IsCheckedChanged(object sender, RoutedEventArgs e)
     {
         if (sender is not CheckBox checkBox)
             return;

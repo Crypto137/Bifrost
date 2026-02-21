@@ -2,7 +2,30 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="450" d:DesignHeight="400"
+             mc:Ignorable="d" d:DesignWidth="540" d:DesignHeight="495"
              x:Class="Bifrost.Avalonia.Views.Options.OptionsAboutUserControl">
+
+    <Grid RowDefinitions="auto *">
+        <HeaderedContentControl Grid.Row="0" Header="About">
+            <HeaderedContentControl.Styles>
+                <Style Selector="TextBlock">
+                    <Setter Property="TextWrapping" Value="Wrap" />
+                    <Setter Property="Margin" Value="4" />
+                </Style>
+            </HeaderedContentControl.Styles>
+
+            <StackPanel Spacing="0">
+                <TextBlock Text="Bifrost" />
+                <TextBlock Text="Version 0.0.0 (Configuration)" x:Name="VersionTextBlock" />
+                <HyperlinkButton Content="https://github.com/Crypto137/Bifrost" NavigateUri="https://github.com/Crypto137/Bifrost" />
+            </StackPanel>
+        </HeaderedContentControl>
+
+        <HeaderedContentControl Grid.Row="1" Header="Licenses">
+            <ScrollViewer>
+                <TextBox IsReadOnly="True" BorderThickness="0" x:Name="LicenseTextBox"/>
+            </ScrollViewer>
+        </HeaderedContentControl>
+    </Grid>
 
 </UserControl>
