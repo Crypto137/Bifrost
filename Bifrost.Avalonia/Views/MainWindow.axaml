@@ -4,7 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="820" d:DesignHeight="660"
         x:Class="Bifrost.Avalonia.Views.MainWindow"
-        Title="Bifrost.Avalonia"
+        Title="Bifrost"
         Width="820" Height="660" CanResize="false"
         WindowStartupLocation="CenterScreen"
         Opened="Window_Opened"
