@@ -1,7 +1,7 @@
 using Avalonia.Controls;
+using Bifrost.Avalonia.Extensions;
 using Bifrost.Core.ClientManagement;
 using Bifrost.Core.Models;
-using System;
 
 namespace Bifrost.Avalonia.Views.Options;
 
@@ -11,11 +11,7 @@ public partial class OptionsAdvancedUserControl : OptionsUserControl
     {
         InitializeComponent();
 
-        foreach (Downloader downloader in Enum.GetValues<Downloader>())
-        {
-            ComboBoxItem item = new() { Content = Enum.GetName(downloader) };
-            DownloadersComboBox.Items.Add(item);
-        }
+        DownloadersComboBox.PopulateFromEnum<Downloader>();
     }
 
     public override void Initialize(Window owner, ClientLauncher clientLauncher)
@@ -25,7 +21,7 @@ public partial class OptionsAdvancedUserControl : OptionsUserControl
         LaunchConfig config = _clientLauncher.Config;
 
         Force32BitCheckBox.IsChecked = config.Force32Bit;
-        DownloadersComboBox.SelectedIndex = (int)config.Downloader;
+        DownloadersComboBox.SetSelectedEnumValue(config.Downloader);
 
         NoSoundCheckBox.IsChecked = config.NoSound;
         NoAccountCheckBox.IsChecked = config.NoAccount;
@@ -43,7 +39,7 @@ public partial class OptionsAdvancedUserControl : OptionsUserControl
         LaunchConfig config = _clientLauncher.Config;
 
         config.Force32Bit = Force32BitCheckBox.IsChecked == true;
-        config.Downloader = (Downloader)DownloadersComboBox.SelectedIndex;
+        config.Downloader = DownloadersComboBox.GetSelectedEnumValue<Downloader>();
 
         config.NoSound = NoSoundCheckBox.IsChecked == true;
         config.NoAccount = NoAccountCheckBox.IsChecked == true;

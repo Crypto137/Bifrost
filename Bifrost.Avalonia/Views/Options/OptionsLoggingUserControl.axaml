@@ -8,10 +8,10 @@
     <Grid RowDefinitions="auto *">
         <HeaderedContentControl Grid.Column="0" Grid.Row="0" Header="Logging Settings">
             <Grid ColumnDefinitions="auto *" RowDefinitions="auto auto">
-                <CheckBox Grid.Column="0" Grid.Row="0" Margin="4" Content="Enable Logging" x:Name="EnableLogging" />
+                <CheckBox Grid.Column="0" Grid.Row="0" Content="Enable Logging" x:Name="EnableLoggingCheckBox" />
                 
-                <CheckBox Grid.Column="0" Grid.Row="1" Margin="4" Content="Override Logging Level" x:Name="OverrideLoggingLevel" />
-                <ComboBox Grid.Column="1" Grid.Row="1" x:Name="LoggingLevels" />
+                <CheckBox Grid.Column="0" Grid.Row="1" Content="Override Logging Level" x:Name="OverrideLoggingLevelCheckBox" IsCheckedChanged="OverrideLoggingLevelCheckBox_IsCheckedChanged" />
+                <ComboBox Grid.Column="1" Grid.Row="1" x:Name="LoggingLevelComboBox" />
             </Grid>
         </HeaderedContentControl>
 
@@ -24,8 +24,8 @@
             </HeaderedContentControl.Styles>
             
             <ScrollViewer>
-                <Grid ColumnDefinitions="auto * * *" RowDefinitions="auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto">
-                    <Button Grid.Column="0" Grid.Row="0" Content="Channel" FontWeight="Bold" HorizontalAlignment="Stretch" />
+                <Grid ColumnDefinitions="auto * * *" RowDefinitions="auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto" ColumnSpacing="1" Margin="0 0 1 0">
+                    <Button Grid.Column="0" Grid.Row="0" Content="Channel" IsHitTestVisible="False" />
                     <Label Grid.Column="0" Grid.Row="1" Content="ALL" />
                     <Label Grid.Column="0" Grid.Row="2" Content="ERROR" />
                     <Label Grid.Column="0" Grid.Row="3" Content="CORE" />
@@ -59,7 +59,7 @@
                     <Label Grid.Column="0" Grid.Row="31" Content="UI" />
                     <Label Grid.Column="0" Grid.Row="32" Content="LEADERBOARD" />
 
-                    <Button Grid.Column="1" Grid.Row="0" Content="Default" FontWeight="Bold" HorizontalAlignment="Stretch" x:Name="ResetLoggingChannels" />
+                    <Button Grid.Column="1" Grid.Row="0" Content="Default" x:Name="ResetLoggingChannels" Click="ResetLoggingChannels_Click" />
                     <CheckBox Grid.Column="1" Grid.Row="1" x:Name="CheckBoxChannelAllDefault" />
                     <CheckBox Grid.Column="1" Grid.Row="2" x:Name="CheckBoxChannelErrorDefault" />
                     <CheckBox Grid.Column="1" Grid.Row="3" x:Name="CheckBoxChannelCoreDefault" />
@@ -93,7 +93,7 @@
                     <CheckBox Grid.Column="1" Grid.Row="31" x:Name="CheckBoxChannelUIDefault" />
                     <CheckBox Grid.Column="1" Grid.Row="32" x:Name="CheckBoxChannelLeaderboardDefault" />
 
-                    <Button Grid.Column="2" Grid.Row="0" Content="Off" FontWeight="Bold" HorizontalAlignment="Stretch" x:Name="DisableAllLoggingChannels" />
+                    <Button Grid.Column="2" Grid.Row="0" Content="Off" x:Name="DisableAllLoggingChannels" Click="DisableAllLoggingChannels_Click" />
                     <CheckBox Grid.Column="2" Grid.Row="1" x:Name="CheckBoxChannelAllOff" />
                     <CheckBox Grid.Column="2" Grid.Row="2" x:Name="CheckBoxChannelErrorOff" />
                     <CheckBox Grid.Column="2" Grid.Row="3" x:Name="CheckBoxChannelCoreOff" />
@@ -127,7 +127,7 @@
                     <CheckBox Grid.Column="2" Grid.Row="31" x:Name="CheckBoxChannelUIOff" />
                     <CheckBox Grid.Column="2" Grid.Row="32" x:Name="CheckBoxChannelLeaderboardOff" />
 
-                    <Button Grid.Column="3" Grid.Row="0" Content="On" FontWeight="Bold" HorizontalAlignment="Stretch" x:Name="EnableAllLoggingChannels" />
+                    <Button Grid.Column="3" Grid.Row="0" Content="On" x:Name="EnableAllLoggingChannels" Click="EnableAllLoggingChannels_Click" />
                     <CheckBox Grid.Column="3" Grid.Row="1" x:Name="CheckBoxChannelAllOn" />
                     <CheckBox Grid.Column="3" Grid.Row="2" x:Name="CheckBoxChannelErrorOn" />
                     <CheckBox Grid.Column="3" Grid.Row="3" x:Name="CheckBoxChannelCoreOn" />
