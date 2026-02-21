@@ -8,10 +8,10 @@
     <StackPanel>
         <HeaderedContentControl Header="Modes">
             <Grid ColumnDefinitions="auto *" RowDefinitions="auto auto *">
-                <CheckBox Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="4" Content="Force 32-bit" x:Name="Force32BitCheckBox" />
+                <CheckBox Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Content="Force 32-bit" x:Name="Force32BitCheckBox" />
 
-                <Label Grid.Column="0" Grid.Row="1" Margin="4" Content="Downloader" />
-                <ComboBox Grid.Column="1" Grid.Row="1"  Margin="4" x:Name="DownloadersComboBox" />
+                <Label Grid.Column="0" Grid.Row="1" Content="Downloader" />
+                <ComboBox Grid.Column="1" Grid.Row="1" x:Name="DownloadersComboBox" />
             </Grid>
         </HeaderedContentControl>
 
@@ -26,7 +26,5 @@
                 <CheckBox Content="Disable Logout" x:Name="NoLogoutCheckBox" />
             </StackPanel>
         </HeaderedContentControl>
-
-        <Button x:Name="OpenThirdPartyLicensesButton" Content="Third Party Licenses" Margin="5" Width="150" HorizontalAlignment="Left" />
     </StackPanel>
 </UserControl>

@@ -7,7 +7,7 @@
 
     <StackPanel>
         <HeaderedContentControl Header="Engine">
-            <Grid ColumnDefinitions="auto auto" RowDefinitions="auto auto auto" RowSpacing="4" ColumnSpacing="8">
+            <Grid ColumnDefinitions="auto auto" RowDefinitions="auto auto auto">
                 <CheckBox Grid.Column="0" Grid.Row="0" x:Name="SkipStartupMoviesCheckBox" Content="Skip Startup Movies" />
                 
                 <CheckBox Grid.Column="0" Grid.Row="1" x:Name="NoSplashCheckBox" Content="Hide Splash Screen" />
@@ -22,7 +22,7 @@
         </HeaderedContentControl>
 
         <HeaderedContentControl Header="Auto-Login">
-            <Grid ColumnDefinitions="auto *" RowDefinitions="auto auto auto" RowSpacing="4">
+            <Grid ColumnDefinitions="auto *" RowDefinitions="auto auto auto">
                 <CheckBox Grid.Column="0" Grid.Row="0" x:Name="EnableAutoLoginCheckBox" IsCheckedChanged="EnableAutoLoginCheckBox_IsCheckedChanged" Content="Enable Auto-Login" />
 
                 <Label Grid.Column="0" Grid.Row="1" Content="Email Address" />

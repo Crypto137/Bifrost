@@ -7,10 +7,14 @@
     <Application.Styles>
         <SimpleTheme />
 
+        <Style Selector="Label">
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+
         <Style Selector="HeaderedContentControl">
             <Setter Property="Template">
                 <ControlTemplate>
-                    <Grid RowDefinitions="auto *" Margin="4">
+                    <Grid RowDefinitions="auto *" Margin="4" RowSpacing="0">
                         <Label Grid.Row="0" FontSize="16" Content="{TemplateBinding Header}" />
                         <Border Grid.Row="1" BorderBrush="{DynamicResource ThemeBorderLowColor}" BorderThickness="1" Padding="4">
                             <ContentPresenter Content="{TemplateBinding Content}" />
@@ -19,6 +23,16 @@
                 </ControlTemplate>
             </Setter>
         </Style>
+
+        <Style Selector="HeaderedContentControl > Grid">
+            <Setter Property="ColumnSpacing" Value="4" />
+            <Setter Property="RowSpacing" Value="8" />
+        </Style>
+
+        <Style Selector="HeaderedContentControl > StackPanel">
+            <Setter Property="Spacing" Value="8" />
+        </Style>
+
     </Application.Styles>
 
     <Application.Resources>
