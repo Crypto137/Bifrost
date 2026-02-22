@@ -28,30 +28,30 @@ namespace Bifrost.Wpf.ViewModels
         {
             Downloaders = Enum.GetNames(typeof(Downloader)).Select(name => new DownloaderModel(name)).ToList();
 
-            _force32Bit = _clientLauncher.Config.Force32Bit;
-            _selectedDownloader = Downloaders[(int)_clientLauncher.Config.Downloader];
-            _noSound = _clientLauncher.Config.NoSound;
-            _noAccount = _clientLauncher.Config.NoAccount;
-            _noOptions = _clientLauncher.Config.NoOptions;
-            _noStore = _clientLauncher.Config.NoStore;
-            _noCatalog = _clientLauncher.Config.NoCatalog;
-            _noNews = _clientLauncher.Config.NoNews;
-            _noLogout = _clientLauncher.Config.NoLogout;
+            _force32Bit = _clientLauncher.LaunchConfig.Force32Bit;
+            _selectedDownloader = Downloaders[(int)_clientLauncher.LaunchConfig.Downloader];
+            _noSound = _clientLauncher.LaunchConfig.NoSound;
+            _noAccount = _clientLauncher.LaunchConfig.NoAccount;
+            _noOptions = _clientLauncher.LaunchConfig.NoOptions;
+            _noStore = _clientLauncher.LaunchConfig.NoStore;
+            _noCatalog = _clientLauncher.LaunchConfig.NoCatalog;
+            _noNews = _clientLauncher.LaunchConfig.NoNews;
+            _noLogout = _clientLauncher.LaunchConfig.NoLogout;
 
             _windowManager = new WindowManager();
         }
 
         public override void UpdateClientLauncher()
         {
-            _clientLauncher.Config.Force32Bit = _force32Bit;
-            _clientLauncher.Config.Downloader = (Downloader)Downloaders.IndexOf(SelectedDownloader);
-            _clientLauncher.Config.NoSound = _noSound;
-            _clientLauncher.Config.NoAccount = _noAccount;
-            _clientLauncher.Config.NoOptions = _noOptions;
-            _clientLauncher.Config.NoStore = _noStore;
-            _clientLauncher.Config.NoCatalog = _noCatalog;
-            _clientLauncher.Config.NoNews = _noNews;
-            _clientLauncher.Config.NoLogout = _noLogout;
+            _clientLauncher.LaunchConfig.Force32Bit = _force32Bit;
+            _clientLauncher.LaunchConfig.Downloader = (Downloader)Downloaders.IndexOf(SelectedDownloader);
+            _clientLauncher.LaunchConfig.NoSound = _noSound;
+            _clientLauncher.LaunchConfig.NoAccount = _noAccount;
+            _clientLauncher.LaunchConfig.NoOptions = _noOptions;
+            _clientLauncher.LaunchConfig.NoStore = _noStore;
+            _clientLauncher.LaunchConfig.NoCatalog = _noCatalog;
+            _clientLauncher.LaunchConfig.NoNews = _noNews;
+            _clientLauncher.LaunchConfig.NoLogout = _noLogout;
         }
 
         public void OpenThirdPartyLicenses()

@@ -50,7 +50,7 @@ public partial class OptionsLoggingUserControl : OptionsUserControl
     {
         base.Initialize(owner, clientLauncher);
 
-        LaunchConfig config = _clientLauncher.Config;
+        LaunchConfig config = _clientLauncher.LaunchConfig;
 
         EnableLoggingCheckBox.IsChecked = config.EnableLogging;
         OverrideLoggingLevelCheckBox.IsChecked = config.OverrideLoggingLevel;
@@ -68,7 +68,7 @@ public partial class OptionsLoggingUserControl : OptionsUserControl
     {
         base.UpdateClientLauncher();
 
-        LaunchConfig config = _clientLauncher.Config;
+        LaunchConfig config = _clientLauncher.LaunchConfig;
 
         config.EnableLogging = EnableLoggingCheckBox.IsChecked == true;
         config.OverrideLoggingLevel = OverrideLoggingLevelCheckBox.IsChecked == true;

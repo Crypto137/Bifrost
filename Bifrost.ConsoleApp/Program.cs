@@ -23,7 +23,7 @@ namespace Bifrost.ConsoleApp
 
             Console.WriteLine($"Version: {clientLauncher.ClientMetadata.Version}");
 
-            foreach (string arg in clientLauncher.Config.ToLaunchArguments(new(), ClientFlags.None))
+            foreach (string arg in clientLauncher.LaunchConfig.ToLaunchArguments(new(), ClientFlags.None))
                 Console.WriteLine(arg);
 
             Console.WriteLine("Launching...");

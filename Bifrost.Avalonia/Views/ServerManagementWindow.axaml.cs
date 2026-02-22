@@ -39,7 +39,7 @@ public partial class ServerManagementWindow : Window
             ServerListBox.Items.Add(item);
         }
 
-        ServerListBox.SelectedIndex = _clientLauncher.Config.ServerIndex;
+        ServerListBox.SelectedIndex = _clientLauncher.LaunchConfig.ServerIndex;
     }
 
     private async Task<bool> EditServer(ServerInfo serverInfo)
@@ -66,7 +66,7 @@ public partial class ServerManagementWindow : Window
             return;
         }
 
-        _clientLauncher.Config.ServerIndex = _clientLauncher.ServerManager.ServerCount - 1;
+        _clientLauncher.LaunchConfig.ServerIndex = _clientLauncher.ServerManager.ServerCount - 1;
 
         ServerListChanged = true;
         RefreshServerListBox();
@@ -111,8 +111,8 @@ public partial class ServerManagementWindow : Window
 
         _clientLauncher.ServerManager.RemoveServer(selectedIndex);
 
-        if (_clientLauncher.Config.ServerIndex >= _clientLauncher.ServerManager.ServerCount)
-            _clientLauncher.Config.ServerIndex = _clientLauncher.ServerManager.ServerCount - 1;
+        if (_clientLauncher.LaunchConfig.ServerIndex >= _clientLauncher.ServerManager.ServerCount)
+            _clientLauncher.LaunchConfig.ServerIndex = _clientLauncher.ServerManager.ServerCount - 1;
 
         ServerListChanged = true;
         RefreshServerListBox();

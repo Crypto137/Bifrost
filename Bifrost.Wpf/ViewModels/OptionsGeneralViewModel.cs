@@ -19,32 +19,32 @@ namespace Bifrost.Wpf.ViewModels
 
         public OptionsGeneralViewModel(ClientLauncher clientLauncher) : base(clientLauncher)
         {
-            _skipStartupMovies = _clientLauncher.Config.NoStartupMovies;
-            _noSplash = _clientLauncher.Config.NoSplash;
-            _forceCustomResolution = _clientLauncher.Config.ForceCustomResolution;
-            _customResolutionX = _clientLauncher.Config.CustomResolutionX.ToString();
-            _customResolutionY = _clientLauncher.Config.CustomResolutionY.ToString();
+            _skipStartupMovies = _clientLauncher.LaunchConfig.NoStartupMovies;
+            _noSplash = _clientLauncher.LaunchConfig.NoSplash;
+            _forceCustomResolution = _clientLauncher.LaunchConfig.ForceCustomResolution;
+            _customResolutionX = _clientLauncher.LaunchConfig.CustomResolutionX.ToString();
+            _customResolutionY = _clientLauncher.LaunchConfig.CustomResolutionY.ToString();
 
-            _enableAutoLogin = _clientLauncher.Config.EnableAutoLogin;
-            _autoLoginEmailAddress = _clientLauncher.Config.AutoLoginEmailAddress;
-            _autoLoginPassword = _clientLauncher.Config.AutoLoginPassword;
+            _enableAutoLogin = _clientLauncher.LaunchConfig.EnableAutoLogin;
+            _autoLoginEmailAddress = _clientLauncher.LaunchConfig.AutoLoginEmailAddress;
+            _autoLoginPassword = _clientLauncher.LaunchConfig.AutoLoginPassword;
 
-            _customArguments = _clientLauncher.Config.CustomArguments;
+            _customArguments = _clientLauncher.LaunchConfig.CustomArguments;
         }
 
         public override void UpdateClientLauncher()
         {
-            _clientLauncher.Config.NoStartupMovies = _skipStartupMovies;
-            _clientLauncher.Config.NoSplash = _noSplash;
-            _clientLauncher.Config.ForceCustomResolution = _forceCustomResolution;
-            _clientLauncher.Config.CustomResolutionX = int.Parse(_customResolutionX);
-            _clientLauncher.Config.CustomResolutionY = int.Parse(_customResolutionY);
+            _clientLauncher.LaunchConfig.NoStartupMovies = _skipStartupMovies;
+            _clientLauncher.LaunchConfig.NoSplash = _noSplash;
+            _clientLauncher.LaunchConfig.ForceCustomResolution = _forceCustomResolution;
+            _clientLauncher.LaunchConfig.CustomResolutionX = int.Parse(_customResolutionX);
+            _clientLauncher.LaunchConfig.CustomResolutionY = int.Parse(_customResolutionY);
 
-            _clientLauncher.Config.EnableAutoLogin = _enableAutoLogin;
-            _clientLauncher.Config.AutoLoginEmailAddress = _autoLoginEmailAddress;
-            _clientLauncher.Config.AutoLoginPassword = _autoLoginPassword;
+            _clientLauncher.LaunchConfig.EnableAutoLogin = _enableAutoLogin;
+            _clientLauncher.LaunchConfig.AutoLoginEmailAddress = _autoLoginEmailAddress;
+            _clientLauncher.LaunchConfig.AutoLoginPassword = _autoLoginPassword;
 
-            _clientLauncher.Config.CustomArguments = _customArguments;
+            _clientLauncher.LaunchConfig.CustomArguments = _customArguments;
         }
 
         public override bool ValidateInput()

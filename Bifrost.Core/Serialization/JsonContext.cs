@@ -8,6 +8,7 @@ namespace Bifrost.Core.Serialization
     /// </summary>
     [JsonSerializable(typeof(List<ServerInfo>))]
     [JsonSerializable(typeof(LaunchConfig))]
+    [JsonSerializable(typeof(GuiConfig))]
     [JsonSourceGenerationOptions(WriteIndented = true)]
     public partial class JsonContext : JsonSerializerContext
     {

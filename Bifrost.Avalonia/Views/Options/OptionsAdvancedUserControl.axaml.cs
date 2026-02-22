@@ -18,7 +18,7 @@ public partial class OptionsAdvancedUserControl : OptionsUserControl
     {
         base.Initialize(owner, clientLauncher);
 
-        LaunchConfig config = _clientLauncher.Config;
+        LaunchConfig config = _clientLauncher.LaunchConfig;
 
         Force32BitCheckBox.IsChecked = config.Force32Bit;
         DownloadersComboBox.SetSelectedEnumValue(config.Downloader);
@@ -36,7 +36,7 @@ public partial class OptionsAdvancedUserControl : OptionsUserControl
     {
         base.UpdateClientLauncher();
 
-        LaunchConfig config = _clientLauncher.Config;
+        LaunchConfig config = _clientLauncher.LaunchConfig;
 
         config.Force32Bit = Force32BitCheckBox.IsChecked == true;
         config.Downloader = DownloadersComboBox.GetSelectedEnumValue<Downloader>();

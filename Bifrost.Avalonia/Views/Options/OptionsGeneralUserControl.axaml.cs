@@ -17,7 +17,7 @@ public partial class OptionsGeneralUserControl : OptionsUserControl
     {
         base.Initialize(owner, clientLauncher);
 
-        LaunchConfig config = _clientLauncher.Config;
+        LaunchConfig config = _clientLauncher.LaunchConfig;
 
         SkipStartupMoviesCheckBox.IsChecked = config.NoStartupMovies;
         NoSplashCheckBox.IsChecked = config.NoSplash;
@@ -61,7 +61,7 @@ public partial class OptionsGeneralUserControl : OptionsUserControl
     {
         base.UpdateClientLauncher();
 
-        LaunchConfig config = _clientLauncher.Config;
+        LaunchConfig config = _clientLauncher.LaunchConfig;
 
         config.NoStartupMovies = SkipStartupMoviesCheckBox.IsChecked == true;
         config.NoSplash = NoSplashCheckBox.IsChecked == true;

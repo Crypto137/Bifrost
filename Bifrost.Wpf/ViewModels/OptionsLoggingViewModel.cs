@@ -24,21 +24,21 @@ namespace Bifrost.Wpf.ViewModels
             LoggingLevels = Enum.GetNames(typeof(LoggingLevel)).Select(name => new LoggingLevelModel(name)).ToList();
             InitLoggingChannelCheckboxes();
 
-            _enableLogging = _clientLauncher.Config.EnableLogging;
-            _overrideLoggingLevel = _clientLauncher.Config.OverrideLoggingLevel;
-            _selectedLoggingLevel = LoggingLevels[(int)_clientLauncher.Config.LoggingLevel];
+            _enableLogging = _clientLauncher.LaunchConfig.EnableLogging;
+            _overrideLoggingLevel = _clientLauncher.LaunchConfig.OverrideLoggingLevel;
+            _selectedLoggingLevel = LoggingLevels[(int)_clientLauncher.LaunchConfig.LoggingLevel];
 
-            foreach (var kvp in _clientLauncher.Config.LoggingChannelStateDict)
+            foreach (var kvp in _clientLauncher.LaunchConfig.LoggingChannelStateDict)
                 _loggingChannelStateDict.Add(kvp.Key, kvp.Value);
         }
 
         public override void UpdateClientLauncher()
         {
-            _clientLauncher.Config.EnableLogging = _enableLogging;
-            _clientLauncher.Config.OverrideLoggingLevel = _overrideLoggingLevel;
-            _clientLauncher.Config.LoggingLevel = (LoggingLevel)LoggingLevels.IndexOf(SelectedLoggingLevel);
+            _clientLauncher.LaunchConfig.EnableLogging = _enableLogging;
+            _clientLauncher.LaunchConfig.OverrideLoggingLevel = _overrideLoggingLevel;
+            _clientLauncher.LaunchConfig.LoggingLevel = (LoggingLevel)LoggingLevels.IndexOf(SelectedLoggingLevel);
             foreach (var kvp in _loggingChannelStateDict)
-                _clientLauncher.Config.LoggingChannelStateDict[kvp.Key] = kvp.Value;
+                _clientLauncher.LaunchConfig.LoggingChannelStateDict[kvp.Key] = kvp.Value;
         }
 
         public void ResetLoggingChannels()

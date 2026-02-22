@@ -94,7 +94,7 @@ namespace Bifrost.Avalonia.Views
                 ServerComboBox.Items.Add(serverItem);
             }
 
-            ServerComboBox.SelectedIndex = _clientLauncher.Config.ServerIndex;
+            ServerComboBox.SelectedIndex = _clientLauncher.LaunchConfig.ServerIndex;
         }
 
         #region Event Handlers
@@ -127,7 +127,7 @@ namespace Bifrost.Avalonia.Views
             if (selectedIndex == -1)
                 return;
 
-            _clientLauncher.Config.ServerIndex = selectedIndex;
+            _clientLauncher.LaunchConfig.ServerIndex = selectedIndex;
         }
 
         private async void ManageServersButton_Click(object sender, RoutedEventArgs e)

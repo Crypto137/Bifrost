@@ -15,11 +15,13 @@ namespace Bifrost.Core.ClientManagement
     {
         private const string ServerListFileName = "Bifrost.ServerList.json";
         private const string LaunchConfigFileName = "Bifrost.LaunchConfig.json";
+        private const string GuiConfigFileName = "Bifrost.GuiConfig.json";
 
         private readonly ClientDirectory _clientDirectory = new();
 
         public ServerManager ServerManager { get; } = new();
-        public LaunchConfig Config { get; private set; }
+        public LaunchConfig LaunchConfig { get; private set; }
+        public GuiConfig GuiConfig { get; private set; }
 
         public ClientMetadata ClientMetadata { get => _clientDirectory.ClientMetadata; }
 
@@ -29,8 +31,9 @@ namespace Bifrost.Core.ClientManagement
 
         public ClientLauncherInitializationResult Initialize(string clientPath)
         {
-            // LaunchConfig
-            Config = JsonHelper.LoadOrCreate(LaunchConfigFileName, JsonContext.Default.LaunchConfig);
+            // Configs
+            LaunchConfig = JsonHelper.LoadOrCreate(LaunchConfigFileName, JsonContext.Default.LaunchConfig);
+            GuiConfig = JsonHelper.LoadOrCreate(GuiConfigFileName, JsonContext.Default.GuiConfig);
 
             // ServerList
             List<ServerInfo> serverList = JsonHelper.LoadOrCreate(ServerListFileName, JsonContext.Default.ListServerInfo);
@@ -50,25 +53,26 @@ namespace Bifrost.Core.ClientManagement
         public void SaveData()
         {
             JsonHelper.Save(ServerManager.ServerList, ServerListFileName, JsonContext.Default.ListServerInfo);
-            JsonHelper.Save(Config, LaunchConfigFileName, JsonContext.Default.LaunchConfig);
+            JsonHelper.Save(LaunchConfig, LaunchConfigFileName, JsonContext.Default.LaunchConfig);
+            JsonHelper.Save(GuiConfig, GuiConfigFileName, JsonContext.Default.GuiConfig);
         }
 
         public bool Launch()
         {
             // Use the specified server if index is within range
-            ServerInfo serverInfo = ServerManager.GetServer(Config.ServerIndex);
+            ServerInfo serverInfo = ServerManager.GetServer(LaunchConfig.ServerIndex);
             if (serverInfo == null)
                 return false;
 
             // Prefer Win64 if supported and Win32 is not forced. Otherwise launch Win32.
             string executablePath = _clientDirectory.Supports64
-                ? Config.Force32Bit ? _clientDirectory.ExecutablePath32 : _clientDirectory.ExecutablePath64
+                ? LaunchConfig.Force32Bit ? _clientDirectory.ExecutablePath32 : _clientDirectory.ExecutablePath64
                 : _clientDirectory.ExecutablePath32;
 
             if (string.IsNullOrWhiteSpace(executablePath))
                 return false;
 
-            string[] args = Config.ToLaunchArguments(serverInfo, _clientDirectory.ClientMetadata.Flags);
+            string[] args = LaunchConfig.ToLaunchArguments(serverInfo, _clientDirectory.ClientMetadata.Flags);
             Process.Start(executablePath, args);
             return true;
         }

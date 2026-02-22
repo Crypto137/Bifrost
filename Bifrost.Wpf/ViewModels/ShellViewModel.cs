@@ -55,7 +55,7 @@ namespace Bifrost.Wpf.ViewModels
                 serverModels.Add(new ServerModel(serverInfo));
             ServerCollection = new(serverModels);
 
-            SelectedServer = ServerCollection.ElementAtOrDefault(_clientLauncher.Config.ServerIndex);
+            SelectedServer = ServerCollection.ElementAtOrDefault(_clientLauncher.LaunchConfig.ServerIndex);
         }
 
         public void Play()
@@ -72,8 +72,8 @@ namespace Bifrost.Wpf.ViewModels
             // Update selected server
             if (ServerCollection.Any())
             {
-                SelectedServer = _clientLauncher.Config.ServerIndex >=0 && _clientLauncher.Config.ServerIndex < _serverCollection.Count
-                    ? ServerCollection[_clientLauncher.Config.ServerIndex]
+                SelectedServer = _clientLauncher.LaunchConfig.ServerIndex >=0 && _clientLauncher.LaunchConfig.ServerIndex < _serverCollection.Count
+                    ? ServerCollection[_clientLauncher.LaunchConfig.ServerIndex]
                     : ServerCollection[0];
             }
         }
@@ -95,7 +95,7 @@ namespace Bifrost.Wpf.ViewModels
             _clientLauncher.ServerManager.SetServerList(ServerCollection.Select(serverModel => serverModel.ToServerInfo()));
 
             // Update launch config
-            _clientLauncher.Config.ServerIndex = ServerCollection.IndexOf(SelectedServer);
+            _clientLauncher.LaunchConfig.ServerIndex = ServerCollection.IndexOf(SelectedServer);
 
             // Save updated data
             _clientLauncher.SaveData();
