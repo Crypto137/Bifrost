@@ -10,7 +10,9 @@ namespace Bifrost.Avalonia.Views.Options;
 
 public partial class OptionsLoggingUserControl : OptionsUserControl
 {
-    private readonly Dictionary<LoggingChannel, CheckBoxSet> _checkboxes;
+    private static readonly GridLength LoggingChannelCheckBoxLength = new(100, GridUnitType.Pixel);
+
+    private readonly Dictionary<LoggingChannel, LoggingChannelCheckBoxSet> _checkboxes = new();
 
     public OptionsLoggingUserControl()
     {
@@ -18,50 +20,29 @@ public partial class OptionsLoggingUserControl : OptionsUserControl
 
         LoggingLevelComboBox.PopulateFromEnum<LoggingLevel>();
 
-        _checkboxes = new()
+        // Create checkboxes for all logging channels
+        foreach (LoggingChannel loggingChannel in Enum.GetValues<LoggingChannel>())
         {
-            { LoggingChannel.ALL,                 new(CheckBoxChannelAllDefault,                CheckBoxChannelAllOff,                CheckBoxChannelAllOn) },
-            { LoggingChannel.ERROR,               new(CheckBoxChannelErrorDefault,              CheckBoxChannelErrorOff,              CheckBoxChannelErrorOn) },
-            { LoggingChannel.CORE,                new(CheckBoxChannelCoreDefault,               CheckBoxChannelCoreOff,               CheckBoxChannelCoreOn) },
-            { LoggingChannel.CORE_NET,            new(CheckBoxChannelCoreNetDefault,            CheckBoxChannelCoreNetOff,            CheckBoxChannelCoreNetOn) },
-            { LoggingChannel.CORE_JOBS_TP,        new(CheckBoxChannelCoreJobsTPDefault,         CheckBoxChannelCoreJobsTPOff,         CheckBoxChannelCoreJobsTPOn) },
-            { LoggingChannel.GAME,                new(CheckBoxChannelGameDefault,               CheckBoxChannelGameOff,               CheckBoxChannelGameOn) },
-            { LoggingChannel.PEER_CONNECTOR,      new(CheckBoxChannelPeerConnectorDefault,      CheckBoxChannelPeerConnectorOff,      CheckBoxChannelPeerConnectorOn) },
-            { LoggingChannel.DATASTORE,           new(CheckBoxChannelDatastoreDefault,          CheckBoxChannelDatastoreOff,          CheckBoxChannelDatastoreOn) },
-            { LoggingChannel.PROFILE,             new(CheckBoxChannelProfileDefault,            CheckBoxChannelProfileOff,            CheckBoxChannelProfileOn) },
-            { LoggingChannel.GAME_NETWORK,        new(CheckBoxChannelGameNetworkDefault,        CheckBoxChannelGameNetworkOff,        CheckBoxChannelGameNetworkOn) },
-            { LoggingChannel.PAKFILE_SYSTEM,      new(CheckBoxChannelPakfileSystemDefault,      CheckBoxChannelPakfileSystemOff,      CheckBoxChannelPakfileSystemOn) },
-            { LoggingChannel.LOOT_MANAGER,        new(CheckBoxChannelLootManagerDefault,        CheckBoxChannelLootManagerOff,        CheckBoxChannelLootManagerOn) },
-            { LoggingChannel.GROUPING_SYSTEM,     new(CheckBoxChannelGroupingSystemDefault,     CheckBoxChannelGroupingSystemOff,     CheckBoxChannelGroupingSystemOn) },
-            { LoggingChannel.PROTOBUF_DUMPER,     new(CheckBoxChannelProtobufDumperDefault,     CheckBoxChannelProtobufDumperOff,     CheckBoxChannelProtobufDumperOn) },
-            { LoggingChannel.GAME_DATABASE,       new(CheckBoxChannelGameDatabaseDefault,       CheckBoxChannelGameDatabaseOff,       CheckBoxChannelGameDatabaseOn) },
-            { LoggingChannel.TRANSITION,          new(CheckBoxChannelTransitionDefault,         CheckBoxChannelTransitionOff,         CheckBoxChannelTransitionOn) },
-            { LoggingChannel.AI,                  new(CheckBoxChannelAIDefault,                 CheckBoxChannelAIOff,                 CheckBoxChannelAIOn) },
-            { LoggingChannel.INVENTORY,           new(CheckBoxChannelInventoryDefault,          CheckBoxChannelInventoryOff,          CheckBoxChannelInventoryOn) },
-            { LoggingChannel.MEMORY,              new(CheckBoxChannelMemoryDefault,             CheckBoxChannelMemoryOff,             CheckBoxChannelMemoryOn) },
-            { LoggingChannel.MISSIONS,            new(CheckBoxChannelMissionsDefault,           CheckBoxChannelMissionsOff,           CheckBoxChannelMissionsOn) },
-            { LoggingChannel.PATCHER,             new(CheckBoxChannelPatcherDefault,            CheckBoxChannelPatcherOff,            CheckBoxChannelPatcherOn) },
-            { LoggingChannel.GENERATION,          new(CheckBoxChannelGenerationDefault,         CheckBoxChannelGenerationOff,         CheckBoxChannelGenerationOn) },
-            { LoggingChannel.RESPAWN,             new(CheckBoxChannelRespawnDefault,            CheckBoxChannelRespawnOff,            CheckBoxChannelRespawnOn) },
-            { LoggingChannel.SAVELOAD,            new(CheckBoxChannelSaveloadDefault,           CheckBoxChannelSaveloadOff,           CheckBoxChannelSaveloadOn) },
-            { LoggingChannel.FRONTEND,            new(CheckBoxChannelFrontendDefault,           CheckBoxChannelFrontendOff,           CheckBoxChannelFrontendOn) },
-            { LoggingChannel.COMMUNITY,           new(CheckBoxChannelCommunityDefault,          CheckBoxChannelCommunityOff,          CheckBoxChannelCommunityOn) },
-            { LoggingChannel.ACHIEVEMENTS,        new(CheckBoxChannelAchievementsDefault,       CheckBoxChannelAchievementsOff,       CheckBoxChannelAchievementsOn) },
-            { LoggingChannel.METRICS_HTTP_UPLOAD, new(CheckBoxChannelMetricsHttpUploadDefault,  CheckBoxChannelMetricsHttpUploadOff,  CheckBoxChannelMetricsHttpUploadOn) },
-            { LoggingChannel.CURRENCY_CONVERSION, new(CheckBoxChannelCurrencyConversionDefault, CheckBoxChannelCurrencyConversionOff, CheckBoxChannelCurrencyConversionOn) },
-            { LoggingChannel.MOBILE,              new(CheckBoxChannelMobileDefault,             CheckBoxChannelMobileOff,             CheckBoxChannelMobileOn) },
-            { LoggingChannel.UI,                  new(CheckBoxChannelUIDefault,                 CheckBoxChannelUIOff,                 CheckBoxChannelUIOn) },
-            { LoggingChannel.LEADERBOARD,         new(CheckBoxChannelLeaderboardDefault,        CheckBoxChannelLeaderboardOff,        CheckBoxChannelLeaderboardOn) },
-        };
+            // Create grid for this logging channel
+            Grid grid = new();
+            grid.AddColumns(GridLength.Star, LoggingChannelCheckBoxLength, LoggingChannelCheckBoxLength, LoggingChannelCheckBoxLength);
+            LoggingChannelStackPanel.Children.Add(grid);
+            
+            // Populate the grid
+            Label label = new() { Content = Enum.GetName(loggingChannel).Replace("_", "__") };
+            grid.AddToColumn(label, 0);
 
-        foreach (var kvp in _checkboxes)
-        {
-            LoggingChannel channel = kvp.Key;
-            CheckBoxSet checkBoxes = kvp.Value;
+            LoggingChannelCheckBoxSet checkBoxes = new();
+            grid.AddToColumn(checkBoxes.Default, 1);
+            grid.AddToColumn(checkBoxes.Off, 2);
+            grid.AddToColumn(checkBoxes.On, 3);
 
-            checkBoxes.Default.Click += (sender, e) => SetLoggingChannelState(channel, LoggingChannelState.Default);
-            checkBoxes.Off.Click += (sender, e) => SetLoggingChannelState(channel, LoggingChannelState.Off);
-            checkBoxes.On.Click += (sender, e) => SetLoggingChannelState(channel, LoggingChannelState.On);
+            // Hook up checkbox events and add a lookup
+            checkBoxes.Default.Click += (sender, e) => SetLoggingChannelState(loggingChannel, LoggingChannelState.Default);
+            checkBoxes.Off.Click += (sender, e) => SetLoggingChannelState(loggingChannel, LoggingChannelState.Off);
+            checkBoxes.On.Click += (sender, e) => SetLoggingChannelState(loggingChannel, LoggingChannelState.On);
+
+            _checkboxes.Add(loggingChannel, checkBoxes);
         }
     }
 
@@ -104,7 +85,7 @@ public partial class OptionsLoggingUserControl : OptionsUserControl
 
     private void SetLoggingChannelState(LoggingChannel channel, LoggingChannelState state)
     {
-        CheckBoxSet checkBoxes = _checkboxes[channel];
+        LoggingChannelCheckBoxSet checkBoxes = _checkboxes[channel];
 
         switch (state)
         {
@@ -158,11 +139,18 @@ public partial class OptionsLoggingUserControl : OptionsUserControl
 
     #endregion
 
-    private readonly struct CheckBoxSet(CheckBox @default, CheckBox off, CheckBox on)
+    private readonly struct LoggingChannelCheckBoxSet
     {
-        public readonly CheckBox Default = @default;
-        public readonly CheckBox Off = off;
-        public readonly CheckBox On = on;
+        public readonly CheckBox Default;
+        public readonly CheckBox Off;
+        public readonly CheckBox On;
+
+        public LoggingChannelCheckBoxSet()
+        {
+            Default = new();
+            Off = new();
+            On = new();
+        }
 
         public LoggingChannelState GetState()
         {

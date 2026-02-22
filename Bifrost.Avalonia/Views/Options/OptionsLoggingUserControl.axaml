@@ -24,143 +24,27 @@
             </HeaderedContentControl.Styles>
             
             <ScrollViewer>
-                <Grid ColumnDefinitions="auto * * *" RowDefinitions="auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto" ColumnSpacing="1" Margin="0 0 1 0">
-                    <Button Grid.Column="0" Grid.Row="0" Content="Channel" IsHitTestVisible="False" />
-                    <Label Grid.Column="0" Grid.Row="1" Content="ALL" />
-                    <Label Grid.Column="0" Grid.Row="2" Content="ERROR" />
-                    <Label Grid.Column="0" Grid.Row="3" Content="CORE" />
-                    <Label Grid.Column="0" Grid.Row="4" Content="CORE__NET" />
-                    <Label Grid.Column="0" Grid.Row="5" Content="CORE__JOBS__TP" />
-                    <Label Grid.Column="0" Grid.Row="6" Content="GAME" />
-                    <Label Grid.Column="0" Grid.Row="7" Content="PEER__CONNECTOR" />
-                    <Label Grid.Column="0" Grid.Row="8" Content="DATASTORE" />
-                    <Label Grid.Column="0" Grid.Row="9" Content="PROFILE" />
-                    <Label Grid.Column="0" Grid.Row="10" Content="GAME__NETWORK" />
-                    <Label Grid.Column="0" Grid.Row="11" Content="PAKFILE__SYSTEM" />
-                    <Label Grid.Column="0" Grid.Row="12" Content="LOOT__MANAGER" />
-                    <Label Grid.Column="0" Grid.Row="13" Content="GROUPING__SYSTEM" />
-                    <Label Grid.Column="0" Grid.Row="14" Content="PROTOBUF__DUMPER" />
-                    <Label Grid.Column="0" Grid.Row="15" Content="GAME__DATABASE" />
-                    <Label Grid.Column="0" Grid.Row="16" Content="TRANSITION" />
-                    <Label Grid.Column="0" Grid.Row="17" Content="AI" />
-                    <Label Grid.Column="0" Grid.Row="18" Content="INVENTORY" />
-                    <Label Grid.Column="0" Grid.Row="19" Content="MEMORY" />
-                    <Label Grid.Column="0" Grid.Row="20" Content="MISSIONS" />
-                    <Label Grid.Column="0" Grid.Row="21" Content="PATCHER" />
-                    <Label Grid.Column="0" Grid.Row="22" Content="GENERATION" />
-                    <Label Grid.Column="0" Grid.Row="23" Content="RESPAWN" />
-                    <Label Grid.Column="0" Grid.Row="24" Content="SAVELOAD" />
-                    <Label Grid.Column="0" Grid.Row="25" Content="FRONTEND" />
-                    <Label Grid.Column="0" Grid.Row="26" Content="COMMUNITY" />
-                    <Label Grid.Column="0" Grid.Row="27" Content="ACHIEVEMENTS" />
-                    <Label Grid.Column="0" Grid.Row="28" Content="METRICS__HTTP__UPLOAD" />
-                    <Label Grid.Column="0" Grid.Row="29" Content="CURRENCY__CONVERSION" />
-                    <Label Grid.Column="0" Grid.Row="30" Content="MOBILE" />
-                    <Label Grid.Column="0" Grid.Row="31" Content="UI" />
-                    <Label Grid.Column="0" Grid.Row="32" Content="LEADERBOARD" />
+                <StackPanel x:Name="LoggingChannelStackPanel">
+                    <StackPanel.Styles>
+                        <Style Selector="Grid">
+                            <Setter Property="ColumnSpacing" Value="1" />
+                            <Setter Property="Margin" Value="0 0 1 0" />
+                        </Style>
 
-                    <Button Grid.Column="1" Grid.Row="0" Content="Default" x:Name="ResetLoggingChannels" Click="ResetLoggingChannels_Click" />
-                    <CheckBox Grid.Column="1" Grid.Row="1" x:Name="CheckBoxChannelAllDefault" />
-                    <CheckBox Grid.Column="1" Grid.Row="2" x:Name="CheckBoxChannelErrorDefault" />
-                    <CheckBox Grid.Column="1" Grid.Row="3" x:Name="CheckBoxChannelCoreDefault" />
-                    <CheckBox Grid.Column="1" Grid.Row="4" x:Name="CheckBoxChannelCoreNetDefault" />
-                    <CheckBox Grid.Column="1" Grid.Row="5" x:Name="CheckBoxChannelCoreJobsTPDefault" />
-                    <CheckBox Grid.Column="1" Grid.Row="6" x:Name="CheckBoxChannelGameDefault" />
-                    <CheckBox Grid.Column="1" Grid.Row="7" x:Name="CheckBoxChannelPeerConnectorDefault" />
-                    <CheckBox Grid.Column="1" Grid.Row="8" x:Name="CheckBoxChannelDatastoreDefault" />
-                    <CheckBox Grid.Column="1" Grid.Row="9" x:Name="CheckBoxChannelProfileDefault" />
-                    <CheckBox Grid.Column="1" Grid.Row="10" x:Name="CheckBoxChannelGameNetworkDefault" />
-                    <CheckBox Grid.Column="1" Grid.Row="11" x:Name="CheckBoxChannelPakfileSystemDefault" />
-                    <CheckBox Grid.Column="1" Grid.Row="12" x:Name="CheckBoxChannelLootManagerDefault" />
-                    <CheckBox Grid.Column="1" Grid.Row="13" x:Name="CheckBoxChannelGroupingSystemDefault" />
-                    <CheckBox Grid.Column="1" Grid.Row="14" x:Name="CheckBoxChannelProtobufDumperDefault" />
-                    <CheckBox Grid.Column="1" Grid.Row="15" x:Name="CheckBoxChannelGameDatabaseDefault" />
-                    <CheckBox Grid.Column="1" Grid.Row="16" x:Name="CheckBoxChannelTransitionDefault" />
-                    <CheckBox Grid.Column="1" Grid.Row="17" x:Name="CheckBoxChannelAIDefault" />
-                    <CheckBox Grid.Column="1" Grid.Row="18" x:Name="CheckBoxChannelInventoryDefault" />
-                    <CheckBox Grid.Column="1" Grid.Row="19" x:Name="CheckBoxChannelMemoryDefault" />
-                    <CheckBox Grid.Column="1" Grid.Row="20" x:Name="CheckBoxChannelMissionsDefault" />
-                    <CheckBox Grid.Column="1" Grid.Row="21" x:Name="CheckBoxChannelPatcherDefault" />
-                    <CheckBox Grid.Column="1" Grid.Row="22" x:Name="CheckBoxChannelGenerationDefault" />
-                    <CheckBox Grid.Column="1" Grid.Row="23" x:Name="CheckBoxChannelRespawnDefault" />
-                    <CheckBox Grid.Column="1" Grid.Row="24" x:Name="CheckBoxChannelSaveloadDefault" />
-                    <CheckBox Grid.Column="1" Grid.Row="25" x:Name="CheckBoxChannelFrontendDefault" />
-                    <CheckBox Grid.Column="1" Grid.Row="26" x:Name="CheckBoxChannelCommunityDefault" />
-                    <CheckBox Grid.Column="1" Grid.Row="27" x:Name="CheckBoxChannelAchievementsDefault" />
-                    <CheckBox Grid.Column="1" Grid.Row="28" x:Name="CheckBoxChannelMetricsHttpUploadDefault" />
-                    <CheckBox Grid.Column="1" Grid.Row="29" x:Name="CheckBoxChannelCurrencyConversionDefault" />
-                    <CheckBox Grid.Column="1" Grid.Row="30" x:Name="CheckBoxChannelMobileDefault" />
-                    <CheckBox Grid.Column="1" Grid.Row="31" x:Name="CheckBoxChannelUIDefault" />
-                    <CheckBox Grid.Column="1" Grid.Row="32" x:Name="CheckBoxChannelLeaderboardDefault" />
+                        <Style Selector="Grid:nth-child(odd)">
+                            <Setter Property="Background" Value="#242424" />
+                        </Style>
+                    </StackPanel.Styles>
 
-                    <Button Grid.Column="2" Grid.Row="0" Content="Off" x:Name="DisableAllLoggingChannels" Click="DisableAllLoggingChannels_Click" />
-                    <CheckBox Grid.Column="2" Grid.Row="1" x:Name="CheckBoxChannelAllOff" />
-                    <CheckBox Grid.Column="2" Grid.Row="2" x:Name="CheckBoxChannelErrorOff" />
-                    <CheckBox Grid.Column="2" Grid.Row="3" x:Name="CheckBoxChannelCoreOff" />
-                    <CheckBox Grid.Column="2" Grid.Row="4" x:Name="CheckBoxChannelCoreNetOff" />
-                    <CheckBox Grid.Column="2" Grid.Row="5" x:Name="CheckBoxChannelCoreJobsTPOff" />
-                    <CheckBox Grid.Column="2" Grid.Row="6" x:Name="CheckBoxChannelGameOff" />
-                    <CheckBox Grid.Column="2" Grid.Row="7" x:Name="CheckBoxChannelPeerConnectorOff" />
-                    <CheckBox Grid.Column="2" Grid.Row="8" x:Name="CheckBoxChannelDatastoreOff" />
-                    <CheckBox Grid.Column="2" Grid.Row="9" x:Name="CheckBoxChannelProfileOff" />
-                    <CheckBox Grid.Column="2" Grid.Row="10" x:Name="CheckBoxChannelGameNetworkOff" />
-                    <CheckBox Grid.Column="2" Grid.Row="11" x:Name="CheckBoxChannelPakfileSystemOff" />
-                    <CheckBox Grid.Column="2" Grid.Row="12" x:Name="CheckBoxChannelLootManagerOff" />
-                    <CheckBox Grid.Column="2" Grid.Row="13" x:Name="CheckBoxChannelGroupingSystemOff" />
-                    <CheckBox Grid.Column="2" Grid.Row="14" x:Name="CheckBoxChannelProtobufDumperOff" />
-                    <CheckBox Grid.Column="2" Grid.Row="15" x:Name="CheckBoxChannelGameDatabaseOff" />
-                    <CheckBox Grid.Column="2" Grid.Row="16" x:Name="CheckBoxChannelTransitionOff" />
-                    <CheckBox Grid.Column="2" Grid.Row="17" x:Name="CheckBoxChannelAIOff" />
-                    <CheckBox Grid.Column="2" Grid.Row="18" x:Name="CheckBoxChannelInventoryOff" />
-                    <CheckBox Grid.Column="2" Grid.Row="19" x:Name="CheckBoxChannelMemoryOff" />
-                    <CheckBox Grid.Column="2" Grid.Row="20" x:Name="CheckBoxChannelMissionsOff" />
-                    <CheckBox Grid.Column="2" Grid.Row="21" x:Name="CheckBoxChannelPatcherOff" />
-                    <CheckBox Grid.Column="2" Grid.Row="22" x:Name="CheckBoxChannelGenerationOff" />
-                    <CheckBox Grid.Column="2" Grid.Row="23" x:Name="CheckBoxChannelRespawnOff" />
-                    <CheckBox Grid.Column="2" Grid.Row="24" x:Name="CheckBoxChannelSaveloadOff" />
-                    <CheckBox Grid.Column="2" Grid.Row="25" x:Name="CheckBoxChannelFrontendOff" />
-                    <CheckBox Grid.Column="2" Grid.Row="26" x:Name="CheckBoxChannelCommunityOff" />
-                    <CheckBox Grid.Column="2" Grid.Row="27" x:Name="CheckBoxChannelAchievementsOff" />
-                    <CheckBox Grid.Column="2" Grid.Row="28" x:Name="CheckBoxChannelMetricsHttpUploadOff" />
-                    <CheckBox Grid.Column="2" Grid.Row="29" x:Name="CheckBoxChannelCurrencyConversionOff" />
-                    <CheckBox Grid.Column="2" Grid.Row="30" x:Name="CheckBoxChannelMobileOff" />
-                    <CheckBox Grid.Column="2" Grid.Row="31" x:Name="CheckBoxChannelUIOff" />
-                    <CheckBox Grid.Column="2" Grid.Row="32" x:Name="CheckBoxChannelLeaderboardOff" />
+                    <Grid ColumnDefinitions="* 100 100 100">
+                        <Button Grid.Column="0" Content="Channel" IsHitTestVisible="False" />
+                        <Button Grid.Column="1" Content="Default" x:Name="ResetLoggingChannels" Click="ResetLoggingChannels_Click" />
+                        <Button Grid.Column="2" Content="Off" x:Name="DisableAllLoggingChannels" Click="DisableAllLoggingChannels_Click" />
+                        <Button Grid.Column="3" Content="On" x:Name="EnableAllLoggingChannels" Click="EnableAllLoggingChannels_Click" />
+                    </Grid>
 
-                    <Button Grid.Column="3" Grid.Row="0" Content="On" x:Name="EnableAllLoggingChannels" Click="EnableAllLoggingChannels_Click" />
-                    <CheckBox Grid.Column="3" Grid.Row="1" x:Name="CheckBoxChannelAllOn" />
-                    <CheckBox Grid.Column="3" Grid.Row="2" x:Name="CheckBoxChannelErrorOn" />
-                    <CheckBox Grid.Column="3" Grid.Row="3" x:Name="CheckBoxChannelCoreOn" />
-                    <CheckBox Grid.Column="3" Grid.Row="4" x:Name="CheckBoxChannelCoreNetOn" />
-                    <CheckBox Grid.Column="3" Grid.Row="5" x:Name="CheckBoxChannelCoreJobsTPOn" />
-                    <CheckBox Grid.Column="3" Grid.Row="6" x:Name="CheckBoxChannelGameOn" />
-                    <CheckBox Grid.Column="3" Grid.Row="7" x:Name="CheckBoxChannelPeerConnectorOn" />
-                    <CheckBox Grid.Column="3" Grid.Row="8" x:Name="CheckBoxChannelDatastoreOn" />
-                    <CheckBox Grid.Column="3" Grid.Row="9" x:Name="CheckBoxChannelProfileOn" />
-                    <CheckBox Grid.Column="3" Grid.Row="10" x:Name="CheckBoxChannelGameNetworkOn" />
-                    <CheckBox Grid.Column="3" Grid.Row="11" x:Name="CheckBoxChannelPakfileSystemOn" />
-                    <CheckBox Grid.Column="3" Grid.Row="12" x:Name="CheckBoxChannelLootManagerOn" />
-                    <CheckBox Grid.Column="3" Grid.Row="13" x:Name="CheckBoxChannelGroupingSystemOn" />
-                    <CheckBox Grid.Column="3" Grid.Row="14" x:Name="CheckBoxChannelProtobufDumperOn" />
-                    <CheckBox Grid.Column="3" Grid.Row="15" x:Name="CheckBoxChannelGameDatabaseOn" />
-                    <CheckBox Grid.Column="3" Grid.Row="16" x:Name="CheckBoxChannelTransitionOn" />
-                    <CheckBox Grid.Column="3" Grid.Row="17" x:Name="CheckBoxChannelAIOn" />
-                    <CheckBox Grid.Column="3" Grid.Row="18" x:Name="CheckBoxChannelInventoryOn" />
-                    <CheckBox Grid.Column="3" Grid.Row="19" x:Name="CheckBoxChannelMemoryOn" />
-                    <CheckBox Grid.Column="3" Grid.Row="20" x:Name="CheckBoxChannelMissionsOn" />
-                    <CheckBox Grid.Column="3" Grid.Row="21" x:Name="CheckBoxChannelPatcherOn" />
-                    <CheckBox Grid.Column="3" Grid.Row="22" x:Name="CheckBoxChannelGenerationOn" />
-                    <CheckBox Grid.Column="3" Grid.Row="23" x:Name="CheckBoxChannelRespawnOn" />
-                    <CheckBox Grid.Column="3" Grid.Row="24" x:Name="CheckBoxChannelSaveloadOn" />
-                    <CheckBox Grid.Column="3" Grid.Row="25" x:Name="CheckBoxChannelFrontendOn" />
-                    <CheckBox Grid.Column="3" Grid.Row="26" x:Name="CheckBoxChannelCommunityOn" />
-                    <CheckBox Grid.Column="3" Grid.Row="27" x:Name="CheckBoxChannelAchievementsOn" />
-                    <CheckBox Grid.Column="3" Grid.Row="28" x:Name="CheckBoxChannelMetricsHttpUploadOn" />
-                    <CheckBox Grid.Column="3" Grid.Row="29" x:Name="CheckBoxChannelCurrencyConversionOn" />
-                    <CheckBox Grid.Column="3" Grid.Row="30" x:Name="CheckBoxChannelMobileOn" />
-                    <CheckBox Grid.Column="3" Grid.Row="31" x:Name="CheckBoxChannelUIOn" />
-                    <CheckBox Grid.Column="3" Grid.Row="32" x:Name="CheckBoxChannelLeaderboardOn" />
-                </Grid>
+                    <!-- Checkboxes are created programmatically in code-behind. -->
+                </StackPanel>
             </ScrollViewer>
         </HeaderedContentControl>
     </Grid>
