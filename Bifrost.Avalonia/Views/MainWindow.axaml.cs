@@ -131,7 +131,7 @@ namespace Bifrost.Avalonia.Views
                 Initialize();
         }
 
-        private void Window_Closed(object sender, EventArgs e)
+        private void Window_Closing(object sender, WindowClosingEventArgs e)
         {
             _clientLauncher?.SaveData();
         }
@@ -171,9 +171,14 @@ namespace Bifrost.Avalonia.Views
                 return;
 
             if (_clientLauncher.Launch())
+            {
+                Close();
                 Environment.Exit(0);
+            }
             else
+            {
                 await MessageBoxWindow.Show(this, "Failed to launch game client.", "Error");
+            }
         }
 
         #endregion
