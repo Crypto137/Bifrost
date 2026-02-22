@@ -11,4 +11,8 @@
     <EmbeddedResource Include="Data\ClientVersions.tsv" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="System.ServiceModel.Syndication" Version="10.0.3" />
+  </ItemGroup>
+
 </Project>

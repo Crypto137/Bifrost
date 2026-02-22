@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using Bifrost.Core.Models;
+using Bifrost.Core.News;
 using Bifrost.Core.Serialization;
 
 namespace Bifrost.Core.ClientManagement
@@ -20,6 +21,8 @@ namespace Bifrost.Core.ClientManagement
         private readonly ClientDirectory _clientDirectory = new();
 
         public ServerManager ServerManager { get; } = new();
+        public NewsFeed NewsFeed { get; } = new();
+
         public LaunchConfig LaunchConfig { get; private set; }
         public GuiConfig GuiConfig { get; private set; }
 
@@ -48,6 +51,17 @@ namespace Bifrost.Core.ClientManagement
                 return directoryResult;
 
             return ClientLauncherInitializationResult.Success;
+        }
+
+        public void RefreshNewsFeedSources()
+        {
+            NewsFeed.Clear();
+
+            string defaultNewsFeedUrl = GuiConfig.DefaultNewsFeedUrl;
+            if (string.IsNullOrWhiteSpace(defaultNewsFeedUrl) == false)
+                NewsFeed.AddSource(defaultNewsFeedUrl, "Bifrost", NewsFeedSourceCategory.Default);
+
+            // TODO: add feed sources from server settings
         }
 
         public void SaveData()
