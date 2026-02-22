@@ -2,12 +2,17 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
+using Avalonia.Threading;
 using Bifrost.Avalonia.Views.Dialogs;
 using Bifrost.Avalonia.Views.Options;
 using Bifrost.Core.ClientManagement;
 using Bifrost.Core.Models;
+using Bifrost.Core.News;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Bifrost.Avalonia.Views
 {
@@ -17,11 +22,17 @@ namespace Bifrost.Avalonia.Views
 
         private ClientLauncher _clientLauncher;
 
+        private int _pendingNewsSources = 0;
+
         public MainWindow()
         {
             InitializeComponent();
 
             ApplyBackgroundOverride();
+
+            // Clear design news placeholders asap
+            if (Design.IsDesignMode == false)
+                NewsItemStackPanel.Children.Clear();
         }
 
         private void Initialize()
@@ -36,7 +47,7 @@ namespace Bifrost.Avalonia.Views
                 Environment.Exit(0);
             }
 
-            //RefreshNews();
+            LoadNews();
             RefreshClientData();
             RefreshServerComboBox();
         }
@@ -58,24 +69,39 @@ namespace Bifrost.Avalonia.Views
             }
         }
 
-        private void RefreshNews()
+        private void LoadNews()
         {
-            // TODO: Replace hardcoded data with RSS output
-            string[] news = [
-                "News Item 0",
-                "News Item 1",
-                "News Item 2",
-                "News Item 3",
-            ];
+            _clientLauncher.RefreshNewsFeedSources();
+            Interlocked.Add(ref _pendingNewsSources, _clientLauncher.NewsFeed.Sources.Count);
+
+            foreach (NewsFeedSource source in _clientLauncher.NewsFeed.Sources.Values)
+                Task.Run(() => source.Load(OnNewsFeedSourceLoaded));
+        }
+
+        private void OnNewsFeedSourceLoaded(NewsFeedSource source)
+        {
+            Interlocked.Decrement(ref _pendingNewsSources);
+
+            if (_pendingNewsSources == 0)
+                Dispatcher.UIThread.Invoke(RefreshNewsFeed);
+        }
+
+        private void RefreshNewsFeed()
+        {
+            const int MaxNewsFeedItems = 10;
+
+            List<NewsFeedItem> newsList = new();
+            _clientLauncher.NewsFeed.GetNews(newsList);
 
             Controls newsItems = NewsItemStackPanel.Children;
             newsItems.Clear();
 
-            foreach (string newsText in news)
+            for (int i = 0; i < newsList.Count && i < MaxNewsFeedItems; i++)
             {
-                HyperlinkButton button = new();
+                NewsFeedItem newsItem = newsList[i];
+                HyperlinkButton button = new() { NavigateUri = new Uri(newsItem.Url) };
                 button.Classes.Add("news-item");
-                button.Content = new TextBlock() { Text = newsText };
+                button.Content = new TextBlock() { Text = newsItem.Title };
                 newsItems.Add(button);
             }
         }
