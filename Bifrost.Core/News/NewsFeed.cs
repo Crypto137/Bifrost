@@ -10,7 +10,7 @@
         {
         }
 
-        public NewsFeedSource AddSource(string url, string name, NewsFeedSourceCategory category)
+        public NewsFeedSource AddSource(string url, string name, NewsFeedSourceCategories category)
         {
             ArgumentNullException.ThrowIfNullOrWhiteSpace(url);
             ArgumentNullException.ThrowIfNullOrWhiteSpace(name);
@@ -35,18 +35,25 @@
         {
             foreach (NewsFeedSource source in _sources.Values)
             {
-                if (source.Category == NewsFeedSourceCategory.Default)
+                if (source.Category == NewsFeedSourceCategories.Default)
                     return source;
             }
 
             return null;
         }
 
-        public void GetNews(List<NewsFeedItem> items)
+        public void GetNews(List<NewsFeedItem> items, NewsFeedSourceCategories categories = NewsFeedSourceCategories.All)
         {
-            // TODO: filter sources, sort chronologically from different sources
             foreach (NewsFeedSource source in _sources.Values)
+            {
+                if (categories.HasFlag(source.Category) == false)
+                    continue;
+
                 items.AddRange(source.Items);
+            }
+
+            // Recent news go first
+            items.Sort((a, b) => b.Timestamp.CompareTo(a.Timestamp));
         }
 
         public void Clear()

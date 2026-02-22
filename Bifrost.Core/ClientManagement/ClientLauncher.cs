@@ -59,7 +59,7 @@ namespace Bifrost.Core.ClientManagement
 
             string defaultNewsFeedUrl = GuiConfig.DefaultNewsFeedUrl;
             if (string.IsNullOrWhiteSpace(defaultNewsFeedUrl) == false)
-                NewsFeed.AddSource(defaultNewsFeedUrl, "Bifrost", NewsFeedSourceCategory.Default);
+                NewsFeed.AddSource(defaultNewsFeedUrl, "Bifrost", NewsFeedSourceCategories.Default);
 
             // TODO: add feed sources from server settings
         }

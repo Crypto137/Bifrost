@@ -3,10 +3,13 @@ using System.Xml;
 
 namespace Bifrost.Core.News
 {
-    public enum NewsFeedSourceCategory
+    [Flags]
+    public enum NewsFeedSourceCategories
     { 
-        Default,
-        CommunityServer,
+        None            = 0,
+        Default         = 1 << 0,
+        CommunityServer = 1 << 1,
+        All             = -1,
     }
 
     public class NewsFeedSource
@@ -16,13 +19,13 @@ namespace Bifrost.Core.News
         public NewsFeed Feed { get; }
         public string Url { get; }
         public string Name { get; }
-        public NewsFeedSourceCategory Category { get; }
+        public NewsFeedSourceCategories Category { get; }
 
         public bool IsLoaded { get; private set; }
 
         public IReadOnlyList<NewsFeedItem> Items { get => _items; }
 
-        internal NewsFeedSource(NewsFeed feed, string url, string name, NewsFeedSourceCategory category)
+        internal NewsFeedSource(NewsFeed feed, string url, string name, NewsFeedSourceCategories category)
         {
             Feed = feed;
             Url = url;
@@ -46,7 +49,13 @@ namespace Bifrost.Core.News
                 reader.Close();
 
                 foreach (SyndicationItem feedItem in feed.Items)
-                    _items.Add(new(feedItem));
+                {
+                    string title = feedItem.Title.Text;
+                    string url = feedItem.Links.Count > 0 ? feedItem.Links[0].Uri.AbsoluteUri : string.Empty;
+                    DateTime timestamp = feedItem.LastUpdatedTime.LocalDateTime;
+
+                    _items.Add(new(title, url, timestamp));
+                }
 
                 IsLoaded = true;
             }

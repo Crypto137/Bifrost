@@ -1,17 +1,20 @@
-﻿using System.ServiceModel.Syndication;
-
-namespace Bifrost.Core.News
+﻿namespace Bifrost.Core.News
 {
     public class NewsFeedItem
     {
-        private SyndicationItem _syndicationItem;
+        public string Title { get; init; }
+        public string Url { get; init; }
+        public DateTime Timestamp { get; init; }
 
-        public string Title { get => _syndicationItem.Title.Text; }
-        public string Url { get => _syndicationItem.Links[0]?.Uri.AbsoluteUri; }
-
-        internal NewsFeedItem(SyndicationItem syndicationItem)
+        public NewsFeedItem()
         {
-            _syndicationItem = syndicationItem;
+        }
+
+        public NewsFeedItem(string title, string url, DateTime timestamp)
+        {
+            Title = title;
+            Url = url;
+            Timestamp = timestamp;
         }
     }
 }
