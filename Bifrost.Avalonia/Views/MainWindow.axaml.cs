@@ -36,6 +36,7 @@ namespace Bifrost.Avalonia.Views
                 Environment.Exit(0);
             }
 
+            //RefreshNews();
             RefreshClientData();
             RefreshServerComboBox();
         }
@@ -54,6 +55,28 @@ namespace Bifrost.Avalonia.Views
             catch (Exception)
             {
                 return;
+            }
+        }
+
+        private void RefreshNews()
+        {
+            // TODO: Replace hardcoded data with RSS output
+            string[] news = [
+                "News Item 0",
+                "News Item 1",
+                "News Item 2",
+                "News Item 3",
+            ];
+
+            Controls newsItems = NewsItemStackPanel.Children;
+            newsItems.Clear();
+
+            foreach (string newsText in news)
+            {
+                HyperlinkButton button = new();
+                button.Classes.Add("news-item");
+                button.Content = new TextBlock() { Text = newsText };
+                newsItems.Add(button);
             }
         }
 

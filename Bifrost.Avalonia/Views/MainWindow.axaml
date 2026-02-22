@@ -112,7 +112,8 @@
                 </TextBlock.Effect>
             </TextBlock>
             <ScrollViewer Grid.Column="1" Grid.Row="1">
-                <StackPanel Spacing="12" Margin="24 0 0 0">
+                <StackPanel Spacing="12" Margin="24 0 0 0" x:Name="NewsItemStackPanel">
+                    <!-- These are just placeholders that will be replaced in code. -->
                     <HyperlinkButton Classes="news-item">
                         <TextBlock>Midtown Madness, Vibranium Mines One-Shot, and More</TextBlock>
                     </HyperlinkButton>
