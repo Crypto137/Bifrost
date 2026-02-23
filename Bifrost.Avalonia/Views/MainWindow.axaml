@@ -98,7 +98,7 @@
         </Grid.Background>
 
         <!-- Server Status -->
-        <Grid Grid.Row="0" ColumnDefinitions="* 270 30">
+        <Grid Grid.Row="0" ColumnDefinitions="* 270 30" IsVisible="False">
             <Border Grid.Column="1" Grid.Row="0" Background="#80000000">
                 <TextBlock Classes="server-status" >Server Status: <Span Foreground="#00cc00">Online</Span></TextBlock>
             </Border>
