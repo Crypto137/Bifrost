@@ -57,17 +57,23 @@ namespace Bifrost.Core.ClientManagement
         {
             NewsFeed.Clear();
 
-            string defaultNewsFeedUrl = GuiConfig.DefaultNewsFeedUrl;
-            if (string.IsNullOrWhiteSpace(defaultNewsFeedUrl) == false)
-                NewsFeed.AddSource(defaultNewsFeedUrl, "Bifrost", NewsFeedSourceCategories.Default);
-
-            foreach (ServerInfo server in ServerManager)
+            if (GuiConfig.NewsCategoryFilter.HasFlag(NewsFeedSourceCategories.Default))
             {
-                string serverNewsFeedUrl = server.NewsFeedUrl;
-                if (string.IsNullOrWhiteSpace(serverNewsFeedUrl))
-                    continue;
+                string defaultNewsFeedUrl = GuiConfig.DefaultNewsFeedUrl;
+                if (string.IsNullOrWhiteSpace(defaultNewsFeedUrl) == false)
+                    NewsFeed.AddSource(defaultNewsFeedUrl, "Bifrost", NewsFeedSourceCategories.Default);
+            }
 
-                NewsFeed.AddSource(serverNewsFeedUrl, server.Name, NewsFeedSourceCategories.Server);
+            if (GuiConfig.NewsCategoryFilter.HasFlag(NewsFeedSourceCategories.Server))
+            {
+                foreach (ServerInfo server in ServerManager)
+                {
+                    string serverNewsFeedUrl = server.NewsFeedUrl;
+                    if (string.IsNullOrWhiteSpace(serverNewsFeedUrl))
+                        continue;
+
+                    NewsFeed.AddSource(serverNewsFeedUrl, server.Name, NewsFeedSourceCategories.Server);
+                }
             }
         }
 
