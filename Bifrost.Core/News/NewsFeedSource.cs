@@ -6,10 +6,11 @@ namespace Bifrost.Core.News
     [Flags]
     public enum NewsFeedSourceCategories
     { 
-        None            = 0,
-        Default         = 1 << 0,
-        CommunityServer = 1 << 1,
-        All             = -1,
+        None    = 0,
+        Default = 1 << 0,
+        Server  = 1 << 1,
+
+        All     = Default | Server,
     }
 
     public class NewsFeedSource
@@ -50,11 +51,12 @@ namespace Bifrost.Core.News
 
                 foreach (SyndicationItem feedItem in feed.Items)
                 {
-                    string title = feedItem.Title.Text;
+                    string title = feedItem.Title.Text.Trim();
                     string url = feedItem.Links.Count > 0 ? feedItem.Links[0].Uri.AbsoluteUri : string.Empty;
                     DateTime timestamp = feedItem.LastUpdatedTime.LocalDateTime;
 
-                    _items.Add(new(title, url, timestamp));
+                    NewsFeedItem item = new(this, title, url, timestamp);
+                    _items.Add(item);
                 }
 
                 IsLoaded = true;

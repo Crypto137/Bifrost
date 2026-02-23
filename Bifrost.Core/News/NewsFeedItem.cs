@@ -2,16 +2,14 @@
 {
     public class NewsFeedItem
     {
-        public string Title { get; init; }
-        public string Url { get; init; }
-        public DateTime Timestamp { get; init; }
+        public NewsFeedSource Source { get; }
+        public string Title { get; }
+        public string Url { get; }
+        public DateTime Timestamp { get; }
 
-        public NewsFeedItem()
+        public NewsFeedItem(NewsFeedSource source, string title, string url, DateTime timestamp)
         {
-        }
-
-        public NewsFeedItem(string title, string url, DateTime timestamp)
-        {
+            Source = source;
             Title = title;
             Url = url;
             Timestamp = timestamp;

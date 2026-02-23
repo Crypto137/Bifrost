@@ -61,7 +61,14 @@ namespace Bifrost.Core.ClientManagement
             if (string.IsNullOrWhiteSpace(defaultNewsFeedUrl) == false)
                 NewsFeed.AddSource(defaultNewsFeedUrl, "Bifrost", NewsFeedSourceCategories.Default);
 
-            // TODO: add feed sources from server settings
+            foreach (ServerInfo server in ServerManager)
+            {
+                string serverNewsFeedUrl = server.NewsFeedUrl;
+                if (string.IsNullOrWhiteSpace(serverNewsFeedUrl))
+                    continue;
+
+                NewsFeed.AddSource(serverNewsFeedUrl, server.Name, NewsFeedSourceCategories.Server);
+            }
         }
 
         public void SaveData()

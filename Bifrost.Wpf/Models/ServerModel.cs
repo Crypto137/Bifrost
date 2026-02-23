@@ -47,7 +47,11 @@ namespace Bifrost.Wpf.Models
 
         public ServerInfo ToServerInfo()
         {
-            return new(Name, SiteConfigUrl);
+            return new()
+            {
+                Name = Name,
+                SiteConfigUrl = SiteConfigUrl
+            };
         }
 
         public object Clone()
