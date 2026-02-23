@@ -79,6 +79,14 @@ namespace Bifrost.Avalonia.Views
 
         private void LoadNews()
         {
+            if (_clientLauncher.GuiConfig.NewsCategoryFilter == NewsFeedSourceCategories.None)
+            {
+                NewsGrid.IsVisible = false;
+                return;
+            }
+
+            NewsGrid.IsVisible = true;
+
             _clientLauncher.RefreshNewsFeedSources();
             Interlocked.Add(ref _pendingNewsSources, _clientLauncher.NewsFeed.Sources.Count);
 
@@ -150,10 +158,17 @@ namespace Bifrost.Avalonia.Views
 
         private async void OptionsButton_Click(object sender, RoutedEventArgs e)
         {
+            NewsFeedSourceCategories oldNewsCategoryFilter = _clientLauncher.GuiConfig.NewsCategoryFilter;
+            string oldDefaultNewsFeedUrl = _clientLauncher.GuiConfig.DefaultNewsFeedUrl;
+
             OptionsWindow optionsWindow = new(_clientLauncher);
             await optionsWindow.ShowDialog(this);
 
-            // TODO: react to options changes
+            if (_clientLauncher.GuiConfig.NewsCategoryFilter != oldNewsCategoryFilter ||
+                _clientLauncher.GuiConfig.DefaultNewsFeedUrl != oldDefaultNewsFeedUrl)
+            {
+                LoadNews();
+            }
         }
 
         private void ServerComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -9,7 +9,7 @@ namespace Bifrost.Core.News
         None    = 0,
         Default = 1 << 0,
         Server  = 1 << 1,
-        All     = -1,
+        All     = Default | Server,
     }
 
     public class NewsFeedSource

@@ -105,7 +105,7 @@
         </Grid>
 
         <!-- News -->
-        <Grid Grid.Row="1" ColumnDefinitions="* 320" RowDefinitions="84 *" Margin="10">
+        <Grid Grid.Row="1" ColumnDefinitions="* 320" RowDefinitions="84 *" Margin="10" x:Name="NewsGrid">
             <!-- News -->
             <TextBlock Grid.Column="1" Grid.Row="0" Classes="news-header" Text="News">
                 <TextBlock.Effect>

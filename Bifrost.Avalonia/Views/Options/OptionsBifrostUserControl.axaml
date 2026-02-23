@@ -4,5 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="540" d:DesignHeight="495"
              x:Class="Bifrost.Avalonia.Views.Options.OptionsBifrostUserControl">
-
+    <StackPanel>
+        <HeaderedContentControl Header="News">
+            <StackPanel>
+                <CheckBox x:Name="EnableDefaultNews" Content="Enable Default News" />
+                <CheckBox x:Name="EnableServerNews" Content="Enable Server News" />
+                <Grid ColumnDefinitions="auto *">
+                    <Label Grid.Column="0" Content="Default News Feed URL" />
+                    <TextBox Grid.Column="1" x:Name="DefaultNewsFeedUrlTextBox" />
+                </Grid>
+            </StackPanel>
+        </HeaderedContentControl>
+    </StackPanel>
 </UserControl>
