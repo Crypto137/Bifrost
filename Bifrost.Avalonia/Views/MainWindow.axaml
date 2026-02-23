@@ -132,7 +132,7 @@
         
         <!-- Bottom Controls -->
         <Grid Grid.Row="2" Background="#80090909">
-            <Grid ColumnDefinitions="180 * 180 80 180" RowDefinitions="* *" Margin="10" ColumnSpacing="10">
+            <Grid ColumnDefinitions="180 * 180 80 180" RowDefinitions="* *" Margin="10" ColumnSpacing="10" x:Name="BottomControlsGrid">
                 <TextBlock Grid.ColumnSpan="4" VerticalAlignment="Center" x:Name="VersionTextBlock">Game Version: Unknown</TextBlock>
 
                 <Button Grid.Column="0" Grid.Row="1" x:Name="OptionsButton" Click="OptionsButton_Click">Options</Button>

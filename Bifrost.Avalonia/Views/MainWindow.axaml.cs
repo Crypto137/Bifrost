@@ -170,10 +170,18 @@ namespace Bifrost.Avalonia.Views
             if (Design.IsDesignMode)
                 return;
 
-            if (_clientLauncher.Launch())
+            BottomControlsGrid.IsEnabled = false;
+
+            // Do the launch asynchronously because it may be delayed by an antivirus check.
+            if (await Task.Run(_clientLauncher.Launch))
+            {
                 Close();
+            }
             else
+            {
                 await MessageBoxWindow.Show(this, "Failed to launch game client.", "Error");
+                BottomControlsGrid.IsEnabled = true;
+            }
         }
 
         #endregion
