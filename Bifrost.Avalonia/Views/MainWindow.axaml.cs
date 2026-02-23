@@ -20,6 +20,8 @@ namespace Bifrost.Avalonia.Views
     {
         private const string BackgroundOverrideFileName = "Bifrost.Background.png";
 
+        private readonly Dictionary<NewsFeedSourceCategories, IBrush> _newsCategoryBrushes;
+
         private ClientLauncher _clientLauncher;
 
         private int _pendingNewsSources = 0;
@@ -27,6 +29,12 @@ namespace Bifrost.Avalonia.Views
         public MainWindow()
         {
             InitializeComponent();
+
+            _newsCategoryBrushes = new()
+            {
+                { NewsFeedSourceCategories.Default,     SolidColorBrush.Parse("#0088cc") },
+                { NewsFeedSourceCategories.Server,      SolidColorBrush.Parse("#0f9c23") }
+            };
 
             ApplyBackgroundOverride();
 
@@ -100,6 +108,10 @@ namespace Bifrost.Avalonia.Views
             {
                 NewsFeedItem newsItem = newsList[i];
                 HyperlinkButton button = new() { NavigateUri = new Uri(newsItem.Url) };
+
+                if (_newsCategoryBrushes.TryGetValue(newsItem.Source.Category, out IBrush borderBrush))
+                    button.BorderBrush = borderBrush;
+
                 button.Classes.Add("news-item");
                 button.Content = new TextBlock() { Text = newsItem.Title };
                 newsItems.Add(button);
@@ -162,7 +174,10 @@ namespace Bifrost.Avalonia.Views
             await serverManagementWindow.ShowDialog(this);
 
             if (serverManagementWindow.ServerListChanged)
+            {
+                LoadNews();
                 RefreshServerComboBox();
+            }
         }
 
         private async void PlayButton_Click(object sender, RoutedEventArgs e)

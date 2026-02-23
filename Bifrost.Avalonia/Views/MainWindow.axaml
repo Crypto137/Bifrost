@@ -32,6 +32,7 @@
             <Setter Property="Height" Value="90" />
             <Setter Property="Background" Value="#80000000" />
             <Setter Property="Padding" Value="0" />
+            <Setter Property="BorderThickness" Value="4 0 0 0" />
 
             <Style Selector="^ TextBlock">
                 <Setter Property="Margin" Value="10" />

@@ -22,28 +22,33 @@ public partial class EditServerWindow : Window
 
         NameTextBox.Text = serverInfo.Name;
         SiteConfigUrlTextBox.Text = serverInfo.SiteConfigUrl;
+        NewsFeedUrlTextBox.Text = serverInfo.NewsFeedUrl;
     }
 
     #region Event Handlers
 
     private async void OKButton_Click(object sender, RoutedEventArgs e)
     {
-        string name = NameTextBox.Text;
+        string name = NameTextBox.Text.Trim();
         if (string.IsNullOrWhiteSpace(name))
         {
             await MessageBoxWindow.Show(this, "Please enter a valid server name.", "Error");
             return;
         }
 
-        string siteConfigUrl = SiteConfigUrlTextBox.Text;
+        string siteConfigUrl = SiteConfigUrlTextBox.Text.Trim();
         if (string.IsNullOrWhiteSpace(siteConfigUrl))
         {
             await MessageBoxWindow.Show(this, "Please enter a valid site config URL.", "Error");
             return;
         }
 
+        string newsFeedUrl = NewsFeedUrlTextBox.Text.Trim();
+        // news feed can be empty
+
         _serverInfo.Name = name;
         _serverInfo.SiteConfigUrl = siteConfigUrl;
+        _serverInfo.NewsFeedUrl = newsFeedUrl;
         HasChanged = true;
 
         Close();
