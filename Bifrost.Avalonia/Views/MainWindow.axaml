@@ -8,7 +8,7 @@
         Width="820" Height="660" CanResize="false"
         WindowStartupLocation="CenterScreen"
         Opened="Window_Opened"
-        Closing="Window_Closing">
+        Closed="Window_Closed">
 
     <Window.Styles>
         <Style Selector="TextBlock.server-status">
