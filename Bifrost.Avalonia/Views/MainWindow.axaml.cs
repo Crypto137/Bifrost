@@ -3,6 +3,7 @@ using Avalonia.Interactivity;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Threading;
+using Bifrost.Avalonia.Themes;
 using Bifrost.Avalonia.Views.Dialogs;
 using Bifrost.Avalonia.Views.Options;
 using Bifrost.Core.ClientManagement;
@@ -10,7 +11,6 @@ using Bifrost.Core.Models;
 using Bifrost.Core.News;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -18,8 +18,6 @@ namespace Bifrost.Avalonia.Views
 {
     public partial class MainWindow : Window
     {
-        private const string BackgroundOverrideFileName = "Bifrost.Background.png";
-
         private readonly Dictionary<NewsFeedSourceCategories, IBrush> _newsCategoryBrushes;
 
         private ClientLauncher _clientLauncher;
@@ -36,7 +34,10 @@ namespace Bifrost.Avalonia.Views
                 { NewsFeedSourceCategories.Server,      SolidColorBrush.Parse("#0f9c23") }
             };
 
-            ApplyBackgroundOverride();
+            ThemeManager.Instance.Initialize(AppContext.BaseDirectory);
+
+            if (MainGrid.Background is ImageBrush defaultBackgroundBrush && defaultBackgroundBrush.Source is Bitmap defaultBackground)
+                ThemeManager.Instance.AddTheme(new(LauncherTheme.DefaultName, -1, defaultBackground));
 
             // Clear design news placeholders asap
             if (Design.IsDesignMode == false)
@@ -55,26 +56,20 @@ namespace Bifrost.Avalonia.Views
                 Environment.Exit(0);
             }
 
+            ApplyTheme(_clientLauncher.GuiConfig.ThemeOverride);
             LoadNews();
             RefreshClientData();
             RefreshServerComboBox();
         }
 
-        private void ApplyBackgroundOverride()
+        private void ApplyTheme(string name)
         {
-            if (File.Exists(BackgroundOverrideFileName) == false)
+            LauncherTheme theme = ThemeManager.Instance.GetTheme(name);
+            if (theme == null)
                 return;
 
-            try
-            {
-                Bitmap bitmap = new(BackgroundOverrideFileName);
-                ImageBrush imageBrush = new() { Source = bitmap };
-                MainGrid.Background = imageBrush;
-            }
-            catch (Exception)
-            {
-                return;
-            }
+            ImageBrush imageBrush = new() { Source = theme.Background };
+            MainGrid.Background = imageBrush;
         }
 
         private void LoadNews()
@@ -158,14 +153,16 @@ namespace Bifrost.Avalonia.Views
 
         private async void OptionsButton_Click(object sender, RoutedEventArgs e)
         {
-            NewsFeedSourceCategories oldNewsCategoryFilter = _clientLauncher.GuiConfig.NewsCategoryFilter;
-            string oldDefaultNewsFeedUrl = _clientLauncher.GuiConfig.DefaultNewsFeedUrl;
+            GuiConfig oldConfig = _clientLauncher.GuiConfig.Clone();
 
             OptionsWindow optionsWindow = new(_clientLauncher);
             await optionsWindow.ShowDialog(this);
 
-            if (_clientLauncher.GuiConfig.NewsCategoryFilter != oldNewsCategoryFilter ||
-                _clientLauncher.GuiConfig.DefaultNewsFeedUrl != oldDefaultNewsFeedUrl)
+            if (_clientLauncher.GuiConfig.ThemeOverride != oldConfig.ThemeOverride)
+                ApplyTheme(_clientLauncher.GuiConfig.ThemeOverride);
+
+            if (_clientLauncher.GuiConfig.NewsCategoryFilter != oldConfig.NewsCategoryFilter ||
+                _clientLauncher.GuiConfig.DefaultNewsFeedUrl != oldConfig.DefaultNewsFeedUrl)
             {
                 LoadNews();
             }

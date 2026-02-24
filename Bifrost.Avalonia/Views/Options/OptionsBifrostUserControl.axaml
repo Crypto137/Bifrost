@@ -5,6 +5,13 @@
              mc:Ignorable="d" d:DesignWidth="540" d:DesignHeight="495"
              x:Class="Bifrost.Avalonia.Views.Options.OptionsBifrostUserControl">
     <StackPanel>
+        <HeaderedContentControl Header="Theme">
+            <Grid Grid.ColumnDefinitions="auto *" RowDefinitions="auto">
+                <Label Grid.Column="0" Grid.Row="0" Content="Selected Theme" />
+                <ComboBox Grid.Column="1" Grid.Row="0" x:Name="ThemeOverrideComboBox" />
+            </Grid>
+        </HeaderedContentControl>
+
         <HeaderedContentControl Header="News">
             <StackPanel>
                 <CheckBox x:Name="EnableDefaultNews" Content="Enable Default News" />
